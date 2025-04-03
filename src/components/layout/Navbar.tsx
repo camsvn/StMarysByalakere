@@ -4,6 +4,9 @@ import { Link } from "react-router-dom";
 import { Menu, X, ChevronDown } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
+import LanguageSelector from "@/components/language/LanguageSelector";
+import { useLanguage } from "@/contexts/LanguageContext";
+import { useMember } from "@/contexts/MemberContext";
 
 interface NavItemProps {
   to: string;
@@ -20,6 +23,8 @@ const NavItem = ({ to, children, onClick }: NavItemProps) => (
 );
 
 const Navbar = () => {
+  const { t } = useLanguage();
+  const { isAuthenticated } = useMember();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
 
@@ -64,18 +69,30 @@ const Navbar = () => {
           </Link>
 
           {/* Desktop Navigation */}
-          <ul className="hidden md:flex space-x-6">
-            <NavItem to="/">Home</NavItem>
-            <NavItem to="/about">About Us</NavItem>
-            <NavItem to="/mass-services">Mass & Services</NavItem>
-            <NavItem to="/events">Events</NavItem>
-            <NavItem to="/ministries">Ministries</NavItem>
-            <NavItem to="/gallery">Gallery</NavItem>
-            <NavItem to="/contact">Contact</NavItem>
+          <ul className="hidden md:flex space-x-4">
+            <NavItem to="/">{t("navHome")}</NavItem>
+            <NavItem to="/about">{t("navAbout")}</NavItem>
+            <NavItem to="/mass-services">{t("navMass")}</NavItem>
+            <NavItem to="/events">{t("navEvents")}</NavItem>
+            <NavItem to="/ministries">{t("navMinistries")}</NavItem>
+            <NavItem to="/gallery">{t("navGallery")}</NavItem>
+            <NavItem to="/contact">{t("navContact")}</NavItem>
           </ul>
 
+          {/* Action buttons and language selector */}
+          <div className="hidden md:flex items-center space-x-2">
+            <LanguageSelector />
+            <Link to="/donate">
+              <Button variant="outline" size="sm">{t("navDonate")}</Button>
+            </Link>
+            <Link to={isAuthenticated ? "/member-portal" : "/login"}>
+              <Button size="sm">{isAuthenticated ? "My Account" : t("navLogin")}</Button>
+            </Link>
+          </div>
+
           {/* Mobile Menu Button */}
-          <div className="md:hidden">
+          <div className="md:hidden flex items-center space-x-2">
+            <LanguageSelector />
             <Button
               variant="ghost"
               size="icon"
@@ -91,13 +108,17 @@ const Navbar = () => {
         {isMenuOpen && (
           <div className="md:hidden absolute top-full left-0 w-full bg-white shadow-md animate-fade-in py-4">
             <ul className="flex flex-col space-y-4 px-4">
-              <NavItem to="/" onClick={closeMenu}>Home</NavItem>
-              <NavItem to="/about" onClick={closeMenu}>About Us</NavItem>
-              <NavItem to="/mass-services" onClick={closeMenu}>Mass & Services</NavItem>
-              <NavItem to="/events" onClick={closeMenu}>Events</NavItem>
-              <NavItem to="/ministries" onClick={closeMenu}>Ministries</NavItem>
-              <NavItem to="/gallery" onClick={closeMenu}>Gallery</NavItem>
-              <NavItem to="/contact" onClick={closeMenu}>Contact</NavItem>
+              <NavItem to="/" onClick={closeMenu}>{t("navHome")}</NavItem>
+              <NavItem to="/about" onClick={closeMenu}>{t("navAbout")}</NavItem>
+              <NavItem to="/mass-services" onClick={closeMenu}>{t("navMass")}</NavItem>
+              <NavItem to="/events" onClick={closeMenu}>{t("navEvents")}</NavItem>
+              <NavItem to="/ministries" onClick={closeMenu}>{t("navMinistries")}</NavItem>
+              <NavItem to="/gallery" onClick={closeMenu}>{t("navGallery")}</NavItem>
+              <NavItem to="/contact" onClick={closeMenu}>{t("navContact")}</NavItem>
+              <NavItem to="/donate" onClick={closeMenu}>{t("navDonate")}</NavItem>
+              <NavItem to={isAuthenticated ? "/member-portal" : "/login"} onClick={closeMenu}>
+                {isAuthenticated ? "My Account" : t("navLogin")}
+              </NavItem>
             </ul>
           </div>
         )}
