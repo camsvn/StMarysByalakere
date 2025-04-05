@@ -1,6 +1,7 @@
 
 import { useState } from "react";
-import { useCMS, MinistryType } from "@/contexts/CMSContext";
+import { useCMS } from "@/contexts/CMSContext";
+import { MinistryType } from "@/types/cms";
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";

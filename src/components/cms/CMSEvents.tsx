@@ -1,6 +1,7 @@
 
 import { useState } from "react";
-import { useCMS, EventType } from "@/contexts/CMSContext";
+import { useCMS } from "@/contexts/CMSContext";
+import { EventType } from "@/types/cms";
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
