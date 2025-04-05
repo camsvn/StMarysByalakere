@@ -1,5 +1,6 @@
 
 import axios from 'axios';
+import { EventType, MassScheduleType, MinistryType } from '@/contexts/CMSContext';
 
 // Define the Strapi API base URL - this should be configured based on where Strapi is hosted
 const STRAPI_API_URL = 'http://localhost:1337/api';
