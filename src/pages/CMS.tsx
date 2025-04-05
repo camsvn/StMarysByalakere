@@ -11,6 +11,7 @@ import CMSMinistries from "@/components/cms/CMSMinistries";
 import { Button } from "@/components/ui/button";
 import { useToast } from "@/hooks/use-toast";
 import ShapesBackground from "@/components/ui/ShapesBackground";
+import { Loader2 } from "lucide-react";
 
 const CMS = () => {
   const navigate = useNavigate();
@@ -18,7 +19,7 @@ const CMS = () => {
   const { toast } = useToast();
   const { contentType } = useParams<{ contentType?: string }>();
   const [activeTab, setActiveTab] = useState<string>(contentType || "events");
-  const { saveContent } = useCMS();
+  const { refreshData, isLoading, error } = useCMS();
 
   // Redirect non-admin users
   if (!member || member.role !== "admin") {
@@ -40,13 +41,30 @@ const CMS = () => {
     navigate(`/cms/${value}`);
   };
 
-  const handleSave = () => {
-    saveContent();
+  const handleRefresh = async () => {
+    await refreshData();
     toast({
-      title: "Content Saved",
-      description: "Your changes have been saved successfully.",
+      title: "Content Refreshed",
+      description: "The latest content has been loaded from the CMS.",
     });
   };
+
+  if (error) {
+    return (
+      <PageLayout>
+        <div className="pt-28 pb-16 md:pt-32 md:pb-20 px-4 relative">
+          <ShapesBackground />
+          <div className="container mx-auto relative z-10">
+            <div className="bg-destructive/10 text-destructive p-6 rounded-lg mb-8">
+              <h2 className="text-xl font-bold mb-2">Error Loading Content</h2>
+              <p>{error}</p>
+              <Button onClick={handleRefresh} className="mt-4">Try Again</Button>
+            </div>
+          </div>
+        </div>
+      </PageLayout>
+    );
+  }
 
   return (
     <PageLayout>
@@ -55,29 +73,39 @@ const CMS = () => {
         <div className="container mx-auto relative z-10">
           <div className="flex items-center justify-between mb-8">
             <h1 className="text-3xl font-bold">Content Management System</h1>
-            <Button onClick={handleSave}>Save All Changes</Button>
+            <Button onClick={handleRefresh} disabled={isLoading}>
+              {isLoading && <Loader2 className="mr-2 h-4 w-4 animate-spin" />}
+              Refresh Content
+            </Button>
           </div>
 
           <div className="bg-white rounded-lg shadow-lg p-6">
-            <Tabs value={activeTab} onValueChange={handleTabChange}>
-              <TabsList className="grid grid-cols-3 mb-8">
-                <TabsTrigger value="events">Events</TabsTrigger>
-                <TabsTrigger value="massSchedule">Mass Schedule</TabsTrigger>
-                <TabsTrigger value="ministries">Ministries</TabsTrigger>
-              </TabsList>
-              
-              <TabsContent value="events">
-                <CMSEvents />
-              </TabsContent>
-              
-              <TabsContent value="massSchedule">
-                <CMSMassSchedule />
-              </TabsContent>
-              
-              <TabsContent value="ministries">
-                <CMSMinistries />
-              </TabsContent>
-            </Tabs>
+            {isLoading ? (
+              <div className="flex flex-col items-center justify-center py-16">
+                <Loader2 className="h-12 w-12 text-primary animate-spin mb-4" />
+                <p className="text-muted-foreground">Loading content from Strapi CMS...</p>
+              </div>
+            ) : (
+              <Tabs value={activeTab} onValueChange={handleTabChange}>
+                <TabsList className="grid grid-cols-3 mb-8">
+                  <TabsTrigger value="events">Events</TabsTrigger>
+                  <TabsTrigger value="massSchedule">Mass Schedule</TabsTrigger>
+                  <TabsTrigger value="ministries">Ministries</TabsTrigger>
+                </TabsList>
+                
+                <TabsContent value="events">
+                  <CMSEvents />
+                </TabsContent>
+                
+                <TabsContent value="massSchedule">
+                  <CMSMassSchedule />
+                </TabsContent>
+                
+                <TabsContent value="ministries">
+                  <CMSMinistries />
+                </TabsContent>
+              </Tabs>
+            )}
           </div>
         </div>
       </div>

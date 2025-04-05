@@ -24,7 +24,7 @@ const PageLayout = ({ children }: PageLayoutProps) => {
           <Button asChild className="rounded-full shadow-lg">
             <Link to="/cms">
               <Edit className="h-5 w-5 mr-2" />
-              Edit Content
+              Manage Content
             </Link>
           </Button>
         </div>

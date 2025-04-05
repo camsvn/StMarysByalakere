@@ -7,17 +7,18 @@ import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Label } from "@/components/ui/label";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
-import { Trash, Plus, Edit } from "lucide-react";
+import { Trash, Plus, Edit, Loader2 } from "lucide-react";
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog";
 import * as Icons from "lucide-react";
 
 const iconOptions = ["Users", "Music", "BookOpen", "Heart", "Award", "Coffee", "Globe", "Gift", "MessageCircle"];
 
 const CMSMinistries = () => {
-  const { ministries, setMinistries } = useCMS();
+  const { ministries, addMinistry, updateMinistry, removeMinistry } = useCMS();
   const [isOpen, setIsOpen] = useState(false);
+  const [isSubmitting, setIsSubmitting] = useState(false);
   const [currentMinistry, setCurrentMinistry] = useState<MinistryType | null>(null);
-  const [formData, setFormData] = useState<MinistryType>({
+  const [formData, setFormData] = useState<Omit<MinistryType, "id">>({
     title: "",
     description: "",
     icon: "Users",
@@ -52,7 +53,7 @@ const CMSMinistries = () => {
     setIsOpen(true);
   };
 
-  const handleSave = () => {
+  const handleSave = async () => {
     if (
       !formData.title.trim() ||
       !formData.description.trim() ||
@@ -61,20 +62,24 @@ const CMSMinistries = () => {
       return; // Don't save incomplete data
     }
 
-    if (currentMinistry) {
-      // Update existing ministry
-      setMinistries(ministries.map(m => 
-        m.title === currentMinistry.title ? formData : m
-      ));
-    } else {
-      // Add new ministry
-      setMinistries([...ministries, formData]);
+    setIsSubmitting(true);
+    
+    try {
+      if (currentMinistry) {
+        // Update existing ministry
+        await updateMinistry(currentMinistry.id, formData);
+      } else {
+        // Add new ministry
+        await addMinistry(formData);
+      }
+      setIsOpen(false);
+    } finally {
+      setIsSubmitting(false);
     }
-    setIsOpen(false);
   };
 
-  const handleDelete = (title: string) => {
-    setMinistries(ministries.filter(ministry => ministry.title !== title));
+  const handleDelete = async (id: number) => {
+    await removeMinistry(id);
   };
 
   const renderIcon = (iconName: string) => {
@@ -92,35 +97,41 @@ const CMSMinistries = () => {
         </Button>
       </div>
 
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-        {ministries.map((ministry, index) => (
-          <Card key={index} className="overflow-hidden">
-            <CardContent className="p-6">
-              <div className="flex justify-between items-start">
-                <div className="flex items-start gap-3">
-                  <div className="inline-flex items-center justify-center w-10 h-10 rounded-full bg-secondary/10 text-secondary">
-                    {renderIcon(ministry.icon)}
+      {ministries.length === 0 ? (
+        <div className="text-center py-8 bg-muted/20 rounded-lg">
+          <p className="text-muted-foreground">No ministries found. Create your first ministry!</p>
+        </div>
+      ) : (
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+          {ministries.map((ministry) => (
+            <Card key={ministry.id} className="overflow-hidden">
+              <CardContent className="p-6">
+                <div className="flex justify-between items-start">
+                  <div className="flex items-start gap-3">
+                    <div className="inline-flex items-center justify-center w-10 h-10 rounded-full bg-secondary/10 text-secondary">
+                      {renderIcon(ministry.icon)}
+                    </div>
+                    <div>
+                      <h3 className="text-lg font-semibold">{ministry.title}</h3>
+                      <p className="text-sm text-muted-foreground mt-1 line-clamp-2">
+                        {ministry.description}
+                      </p>
+                    </div>
                   </div>
-                  <div>
-                    <h3 className="text-lg font-semibold">{ministry.title}</h3>
-                    <p className="text-sm text-muted-foreground mt-1 line-clamp-2">
-                      {ministry.description}
-                    </p>
+                  <div className="flex gap-2 ml-2">
+                    <Button variant="ghost" size="sm" onClick={() => openEditMinistryForm(ministry)}>
+                      <Edit className="h-4 w-4" />
+                    </Button>
+                    <Button variant="ghost" size="sm" onClick={() => handleDelete(ministry.id)}>
+                      <Trash className="h-4 w-4 text-destructive" />
+                    </Button>
                   </div>
                 </div>
-                <div className="flex gap-2 ml-2">
-                  <Button variant="ghost" size="sm" onClick={() => openEditMinistryForm(ministry)}>
-                    <Edit className="h-4 w-4" />
-                  </Button>
-                  <Button variant="ghost" size="sm" onClick={() => handleDelete(ministry.title)}>
-                    <Trash className="h-4 w-4 text-destructive" />
-                  </Button>
-                </div>
-              </div>
-            </CardContent>
-          </Card>
-        ))}
-      </div>
+              </CardContent>
+            </Card>
+          ))}
+        </div>
+      )}
 
       <Dialog open={isOpen} onOpenChange={setIsOpen}>
         <DialogContent className="sm:max-w-lg">
@@ -168,8 +179,11 @@ const CMSMinistries = () => {
               />
             </div>
             <div className="flex justify-end gap-3 pt-4">
-              <Button variant="outline" onClick={() => setIsOpen(false)}>Cancel</Button>
-              <Button onClick={handleSave}>Save Ministry</Button>
+              <Button variant="outline" onClick={() => setIsOpen(false)} disabled={isSubmitting}>Cancel</Button>
+              <Button onClick={handleSave} disabled={isSubmitting}>
+                {isSubmitting && <Loader2 className="h-4 w-4 mr-2 animate-spin" />}
+                Save Ministry
+              </Button>
             </div>
           </div>
         </DialogContent>

@@ -5,14 +5,15 @@ import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { Trash, Plus, Edit, Clock, X } from "lucide-react";
+import { Trash, Plus, Edit, Clock, X, Loader2 } from "lucide-react";
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog";
 
 const CMSMassSchedule = () => {
-  const { massSchedule, setMassSchedule } = useCMS();
+  const { massSchedule, addMassSchedule, updateMassSchedule, removeMassSchedule } = useCMS();
   const [isOpen, setIsOpen] = useState(false);
+  const [isSubmitting, setIsSubmitting] = useState(false);
   const [currentSchedule, setCurrentSchedule] = useState<MassScheduleType | null>(null);
-  const [formData, setFormData] = useState<MassScheduleType>({
+  const [formData, setFormData] = useState<Omit<MassScheduleType, "id">>({
     day: "",
     times: [""],
     location: "",
@@ -61,25 +62,29 @@ const CMSMassSchedule = () => {
     setIsOpen(true);
   };
 
-  const handleSave = () => {
+  const handleSave = async () => {
     if (!formData.day.trim() || formData.times.some(t => !t.trim()) || !formData.location?.trim()) {
       return; // Don't save incomplete data
     }
 
-    if (currentSchedule) {
-      // Update existing schedule
-      setMassSchedule(massSchedule.map(s => 
-        s.day === currentSchedule.day ? formData : s
-      ));
-    } else {
-      // Add new schedule
-      setMassSchedule([...massSchedule, formData]);
+    setIsSubmitting(true);
+    
+    try {
+      if (currentSchedule) {
+        // Update existing schedule
+        await updateMassSchedule(currentSchedule.id, formData);
+      } else {
+        // Add new schedule
+        await addMassSchedule(formData);
+      }
+      setIsOpen(false);
+    } finally {
+      setIsSubmitting(false);
     }
-    setIsOpen(false);
   };
 
-  const handleDelete = (day: string) => {
-    setMassSchedule(massSchedule.filter(schedule => schedule.day !== day));
+  const handleDelete = async (id: number) => {
+    await removeMassSchedule(id);
   };
 
   return (
@@ -91,38 +96,44 @@ const CMSMassSchedule = () => {
         </Button>
       </div>
 
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-        {massSchedule.map((schedule) => (
-          <Card key={schedule.day} className="overflow-hidden">
-            <CardContent className="p-6">
-              <div className="flex justify-between">
-                <h3 className="text-lg font-semibold">{schedule.day}</h3>
-                <div className="flex gap-2">
-                  <Button variant="ghost" size="sm" onClick={() => openEditScheduleForm(schedule)}>
-                    <Edit className="h-4 w-4" />
-                  </Button>
-                  <Button variant="ghost" size="sm" onClick={() => handleDelete(schedule.day)}>
-                    <Trash className="h-4 w-4 text-destructive" />
-                  </Button>
-                </div>
-              </div>
-              <div className="mt-3 space-y-2">
-                <div className="flex items-start">
-                  <Clock className="h-5 w-5 text-primary mr-2 mt-0.5" />
-                  <div className="space-y-1">
-                    {schedule.times.map((time, index) => (
-                      <div key={index} className="text-sm">{time}</div>
-                    ))}
+      {massSchedule.length === 0 ? (
+        <div className="text-center py-8 bg-muted/20 rounded-lg">
+          <p className="text-muted-foreground">No mass schedules found. Create your first schedule!</p>
+        </div>
+      ) : (
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+          {massSchedule.map((schedule) => (
+            <Card key={schedule.id} className="overflow-hidden">
+              <CardContent className="p-6">
+                <div className="flex justify-between">
+                  <h3 className="text-lg font-semibold">{schedule.day}</h3>
+                  <div className="flex gap-2">
+                    <Button variant="ghost" size="sm" onClick={() => openEditScheduleForm(schedule)}>
+                      <Edit className="h-4 w-4" />
+                    </Button>
+                    <Button variant="ghost" size="sm" onClick={() => handleDelete(schedule.id)}>
+                      <Trash className="h-4 w-4 text-destructive" />
+                    </Button>
                   </div>
                 </div>
-                {schedule.location && (
-                  <p className="text-sm text-muted-foreground mt-2">Location: {schedule.location}</p>
-                )}
-              </div>
-            </CardContent>
-          </Card>
-        ))}
-      </div>
+                <div className="mt-3 space-y-2">
+                  <div className="flex items-start">
+                    <Clock className="h-5 w-5 text-primary mr-2 mt-0.5" />
+                    <div className="space-y-1">
+                      {schedule.times.map((time, index) => (
+                        <div key={index} className="text-sm">{time}</div>
+                      ))}
+                    </div>
+                  </div>
+                  {schedule.location && (
+                    <p className="text-sm text-muted-foreground mt-2">Location: {schedule.location}</p>
+                  )}
+                </div>
+              </CardContent>
+            </Card>
+          ))}
+        </div>
+      )}
 
       <Dialog open={isOpen} onOpenChange={setIsOpen}>
         <DialogContent className="sm:max-w-lg">
@@ -169,8 +180,11 @@ const CMSMassSchedule = () => {
               />
             </div>
             <div className="flex justify-end gap-3 pt-4">
-              <Button variant="outline" onClick={() => setIsOpen(false)}>Cancel</Button>
-              <Button onClick={handleSave}>Save Schedule</Button>
+              <Button variant="outline" onClick={() => setIsOpen(false)} disabled={isSubmitting}>Cancel</Button>
+              <Button onClick={handleSave} disabled={isSubmitting}>
+                {isSubmitting && <Loader2 className="h-4 w-4 mr-2 animate-spin" />}
+                Save Schedule
+              </Button>
             </div>
           </div>
         </DialogContent>
