@@ -102,4 +102,4 @@ export const useCMS = () => {
 };
 
 // Re-export types for backwards compatibility
-export { EventType, MassScheduleType, MinistryType };
+export type { EventType, MassScheduleType, MinistryType };
