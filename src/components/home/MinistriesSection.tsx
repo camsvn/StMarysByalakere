@@ -3,7 +3,8 @@ import { Link } from "react-router-dom";
 import SectionHeading from "../ui/SectionHeading";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
-import { Music, BookOpen, Heart, Users } from "lucide-react";
+import { Music, BookOpen, Heart, Users, Award, Coffee, Globe, Gift, MessageCircle } from "lucide-react";
+import { useCMS } from "@/contexts/CMSContext";
 
 interface MinistryCardProps {
   title: string;
@@ -32,32 +33,24 @@ const MinistryCard = ({ title, description, icon, delay }: MinistryCardProps) =>
 );
 
 const MinistriesSection = () => {
-  const ministries = [
-    {
-      title: "Youth Ministry",
-      description: "A vibrant community where young people grow in faith, build friendships, and develop leadership skills.",
-      icon: <Users className="h-6 w-6" />,
-      delay: "animate-delay-100"
-    },
-    {
-      title: "Choir & Music",
-      description: "Enhance our liturgies through music and song, bringing the congregation into deeper worship.",
-      icon: <Music className="h-6 w-6" />,
-      delay: "animate-delay-200"
-    },
-    {
-      title: "Sunday School",
-      description: "Religious education for children and youth to learn about our faith and traditions.",
-      icon: <BookOpen className="h-6 w-6" />,
-      delay: "animate-delay-300"
-    },
-    {
-      title: "Charity & Outreach",
-      description: "Serving our community through charitable works, outreach programs, and social justice initiatives.",
-      icon: <Heart className="h-6 w-6" />,
-      delay: "animate-delay-400"
-    }
-  ];
+  const { ministries } = useCMS();
+  
+  // Helper function to render the correct icon
+  const getIconComponent = (iconName: string) => {
+    const iconMap: Record<string, React.ReactNode> = {
+      Users: <Users className="h-6 w-6" />,
+      Music: <Music className="h-6 w-6" />,
+      BookOpen: <BookOpen className="h-6 w-6" />,
+      Heart: <Heart className="h-6 w-6" />,
+      Award: <Award className="h-6 w-6" />,
+      Coffee: <Coffee className="h-6 w-6" />,
+      Globe: <Globe className="h-6 w-6" />,
+      Gift: <Gift className="h-6 w-6" />,
+      MessageCircle: <MessageCircle className="h-6 w-6" />,
+    };
+    
+    return iconMap[iconName] || <Users className="h-6 w-6" />;
+  };
 
   return (
     <section className="section-container">
@@ -72,8 +65,8 @@ const MinistriesSection = () => {
             key={index}
             title={ministry.title}
             description={ministry.description}
-            icon={ministry.icon}
-            delay={ministry.delay}
+            icon={getIconComponent(ministry.icon)}
+            delay={`animate-delay-${index * 100}`}
           />
         ))}
       </div>

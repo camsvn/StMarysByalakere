@@ -3,35 +3,13 @@ import { Link } from "react-router-dom";
 import SectionHeading from "../ui/SectionHeading";
 import EventCard from "../ui/EventCard";
 import { Button } from "@/components/ui/button";
+import { useCMS } from "@/contexts/CMSContext";
 
 const EventsSection = () => {
-  // Sample event data
-  const events = [
-    {
-      id: 1,
-      title: "Easter Sunday Mass",
-      date: "Apr 9, 2023",
-      time: "9:00 AM",
-      description: "Celebrate the resurrection of our Lord Jesus Christ with a special Easter service followed by community breakfast.",
-      location: "Main Church"
-    },
-    {
-      id: 2,
-      title: "Youth Group Meeting",
-      date: "Apr 12, 2023",
-      time: "6:30 PM",
-      description: "Join fellow youth for an evening of faith, fun, and fellowship. This week's topic: 'Faith in Action'.",
-      location: "Parish Hall"
-    },
-    {
-      id: 3,
-      title: "Food Drive for Local Shelter",
-      date: "Apr 15, 2023",
-      time: "10:00 AM - 2:00 PM",
-      description: "Help collect non-perishable food items for our local community shelter. All donations welcome!",
-      location: "Church Parking Lot"
-    }
-  ];
+  const { events } = useCMS();
+  
+  // Display the first 3 events
+  const displayedEvents = events.slice(0, 3);
 
   return (
     <section className="section-container">
@@ -41,7 +19,7 @@ const EventsSection = () => {
       />
 
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-        {events.map((event, index) => (
+        {displayedEvents.map((event, index) => (
           <EventCard
             key={event.id}
             title={event.title}

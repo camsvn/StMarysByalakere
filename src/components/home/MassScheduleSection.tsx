@@ -5,6 +5,7 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
 import { cn } from "@/lib/utils";
+import { useCMS } from "@/contexts/CMSContext";
 
 interface MassCardProps {
   day: string;
@@ -40,16 +41,10 @@ const MassCard = ({ day, times, location, className }: MassCardProps) => (
 );
 
 const MassScheduleSection = () => {
-  // Sample Mass schedule data
-  const schedule = [
-    { day: "Sunday", times: ["8:00 AM", "10:30 AM", "5:00 PM"], location: "Main Church" },
-    { day: "Monday", times: ["6:30 AM"], location: "Chapel" },
-    { day: "Tuesday", times: ["6:30 AM"], location: "Chapel" },
-    { day: "Wednesday", times: ["6:30 AM", "7:00 PM"], location: "Chapel" },
-    { day: "Thursday", times: ["6:30 AM"], location: "Chapel" },
-    { day: "Friday", times: ["6:30 AM"], location: "Chapel" },
-    { day: "Saturday", times: ["9:00 AM", "5:00 PM (Vigil)"], location: "Main Church" }
-  ];
+  const { massSchedule } = useCMS();
+  
+  // Only show the first 4 days in the home page (typically Sun-Wed)
+  const displaySchedule = massSchedule.slice(0, 4);
 
   return (
     <section className="section-container bg-gradient-to-br from-primary/5 to-secondary/5">
@@ -59,7 +54,7 @@ const MassScheduleSection = () => {
       />
 
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
-        {schedule.map((item, index) => (
+        {displaySchedule.map((item, index) => (
           <MassCard
             key={item.day}
             day={item.day}
