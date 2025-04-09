@@ -13,7 +13,7 @@ import {
   TableRow 
 } from "@/components/ui/table";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { CalendarIcon } from "lucide-react";
+import { CalendarIcon, ArrowRight } from "lucide-react";
 
 const EventsSection = () => {
   const { events } = useCMS();
@@ -29,6 +29,13 @@ const EventsSection = () => {
     year: 'numeric'
   });
 
+  // Array of placeholder images for event posters
+  const posterImages = [
+    "https://images.unsplash.com/photo-1605810230434-7631ac76ec81?auto=format&fit=crop&w=600&h=400&q=80",
+    "https://images.unsplash.com/photo-1470813740244-df37b8c1edcb?auto=format&fit=crop&w=600&h=400&q=80",
+    "https://images.unsplash.com/photo-1500673922987-e212871fec22?auto=format&fit=crop&w=600&h=400&q=80"
+  ];
+
   return (
     <section className="section-container bg-white">
       <div className="max-w-7xl mx-auto">
@@ -37,11 +44,45 @@ const EventsSection = () => {
           subtitle="Join us for these special events and be part of our vibrant community."
         />
 
-        <Tabs defaultValue="cards" className="w-full max-w-4xl mx-auto">
-          <TabsList className="grid w-full max-w-md mx-auto grid-cols-2 mb-8">
+        <Tabs defaultValue="posters" className="w-full max-w-4xl mx-auto">
+          <TabsList className="grid w-full max-w-md mx-auto grid-cols-3 mb-8">
+            <TabsTrigger value="posters">Posters</TabsTrigger>
             <TabsTrigger value="cards">Cards</TabsTrigger>
             <TabsTrigger value="calendar">Calendar</TabsTrigger>
           </TabsList>
+
+          <TabsContent value="posters">
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-8">
+              {displayedEvents.map((event, index) => (
+                <div 
+                  key={event.id} 
+                  className={`relative overflow-hidden rounded-lg shadow-lg group hover:shadow-xl transition-all duration-300 animate-fade-in animate-delay-${index * 100}`}
+                >
+                  <div className="absolute inset-0 bg-gradient-to-t from-black via-black/70 to-transparent opacity-60 group-hover:opacity-70 transition-opacity"></div>
+                  <img 
+                    src={posterImages[index % posterImages.length]} 
+                    alt={event.title} 
+                    className="w-full h-80 object-cover group-hover:scale-105 transition-transform duration-700"
+                  />
+                  <div className="absolute bottom-0 left-0 right-0 p-6 text-white">
+                    <div className="flex items-center mb-2">
+                      <CalendarIcon className="h-5 w-5 mr-2 text-primary-foreground" />
+                      <span className="text-sm font-medium bg-primary/80 px-3 py-1 rounded-full">{event.date} • {event.time}</span>
+                    </div>
+                    <h3 className="text-xl font-bold mb-2 group-hover:text-accent transition-colors">{event.title}</h3>
+                    <p className="text-sm text-white/80 line-clamp-2 mb-4">{event.description}</p>
+                    <Link 
+                      to="/events" 
+                      className="inline-flex items-center text-sm font-medium text-primary-foreground hover:text-accent transition-colors"
+                    >
+                      Learn More
+                      <ArrowRight className="ml-1 h-4 w-4 group-hover:translate-x-1 transition-transform" />
+                    </Link>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </TabsContent>
 
           <TabsContent value="cards">
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
@@ -53,7 +94,7 @@ const EventsSection = () => {
                   time={event.time}
                   description={event.description}
                   location={event.location}
-                  className={`animate-fade-in animate-delay-${index * 100} shadow-lg`}
+                  className={`animate-fade-in animate-delay-${index * 100} shadow-lg hover:-translate-y-1 hover:shadow-xl transition-all duration-300`}
                 />
               ))}
             </div>
@@ -96,8 +137,11 @@ const EventsSection = () => {
         </Tabs>
 
         <div className="text-center mt-12">
-          <Button size="lg" asChild>
-            <Link to="/events">View All Events</Link>
+          <Button size="lg" asChild className="group">
+            <Link to="/events">
+              View All Events
+              <ArrowRight className="ml-2 h-5 w-5 group-hover:translate-x-1 transition-transform" />
+            </Link>
           </Button>
         </div>
       </div>

@@ -1,66 +1,55 @@
 
 import { useEffect, useRef } from "react";
-import { cn } from "@/lib/utils";
 
-interface ShapesBackgroundProps {
-  className?: string;
-}
+const ShapesBackground = () => {
+  const shapesRef = useRef<(HTMLDivElement | null)[]>([]);
 
-const ShapesBackground = ({ className }: ShapesBackgroundProps) => {
-  const containerRef = useRef<HTMLDivElement>(null);
-  
   useEffect(() => {
-    const container = containerRef.current;
-    if (!container) return;
-    
-    const shapes = container.querySelectorAll('.shape');
-    
-    const animateShapes = () => {
-      shapes.forEach((shape) => {
-        const duration = 15 + Math.random() * 15;
-        const shapeElement = shape as HTMLElement;
-        
-        shapeElement.style.animationDuration = `${duration}s`;
-      });
-    };
-    
-    animateShapes();
+    // Animate the shapes with random motion
+    shapesRef.current.forEach((shape) => {
+      if (!shape) return;
+      
+      const xPos = Math.random() * 100;
+      const yPos = Math.random() * 100;
+      const speed = 20 + Math.random() * 40;
+      const size = 100 + Math.random() * 200;
+      
+      shape.style.left = `${xPos}%`;
+      shape.style.top = `${yPos}%`;
+      shape.style.width = `${size}px`;
+      shape.style.height = `${size}px`;
+      
+      const animation = shape.animate(
+        [
+          { transform: 'translate(0, 0) rotate(0deg)' },
+          { transform: `translate(${Math.random() * 50 - 25}px, ${Math.random() * 50 - 25}px) rotate(${Math.random() * 60 - 30}deg)` }
+        ],
+        {
+          duration: speed * 1000,
+          iterations: Infinity,
+          direction: 'alternate',
+          easing: 'ease-in-out'
+        }
+      );
+      
+      return () => animation.cancel();
+    });
   }, []);
 
   return (
-    <div 
-      ref={containerRef} 
-      className={cn("absolute inset-0 overflow-hidden pointer-events-none z-0", className)}
-    >
-      {/* Abstract background shapes */}
+    <div className="absolute inset-0 overflow-hidden -z-10">
       <div 
-        className="shape shape-blue rounded-full w-64 h-64 blur-3xl opacity-20 animate-float"
-        style={{ 
-          top: '-5%', 
-          left: '10%',
-        }}
-      ></div>
+        ref={el => shapesRef.current[0] = el} 
+        className="shape shape-blue rounded-full blur-3xl absolute opacity-20"
+      />
       <div 
-        className="shape shape-purple rounded-full w-72 h-72 blur-3xl opacity-20 animate-float"
-        style={{ 
-          top: '30%', 
-          right: '-10%',
-        }}
-      ></div>
+        ref={el => shapesRef.current[1] = el} 
+        className="shape shape-purple rounded-full blur-3xl absolute opacity-20"
+      />
       <div 
-        className="shape shape-gold rounded-full w-48 h-48 blur-3xl opacity-20 animate-float"
-        style={{ 
-          bottom: '10%', 
-          left: '20%',
-        }}
-      ></div>
-      <div 
-        className="shape shape-blue rounded-full w-56 h-56 blur-3xl opacity-20 animate-float"
-        style={{ 
-          bottom: '-10%', 
-          right: '15%',
-        }}
-      ></div>
+        ref={el => shapesRef.current[2] = el} 
+        className="shape shape-gold rounded-full blur-3xl absolute opacity-20"
+      />
     </div>
   );
 };
