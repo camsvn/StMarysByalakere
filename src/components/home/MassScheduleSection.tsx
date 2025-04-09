@@ -6,32 +6,38 @@ import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
 import { cn } from "@/lib/utils";
 import { useCMS } from "@/contexts/CMSContext";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 
 interface MassCardProps {
   day: string;
   times: string[];
   location?: string;
   className?: string;
+  isHighlighted?: boolean;
 }
 
-const MassCard = ({ day, times, location, className }: MassCardProps) => (
-  <Card className={cn("card-hover", className)}>
+const MassCard = ({ day, times, location, className, isHighlighted }: MassCardProps) => (
+  <Card className={cn(
+    "card-hover", 
+    isHighlighted && "border-primary/50 bg-gradient-to-br from-primary/5 to-secondary/10",
+    className
+  )}>
     <CardHeader className="pb-2">
-      <CardTitle className="text-xl">{day}</CardTitle>
+      <CardTitle className={cn("text-xl", isHighlighted && "text-primary")}>{day}</CardTitle>
     </CardHeader>
     <CardContent>
       <div className="space-y-2">
         <div className="flex items-start">
-          <Clock className="h-5 w-5 text-primary mr-2 mt-0.5" />
+          <Clock className={cn("h-5 w-5 mr-2 mt-0.5", isHighlighted ? "text-primary" : "text-muted-foreground")} />
           <div className="space-y-1">
             {times.map((time, index) => (
-              <div key={index} className="text-sm">{time}</div>
+              <div key={index} className={cn("text-sm", isHighlighted && "font-medium")}>{time}</div>
             ))}
           </div>
         </div>
         {location && (
           <div className="flex items-start mt-2">
-            <MapPin className="h-5 w-5 text-primary mr-2 mt-0.5" />
+            <MapPin className={cn("h-5 w-5 mr-2 mt-0.5", isHighlighted ? "text-primary" : "text-muted-foreground")} />
             <div className="text-sm">{location}</div>
           </div>
         )}
@@ -43,32 +49,84 @@ const MassCard = ({ day, times, location, className }: MassCardProps) => (
 const MassScheduleSection = () => {
   const { massSchedule } = useCMS();
   
-  // Only show the first 4 days in the home page (typically Sun-Wed)
-  const displaySchedule = massSchedule.slice(0, 4);
+  // Get current day of the week for highlighting
+  const today = new Date().toLocaleString('en-us', {weekday: 'long'});
+  
+  // Group mass schedule by weekday vs weekend
+  const weekdayMasses = massSchedule.filter(item => 
+    !["Saturday", "Sunday"].includes(item.day)
+  ).slice(0, 3); // Show first 3 weekdays
+  
+  const weekendMasses = massSchedule.filter(item => 
+    ["Saturday", "Sunday"].includes(item.day)
+  );
 
   return (
-    <section className="section-container bg-gradient-to-br from-primary/5 to-secondary/5">
-      <SectionHeading 
-        title="Mass Schedule" 
-        subtitle="Join us in prayer and worship throughout the week."
-      />
+    <section className="section-container bg-gradient-to-br from-primary/5 to-secondary/5 py-16">
+      <div className="max-w-7xl mx-auto">
+        <SectionHeading 
+          title="Mass Schedule" 
+          subtitle="Join us in prayer and worship throughout the week."
+        />
 
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
-        {displaySchedule.map((item, index) => (
-          <MassCard
-            key={item.day}
-            day={item.day}
-            times={item.times}
-            location={item.location}
-            className={`animate-fade-in animate-delay-${index * 50}`}
-          />
-        ))}
-      </div>
+        <Tabs defaultValue="all" className="w-full max-w-4xl mx-auto">
+          <TabsList className="grid w-full max-w-md mx-auto grid-cols-3 mb-8">
+            <TabsTrigger value="all">All Masses</TabsTrigger>
+            <TabsTrigger value="weekday">Weekday</TabsTrigger>
+            <TabsTrigger value="weekend">Weekend</TabsTrigger>
+          </TabsList>
 
-      <div className="text-center mt-12">
-        <Button variant="outline" asChild>
-          <Link to="/mass-services">View All Services</Link>
-        </Button>
+          <TabsContent value="all" className="space-y-8">
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
+              {massSchedule.map((item, index) => (
+                <MassCard
+                  key={item.day}
+                  day={item.day}
+                  times={item.times}
+                  location={item.location}
+                  isHighlighted={item.day === today}
+                  className={`animate-fade-in animate-delay-${index * 50}`}
+                />
+              ))}
+            </div>
+          </TabsContent>
+
+          <TabsContent value="weekday" className="space-y-8">
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+              {weekdayMasses.map((item, index) => (
+                <MassCard
+                  key={item.day}
+                  day={item.day}
+                  times={item.times}
+                  location={item.location}
+                  isHighlighted={item.day === today}
+                  className={`animate-fade-in animate-delay-${index * 50}`}
+                />
+              ))}
+            </div>
+          </TabsContent>
+
+          <TabsContent value="weekend" className="space-y-8">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 max-w-2xl mx-auto">
+              {weekendMasses.map((item, index) => (
+                <MassCard
+                  key={item.day}
+                  day={item.day}
+                  times={item.times}
+                  location={item.location}
+                  isHighlighted={item.day === today}
+                  className={`animate-fade-in animate-delay-${index * 50}`}
+                />
+              ))}
+            </div>
+          </TabsContent>
+        </Tabs>
+
+        <div className="text-center mt-10">
+          <Button size="lg" variant="outline" asChild>
+            <Link to="/mass-services">View Detailed Schedule</Link>
+          </Button>
+        </div>
       </div>
     </section>
   );

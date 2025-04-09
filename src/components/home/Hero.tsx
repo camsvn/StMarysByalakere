@@ -2,7 +2,7 @@
 import { Button } from "@/components/ui/button";
 import ShapesBackground from "@/components/ui/ShapesBackground";
 import { Link } from "react-router-dom";
-import { Church } from "lucide-react";
+import { Church, Calendar } from "lucide-react";
 
 const Hero = () => {
   return (
@@ -22,11 +22,17 @@ const Hero = () => {
             Join our vibrant community for worship, fellowship, and spiritual growth. Together, we celebrate our faith and serve our community.
           </p>
           <div className="flex flex-col sm:flex-row justify-center lg:justify-start gap-4 animate-fade-in animate-delay-200">
-            <Button size="lg" className="font-medium" asChild>
-              <Link to="/mass-services">Mass Schedule</Link>
+            <Button size="lg" className="font-medium flex items-center gap-2" asChild>
+              <Link to="/mass-services">
+                <Church className="h-5 w-5" />
+                Mass Schedule
+              </Link>
             </Button>
-            <Button variant="outline" size="lg" className="font-medium" asChild>
-              <Link to="/about">Learn More</Link>
+            <Button variant="outline" size="lg" className="font-medium flex items-center gap-2" asChild>
+              <Link to="/events">
+                <Calendar className="h-5 w-5" />
+                Upcoming Events
+              </Link>
             </Button>
           </div>
         </div>
