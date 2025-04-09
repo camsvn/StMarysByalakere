@@ -13,11 +13,11 @@ const Index = () => {
     <PageLayout>
       <Hero />
       <EventsMarquee />
+      <PriestMessage />
       <EventsSection />
       <MassScheduleSection />
       <MinistriesSection />
       <MissionSection />
-      <PriestMessage />
     </PageLayout>
   );
 };
