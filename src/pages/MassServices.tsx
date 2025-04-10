@@ -98,7 +98,7 @@ const MassServices = () => {
                       { title: "Confirmation", description: "Classes held on Wednesday evenings at 7:00 PM" },
                       { title: "Marriage", description: "Contact the parish office at least six months in advance" }
                     ].map((sacrament, index) => (
-                      <Collapsible key={index} className="animate-fade-in">
+                      <Collapsible key={index} className="animate-fade-in" defaultOpen>
                         <Card className="card-hover">
                           <CollapsibleTrigger className="w-full text-left">
                             <CardHeader className="pb-2">
@@ -132,7 +132,7 @@ const MassServices = () => {
                       { title: "Anointing of the Sick", description: "After weekday Masses or by appointment" },
                       { title: "Funeral Services", description: "Contact the parish office for arrangements" }
                     ].map((service, index) => (
-                      <Collapsible key={index} className="animate-fade-in">
+                      <Collapsible key={index} className="animate-fade-in" defaultOpen>
                         <Card className="card-hover">
                           <CollapsibleTrigger className="w-full text-left">
                             <CardHeader className="pb-2">
