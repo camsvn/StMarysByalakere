@@ -1,4 +1,3 @@
-
 import React, { createContext, useContext, useState, useEffect, ReactNode } from "react";
 import { toast } from "@/hooks/use-toast";
 import { supabase } from "@/integrations/supabase/client";
@@ -88,8 +87,8 @@ export const MemberProvider: React.FC<{ children: ReactNode }> = ({ children }) 
         // Then safely convert to our Profile type
         if (typeof data === 'object' && data !== null) {
           const profileData = {
-            name: data.name as string | null,
-            role: data.role as string | null
+            name: data?.name ?? null,  // Use nullish coalescing to handle potential undefined
+            role: data?.role ?? null   // Use nullish coalescing to handle potential undefined
           };
           
           // Create member object from Supabase data
@@ -103,6 +102,10 @@ export const MemberProvider: React.FC<{ children: ReactNode }> = ({ children }) 
           console.error("Unexpected data format from profile fetch");
           setMember(null);
         }
+      } else {
+        // Handle case where data is null
+        console.error("No profile data found");
+        setMember(null);
       }
     } catch (error) {
       console.error("Error in profile fetch:", error);
