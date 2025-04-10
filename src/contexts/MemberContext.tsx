@@ -12,6 +12,12 @@ export interface Member {
   role: "member" | "admin";
 }
 
+// Define profile type to match the database structure
+interface Profile {
+  name: string | null;
+  role: string | null;
+}
+
 // Context type
 interface MemberContextType {
   member: Member | null;
@@ -67,7 +73,7 @@ export const MemberProvider: React.FC<{ children: ReactNode }> = ({ children }) 
   // Helper function to fetch user profile data
   const fetchUserProfile = async (user: User) => {
     try {
-      // Using type assertion to tell TypeScript this is a valid table
+      // Using type assertion with explicit type for better type safety
       const { data, error } = await supabase
         .from('profiles' as any)
         .select('name, role')
@@ -78,12 +84,15 @@ export const MemberProvider: React.FC<{ children: ReactNode }> = ({ children }) 
         console.error("Error fetching user profile:", error);
         setMember(null);
       } else if (data) {
+        // Explicitly type the data as Profile
+        const profileData = data as Profile;
+        
         // Create member object from Supabase data
         setMember({
           id: user.id,
           email: user.email || '',
-          name: data.name || user.email?.split('@')[0] || 'User',
-          role: (data.role as "admin" | "member") || "member"
+          name: profileData.name || user.email?.split('@')[0] || 'User',
+          role: (profileData.role as "admin" | "member") || "member"
         });
       }
     } catch (error) {
