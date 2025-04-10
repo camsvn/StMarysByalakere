@@ -71,9 +71,9 @@ const MassScheduleSection = () => {
 
         <Tabs defaultValue="all" className="w-full max-w-4xl mx-auto">
           <TabsList className="grid w-full max-w-md mx-auto grid-cols-3 mb-8">
-            <TabsTrigger value="all">All Masses</TabsTrigger>
-            <TabsTrigger value="weekday">Weekday</TabsTrigger>
-            <TabsTrigger value="weekend">Weekend</TabsTrigger>
+            <TabsTrigger value="all" className="text-xs sm:text-sm px-2 sm:px-3">All Masses</TabsTrigger>
+            <TabsTrigger value="weekday" className="text-xs sm:text-sm px-2 sm:px-3">Weekday</TabsTrigger>
+            <TabsTrigger value="weekend" className="text-xs sm:text-sm px-2 sm:px-3">Weekend</TabsTrigger>
           </TabsList>
 
           <TabsContent value="all" className="space-y-8">

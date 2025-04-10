@@ -7,9 +7,11 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Clock, MapPin, BookOpen, User, Heart } from "lucide-react";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Collapsible, CollapsibleContent, CollapsibleTrigger } from "@/components/ui/collapsible";
+import { useIsMobile } from "@/hooks/use-mobile";
 
 const MassServices = () => {
   const { massSchedule } = useCMS();
+  const isMobile = useIsMobile();
 
   // Get current day of the week for highlighting
   const today = new Date().toLocaleString('en-us', {weekday: 'long'});
@@ -27,9 +29,9 @@ const MassServices = () => {
           <div className="max-w-5xl mx-auto">
             <Tabs defaultValue="masses" className="w-full">
               <TabsList className="grid w-full max-w-md mx-auto grid-cols-3 mb-8">
-                <TabsTrigger value="masses">Masses</TabsTrigger>
-                <TabsTrigger value="sacraments">Sacraments</TabsTrigger>
-                <TabsTrigger value="special">Special Services</TabsTrigger>
+                <TabsTrigger value="masses" className="text-xs sm:text-sm px-2 sm:px-3">Masses</TabsTrigger>
+                <TabsTrigger value="sacraments" className="text-xs sm:text-sm px-2 sm:px-3">Sacraments</TabsTrigger>
+                <TabsTrigger value="special" className="text-xs sm:text-sm px-2 sm:px-3">Special Services</TabsTrigger>
               </TabsList>
 
               <TabsContent value="masses" className="space-y-8">
