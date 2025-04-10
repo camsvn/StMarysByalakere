@@ -8,6 +8,7 @@ import { useMember } from "@/contexts/MemberContext";
 import CMSEvents from "@/components/cms/CMSEvents";
 import CMSMassSchedule from "@/components/cms/CMSMassSchedule";
 import CMSMinistries from "@/components/cms/CMSMinistries";
+import CMSGallery from "@/components/cms/CMSGallery";
 import { Button } from "@/components/ui/button";
 import { useToast } from "@/hooks/use-toast";
 import ShapesBackground from "@/components/ui/ShapesBackground";
@@ -60,10 +61,11 @@ const CMS = () => {
 
           <div className="bg-white rounded-lg shadow-lg p-6">
             <Tabs value={activeTab} onValueChange={handleTabChange}>
-              <TabsList className="grid grid-cols-3 mb-8">
+              <TabsList className="grid grid-cols-4 mb-8">
                 <TabsTrigger value="events">Events</TabsTrigger>
                 <TabsTrigger value="massSchedule">Mass Schedule</TabsTrigger>
                 <TabsTrigger value="ministries">Ministries</TabsTrigger>
+                <TabsTrigger value="gallery">Gallery</TabsTrigger>
               </TabsList>
               
               <TabsContent value="events">
@@ -76,6 +78,10 @@ const CMS = () => {
               
               <TabsContent value="ministries">
                 <CMSMinistries />
+              </TabsContent>
+              
+              <TabsContent value="gallery">
+                <CMSGallery />
               </TabsContent>
             </Tabs>
           </div>

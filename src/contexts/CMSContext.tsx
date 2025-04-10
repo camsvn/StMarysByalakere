@@ -1,4 +1,3 @@
-
 import React, { createContext, useContext, useState, useEffect } from "react";
 import { useLanguage } from "./LanguageContext";
 import { useMember } from "./MemberContext";
@@ -11,6 +10,7 @@ export type EventType = {
   time: string;
   description: string;
   location?: string;
+  image?: string;
 };
 
 export type MassScheduleType = {
@@ -23,6 +23,14 @@ export type MinistryType = {
   title: string;
   description: string;
   icon: string;
+  image?: string;
+};
+
+export type GalleryImageType = {
+  id: number;
+  src: string;
+  alt: string;
+  category: string;
 };
 
 type CMSContextType = {
@@ -32,6 +40,8 @@ type CMSContextType = {
   setMassSchedule: React.Dispatch<React.SetStateAction<MassScheduleType[]>>;
   ministries: MinistryType[];
   setMinistries: React.Dispatch<React.SetStateAction<MinistryType[]>>;
+  galleryImages: GalleryImageType[];
+  setGalleryImages: React.Dispatch<React.SetStateAction<GalleryImageType[]>>;
   isEditing: boolean;
   toggleEditing: () => void;
   saveContent: () => void;
@@ -44,7 +54,8 @@ const defaultEvents: EventType[] = [
     date: "Apr 9, 2023",
     time: "9:00 AM",
     description: "Celebrate the resurrection of our Lord Jesus Christ with a special Easter service followed by community breakfast.",
-    location: "Main Church"
+    location: "Main Church",
+    image: "https://images.unsplash.com/photo-1605810230434-7631ac76ec81?auto=format&fit=crop&w=600&h=400&q=80"
   },
   {
     id: 2,
@@ -52,7 +63,8 @@ const defaultEvents: EventType[] = [
     date: "Apr 12, 2023",
     time: "6:30 PM",
     description: "Join fellow youth for an evening of faith, fun, and fellowship. This week's topic: 'Faith in Action'.",
-    location: "Parish Hall"
+    location: "Parish Hall",
+    image: "https://images.unsplash.com/photo-1470813740244-df37b8c1edcb?auto=format&fit=crop&w=600&h=400&q=80"
   },
   {
     id: 3,
@@ -60,7 +72,8 @@ const defaultEvents: EventType[] = [
     date: "Apr 15, 2023",
     time: "10:00 AM",
     description: "Help collect non-perishable food items for our local community shelter. All donations welcome!",
-    location: "Church Parking Lot"
+    location: "Church Parking Lot",
+    image: "https://images.unsplash.com/photo-1500673922987-e212871fec22?auto=format&fit=crop&w=600&h=400&q=80"
   }
 ];
 
@@ -97,6 +110,18 @@ const defaultMinistries: MinistryType[] = [
   }
 ];
 
+const defaultGalleryImages: GalleryImageType[] = [
+  { id: 1, src: "https://images.unsplash.com/photo-1438032005730-c779502df39b", alt: "Church building exterior", category: "Church" },
+  { id: 2, src: "https://images.unsplash.com/photo-1492321936769-b49830bc1d1e", alt: "Christmas celebration", category: "Events" },
+  { id: 3, src: "https://images.unsplash.com/photo-1473177104440-ffee2f376098", alt: "Church interior with beautiful architecture", category: "Church" },
+  { id: 4, src: "https://images.unsplash.com/photo-1494891848038-7bd202a2afeb", alt: "Youth group event", category: "Events" },
+  { id: 5, src: "https://images.unsplash.com/photo-1524230572899-a752b3835840", alt: "Sunday Mass celebration", category: "Services" },
+  { id: 6, src: "https://images.unsplash.com/photo-1551038247-3d9af20df552", alt: "Parish picnic", category: "Events" },
+  { id: 7, src: "https://images.unsplash.com/photo-1605810230434-7631ac76ec81", alt: "Community outreach", category: "Outreach" },
+  { id: 8, src: "https://images.unsplash.com/photo-1466442929976-97f336a657be", alt: "Church activities", category: "Services" },
+  { id: 9, src: "https://images.unsplash.com/photo-1517022812141-23620dba5c23", alt: "Youth ministry", category: "Ministries" },
+];
+
 const CMSContext = createContext<CMSContextType | undefined>(undefined);
 
 export const CMSProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
@@ -119,6 +144,11 @@ export const CMSProvider: React.FC<{ children: React.ReactNode }> = ({ children 
     return saved ? JSON.parse(saved) : defaultMinistries;
   });
   
+  const [galleryImages, setGalleryImages] = useState<GalleryImageType[]>(() => {
+    const saved = localStorage.getItem("cms_gallery");
+    return saved ? JSON.parse(saved) : defaultGalleryImages;
+  });
+  
   const [isEditing, setIsEditing] = useState(false);
   
   // Save content to localStorage when changes occur
@@ -127,8 +157,9 @@ export const CMSProvider: React.FC<{ children: React.ReactNode }> = ({ children 
       localStorage.setItem("cms_events", JSON.stringify(events));
       localStorage.setItem("cms_massSchedule", JSON.stringify(massSchedule));
       localStorage.setItem("cms_ministries", JSON.stringify(ministries));
+      localStorage.setItem("cms_gallery", JSON.stringify(galleryImages));
     }
-  }, [events, massSchedule, ministries, member?.role]);
+  }, [events, massSchedule, ministries, galleryImages, member?.role]);
   
   const toggleEditing = () => {
     setIsEditing(prev => !prev);
@@ -138,6 +169,7 @@ export const CMSProvider: React.FC<{ children: React.ReactNode }> = ({ children 
     localStorage.setItem("cms_events", JSON.stringify(events));
     localStorage.setItem("cms_massSchedule", JSON.stringify(massSchedule));
     localStorage.setItem("cms_ministries", JSON.stringify(ministries));
+    localStorage.setItem("cms_gallery", JSON.stringify(galleryImages));
     setIsEditing(false);
   };
   
@@ -150,6 +182,8 @@ export const CMSProvider: React.FC<{ children: React.ReactNode }> = ({ children 
         setMassSchedule,
         ministries,
         setMinistries,
+        galleryImages,
+        setGalleryImages,
         isEditing,
         toggleEditing,
         saveContent

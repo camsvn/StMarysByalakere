@@ -6,8 +6,9 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Label } from "@/components/ui/label";
-import { Trash, Plus, Edit } from "lucide-react";
+import { Trash, Plus, Edit, ImageIcon } from "lucide-react";
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
+import { AspectRatio } from "@/components/ui/aspect-ratio";
 
 const CMSEvents = () => {
   const { events, setEvents } = useCMS();
@@ -19,6 +20,7 @@ const CMSEvents = () => {
     time: "",
     description: "",
     location: "",
+    image: "",
   });
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
@@ -34,6 +36,7 @@ const CMSEvents = () => {
       time: "",
       description: "",
       location: "",
+      image: "",
     });
     setIsOpen(true);
   };
@@ -46,6 +49,7 @@ const CMSEvents = () => {
       time: event.time,
       description: event.description,
       location: event.location || "",
+      image: event.image || "",
     });
     setIsOpen(true);
   };
@@ -87,10 +91,21 @@ const CMSEvents = () => {
         </Button>
       </div>
 
-      <div className="space-y-4">
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
         {events.map((event) => (
           <Card key={event.id} className="overflow-hidden">
             <CardContent className="p-0">
+              {event.image && (
+                <div className="relative h-48 w-full">
+                  <AspectRatio ratio={16/9}>
+                    <img 
+                      src={event.image} 
+                      alt={event.title} 
+                      className="w-full h-full object-cover"
+                    />
+                  </AspectRatio>
+                </div>
+              )}
               <div className="p-6">
                 <div className="flex justify-between">
                   <h3 className="text-lg font-semibold">{event.title}</h3>
@@ -163,6 +178,21 @@ const CMSEvents = () => {
                 onChange={handleInputChange}
                 placeholder="Event location"
               />
+            </div>
+            <div className="space-y-2">
+              <Label htmlFor="image">Image URL</Label>
+              <Input
+                id="image"
+                name="image"
+                value={formData.image || ""}
+                onChange={handleInputChange}
+                placeholder="https://example.com/image.jpg"
+              />
+              {formData.image && (
+                <div className="mt-2 border rounded-md overflow-hidden">
+                  <img src={formData.image} alt="Preview" className="w-full h-40 object-cover" />
+                </div>
+              )}
             </div>
             <div className="space-y-2">
               <Label htmlFor="description">Description</Label>
