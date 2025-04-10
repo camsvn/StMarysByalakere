@@ -84,16 +84,25 @@ export const MemberProvider: React.FC<{ children: ReactNode }> = ({ children }) 
         console.error("Error fetching user profile:", error);
         setMember(null);
       } else if (data) {
-        // Explicitly type the data as Profile
-        const profileData = data as Profile;
-        
-        // Create member object from Supabase data
-        setMember({
-          id: user.id,
-          email: user.email || '',
-          name: profileData.name || user.email?.split('@')[0] || 'User',
-          role: (profileData.role as "admin" | "member") || "member"
-        });
+        // First check if data is an actual object and not an error
+        // Then safely convert to our Profile type
+        if (typeof data === 'object' && data !== null) {
+          const profileData = {
+            name: data.name as string | null,
+            role: data.role as string | null
+          };
+          
+          // Create member object from Supabase data
+          setMember({
+            id: user.id,
+            email: user.email || '',
+            name: profileData.name || user.email?.split('@')[0] || 'User',
+            role: (profileData.role as "admin" | "member") || "member"
+          });
+        } else {
+          console.error("Unexpected data format from profile fetch");
+          setMember(null);
+        }
       }
     } catch (error) {
       console.error("Error in profile fetch:", error);
