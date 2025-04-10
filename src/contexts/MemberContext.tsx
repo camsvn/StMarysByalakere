@@ -72,41 +72,37 @@ export const MemberProvider: React.FC<{ children: ReactNode }> = ({ children }) 
   // Helper function to fetch user profile data
   const fetchUserProfile = async (user: User) => {
     try {
-      // Using type assertion with explicit type for better type safety
       const { data, error } = await supabase
-        .from('profiles' as any)
+        .from('profiles')
         .select('name, role')
         .eq('id', user.id)
         .single();
 
-      if (error) {
+      // Explicit null and error checking
+      if (error || !data) {
         console.error("Error fetching user profile:", error);
-        setMember(null);
-      } else if (data) {
-        // First check if data is an actual object and not an error
-        // Then safely convert to our Profile type
-        if (typeof data === 'object' && data !== null) {
-          const profileData = {
-            name: data?.name ?? null,  // Use nullish coalescing to handle potential undefined
-            role: data?.role ?? null   // Use nullish coalescing to handle potential undefined
-          };
-          
-          // Create member object from Supabase data
-          setMember({
-            id: user.id,
-            email: user.email || '',
-            name: profileData.name || user.email?.split('@')[0] || 'User',
-            role: (profileData.role as "admin" | "member") || "member"
-          });
-        } else {
-          console.error("Unexpected data format from profile fetch");
-          setMember(null);
-        }
-      } else {
-        // Handle case where data is null
-        console.error("No profile data found");
-        setMember(null);
+        setMember({
+          id: user.id,
+          email: user.email || '',
+          name: user.email?.split('@')[0] || 'User',
+          role: 'member'
+        });
+        return;
       }
+
+      // Safely extract profile data
+      const profileData = {
+        name: data.name ?? null,
+        role: data.role ?? 'member'
+      };
+      
+      // Create member object from Supabase data
+      setMember({
+        id: user.id,
+        email: user.email || '',
+        name: profileData.name || user.email?.split('@')[0] || 'User',
+        role: (profileData.role as "admin" | "member") || "member"
+      });
     } catch (error) {
       console.error("Error in profile fetch:", error);
       setMember(null);
