@@ -58,7 +58,7 @@ const defaultEvents: EventType[] = [
     id: 3,
     title: "Food Drive for Local Shelter",
     date: "Apr 15, 2023",
-    time: "10:00 AM - 2:00 PM",
+    time: "10:00 AM",
     description: "Help collect non-perishable food items for our local community shelter. All donations welcome!",
     location: "Church Parking Lot"
   }
