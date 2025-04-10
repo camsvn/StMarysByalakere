@@ -67,8 +67,9 @@ export const MemberProvider: React.FC<{ children: ReactNode }> = ({ children }) 
   // Helper function to fetch user profile data
   const fetchUserProfile = async (user: User) => {
     try {
+      // Using type assertion to tell TypeScript this is a valid table
       const { data, error } = await supabase
-        .from('profiles')
+        .from('profiles' as any)
         .select('name, role')
         .eq('id', user.id)
         .single();
@@ -76,7 +77,7 @@ export const MemberProvider: React.FC<{ children: ReactNode }> = ({ children }) 
       if (error) {
         console.error("Error fetching user profile:", error);
         setMember(null);
-      } else {
+      } else if (data) {
         // Create member object from Supabase data
         setMember({
           id: user.id,
