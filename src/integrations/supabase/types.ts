@@ -9,7 +9,156 @@ export type Json =
 export type Database = {
   public: {
     Tables: {
-      [_ in never]: never
+      events: {
+        Row: {
+          created_at: string
+          date: string
+          description: string
+          id: string
+          image: string | null
+          location: string | null
+          time: string
+          title: string
+          updated_at: string
+          user_id: string
+        }
+        Insert: {
+          created_at?: string
+          date: string
+          description: string
+          id?: string
+          image?: string | null
+          location?: string | null
+          time: string
+          title: string
+          updated_at?: string
+          user_id: string
+        }
+        Update: {
+          created_at?: string
+          date?: string
+          description?: string
+          id?: string
+          image?: string | null
+          location?: string | null
+          time?: string
+          title?: string
+          updated_at?: string
+          user_id?: string
+        }
+        Relationships: []
+      }
+      gallery: {
+        Row: {
+          alt: string
+          category: string
+          created_at: string
+          id: string
+          src: string
+          updated_at: string
+          user_id: string
+        }
+        Insert: {
+          alt: string
+          category: string
+          created_at?: string
+          id?: string
+          src: string
+          updated_at?: string
+          user_id: string
+        }
+        Update: {
+          alt?: string
+          category?: string
+          created_at?: string
+          id?: string
+          src?: string
+          updated_at?: string
+          user_id?: string
+        }
+        Relationships: []
+      }
+      mass_schedule: {
+        Row: {
+          created_at: string
+          day: string
+          id: string
+          location: string | null
+          times: string[]
+          updated_at: string
+          user_id: string
+        }
+        Insert: {
+          created_at?: string
+          day: string
+          id?: string
+          location?: string | null
+          times: string[]
+          updated_at?: string
+          user_id: string
+        }
+        Update: {
+          created_at?: string
+          day?: string
+          id?: string
+          location?: string | null
+          times?: string[]
+          updated_at?: string
+          user_id?: string
+        }
+        Relationships: []
+      }
+      ministries: {
+        Row: {
+          created_at: string
+          description: string
+          icon: string
+          id: string
+          image: string | null
+          title: string
+          updated_at: string
+          user_id: string
+        }
+        Insert: {
+          created_at?: string
+          description: string
+          icon: string
+          id?: string
+          image?: string | null
+          title: string
+          updated_at?: string
+          user_id: string
+        }
+        Update: {
+          created_at?: string
+          description?: string
+          icon?: string
+          id?: string
+          image?: string | null
+          title?: string
+          updated_at?: string
+          user_id?: string
+        }
+        Relationships: []
+      }
+      profiles: {
+        Row: {
+          id: string
+          name: string | null
+          role: string | null
+        }
+        Insert: {
+          id: string
+          name?: string | null
+          role?: string | null
+        }
+        Update: {
+          id?: string
+          name?: string | null
+          role?: string | null
+        }
+        Relationships: []
+      }
     }
     Views: {
       [_ in never]: never
