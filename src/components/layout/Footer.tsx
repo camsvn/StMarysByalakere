@@ -1,6 +1,6 @@
 
 import { Link } from "react-router-dom";
-import { Facebook, Instagram, Twitter, Mail, Phone, MapPin } from "lucide-react";
+import { Facebook, Instagram, Twitter, Mail, Phone, MapPin, Church } from "lucide-react";
 
 const Footer = () => {
   const currentYear = new Date().getFullYear();
@@ -12,11 +12,15 @@ const Footer = () => {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-8 gap-y-10 mb-10">
           {/* Church Info */}
           <div className="space-y-4">
-            <h3 className="text-xl font-bold mb-4 border-b border-white/20 pb-2">Contact Us</h3>
+            <h3 className="text-xl font-bold mb-4 border-b border-white/20 pb-2">Our Parish</h3>
             <ul className="space-y-3">
               <li className="flex items-start">
+                <Church className="mr-3 h-5 w-5 mt-0.5 flex-shrink-0" />
+                <span>St. Mary's Church, Byalakere</span>
+              </li>
+              <li className="flex items-start">
                 <MapPin className="mr-3 h-5 w-5 mt-0.5 flex-shrink-0" />
-                <span>123 Faith Avenue, City, State 12345</span>
+                <span>Diocese of Mandya</span>
               </li>
               <li className="flex items-center">
                 <Phone className="mr-3 h-5 w-5 flex-shrink-0" />
@@ -65,12 +69,11 @@ const Footer = () => {
             </ul>
           </div>
 
-          {/* Mission Statement */}
+          {/* Vicar's Message */}
           <div className="space-y-4">
-            <h3 className="text-xl font-bold mb-4 border-b border-white/20 pb-2">Our Mission</h3>
-            <p className="text-white/80 leading-relaxed">
-              St. Mary's is dedicated to spreading the Gospel of Jesus Christ, building a loving 
-              community of faith, and serving the needs of all through our Malabar Catholic traditions.
+            <h3 className="text-xl font-bold mb-4 border-b border-white/20 pb-2">From Our Vicar</h3>
+            <p className="text-white/80 leading-relaxed italic">
+              "A word from Fr. Vijoy Kallingal, ISch, guiding our parish with love and spiritual wisdom."
             </p>
           </div>
         </div>
@@ -81,7 +84,7 @@ const Footer = () => {
         {/* Bottom Section */}
         <div className="flex flex-col md:flex-row justify-between items-center text-sm text-white/70">
           <p>
-            &copy; {currentYear} St. Mary Malabar Catholic Church. All rights reserved.
+            &copy; {currentYear} St. Mary's Church, Byalakere. All rights reserved.
           </p>
           <p className="mt-2 md:mt-0">
             <Link to="/privacy-policy" className="hover:text-white">Privacy Policy</Link>
