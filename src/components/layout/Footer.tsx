@@ -6,26 +6,27 @@ const Footer = () => {
   const currentYear = new Date().getFullYear();
 
   return (
-    <footer className="bg-primary text-white pt-12 pb-6">
+    <footer className="bg-primary text-white pt-12 pb-8">
       <div className="container mx-auto px-4">
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-8">
+        {/* Main Footer Content */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-8 gap-y-10 mb-10">
           {/* Church Info */}
-          <div>
-            <h3 className="text-xl font-bold mb-4">St. Mary Malabar Catholic Church</h3>
-            <ul className="space-y-2">
-              <li className="flex items-center">
-                <MapPin className="mr-2 h-5 w-5" />
+          <div className="space-y-4">
+            <h3 className="text-xl font-bold mb-4 border-b border-white/20 pb-2">Contact Us</h3>
+            <ul className="space-y-3">
+              <li className="flex items-start">
+                <MapPin className="mr-3 h-5 w-5 mt-0.5 flex-shrink-0" />
                 <span>123 Faith Avenue, City, State 12345</span>
               </li>
               <li className="flex items-center">
-                <Phone className="mr-2 h-5 w-5" />
-                <a href="tel:+11234567890" className="hover:underline">
+                <Phone className="mr-3 h-5 w-5 flex-shrink-0" />
+                <a href="tel:+11234567890" className="transition hover:text-accent hover:underline">
                   (123) 456-7890
                 </a>
               </li>
               <li className="flex items-center">
-                <Mail className="mr-2 h-5 w-5" />
-                <a href="mailto:info@stmaryschurch.org" className="hover:underline">
+                <Mail className="mr-3 h-5 w-5 flex-shrink-0" />
+                <a href="mailto:info@stmaryschurch.org" className="transition hover:text-accent hover:underline">
                   info@stmaryschurch.org
                 </a>
               </li>
@@ -33,32 +34,59 @@ const Footer = () => {
           </div>
 
           {/* Quick Links */}
-          <div>
-            <h3 className="text-xl font-bold mb-4">Quick Links</h3>
-            <ul className="space-y-2">
+          <div className="space-y-4">
+            <h3 className="text-xl font-bold mb-4 border-b border-white/20 pb-2">Quick Links</h3>
+            <ul className="grid grid-cols-1 gap-y-2">
               <li>
-                <Link to="/" className="hover:underline">Home</Link>
+                <Link to="/" className="transition hover:text-accent flex items-center">
+                  <span className="mr-2">•</span> Home
+                </Link>
               </li>
               <li>
-                <Link to="/about" className="hover:underline">About Us</Link>
+                <Link to="/about" className="transition hover:text-accent flex items-center">
+                  <span className="mr-2">•</span> About Us
+                </Link>
               </li>
               <li>
-                <Link to="/mass-services" className="hover:underline">Mass Schedule</Link>
+                <Link to="/mass-services" className="transition hover:text-accent flex items-center">
+                  <span className="mr-2">•</span> Mass Schedule
+                </Link>
               </li>
               <li>
-                <Link to="/events" className="hover:underline">Events & Announcements</Link>
+                <Link to="/events" className="transition hover:text-accent flex items-center">
+                  <span className="mr-2">•</span> Events & Announcements
+                </Link>
               </li>
               <li>
-                <Link to="/contact" className="hover:underline">Contact Us</Link>
+                <Link to="/contact" className="transition hover:text-accent flex items-center">
+                  <span className="mr-2">•</span> Contact Us
+                </Link>
               </li>
             </ul>
           </div>
+
+          {/* Mission Statement */}
+          <div className="space-y-4">
+            <h3 className="text-xl font-bold mb-4 border-b border-white/20 pb-2">Our Mission</h3>
+            <p className="text-white/80 leading-relaxed">
+              St. Mary's is dedicated to spreading the Gospel of Jesus Christ, building a loving 
+              community of faith, and serving the needs of all through our Malabar Catholic traditions.
+            </p>
+          </div>
         </div>
 
+        {/* Divider */}
+        <div className="border-t border-white/20 my-6"></div>
+
         {/* Bottom Section */}
-        <div className="border-t border-white/20 pt-6 mt-6 text-center text-sm">
+        <div className="flex flex-col md:flex-row justify-between items-center text-sm text-white/70">
           <p>
             &copy; {currentYear} St. Mary Malabar Catholic Church. All rights reserved.
+          </p>
+          <p className="mt-2 md:mt-0">
+            <Link to="/privacy-policy" className="hover:text-white">Privacy Policy</Link>
+            <span className="mx-2">|</span>
+            <Link to="/terms" className="hover:text-white">Terms of Use</Link>
           </p>
         </div>
       </div>
