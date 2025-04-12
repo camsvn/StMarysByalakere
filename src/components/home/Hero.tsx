@@ -12,11 +12,11 @@ const Hero = () => {
         <div className="max-w-2xl lg:w-1/2 text-center lg:text-left">
           <div className="inline-flex items-center justify-center p-2 bg-primary/10 rounded-full mb-4 animate-fade-in">
             <Church className="h-6 w-6 text-primary mr-2" />
-            <span className="text-sm font-medium text-primary">Faith Community</span>
+            <span className="text-sm font-medium text-primary">Diocese of Mandya</span>
           </div>
           <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-4 md:mb-6 animate-fade-in">
             Welcome to{" "}
-            <span className="text-primary">St. Mary Malabar Catholic Church</span>
+            <span className="text-primary">St. Mary's Church, Byalakere</span>
           </h1>
           <p className="text-lg md:text-xl text-muted-foreground mb-8 md:mb-10 animate-fade-in animate-delay-100">
             Join our vibrant community for worship, fellowship, and spiritual growth. Together, we celebrate our faith and serve our community.
@@ -42,13 +42,13 @@ const Hero = () => {
           <div className="relative aspect-[4/3] bg-gradient-to-br from-primary/5 to-secondary/5">
             <img 
               src="https://images.unsplash.com/photo-1438032005730-c779502df39b?auto=format&fit=crop&w=800&h=600"
-              alt="St. Mary's Church" 
+              alt="St. Mary's Church, Byalakere" 
               className="w-full h-full object-cover rounded-2xl"
             />
             <div className="absolute inset-0 bg-gradient-to-t from-black/30 to-transparent flex items-end">
               <div className="p-6 text-white">
-                <h3 className="text-xl font-semibold">Our Church</h3>
-                <p className="text-sm opacity-90">A place of worship, community, and spiritual growth</p>
+                <h3 className="text-xl font-semibold">St. Mary's Church, Byalakere</h3>
+                <p className="text-sm opacity-90">Diocese of Mandya</p>
               </div>
             </div>
           </div>

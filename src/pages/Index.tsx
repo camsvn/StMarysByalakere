@@ -17,7 +17,7 @@ const Index = () => {
       <EventsSection />
       <MassScheduleSection />
       <MinistriesSection />
-      {/* <MissionSection /> */}
+      <MissionSection />
     </PageLayout>
   );
 };

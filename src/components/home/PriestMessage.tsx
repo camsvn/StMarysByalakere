@@ -8,8 +8,8 @@ const PriestMessage = () => {
   return (
     <section className="section-container bg-gradient-to-br from-accent/10 via-white to-primary/5 relative overflow-hidden">
       <SectionHeading 
-        title="A Message From Our Pastor" 
-        subtitle="Fr. Johnson Nellissery, ISP welcomes you to our parish community"
+        title="A Message From Our Vicar" 
+        subtitle="Fr. Vijoy Kallingal, ISch welcomes you to our parish community"
       />
 
       <div className="max-w-4xl mx-auto">
@@ -18,10 +18,10 @@ const PriestMessage = () => {
             {/* Priest photo section */}
             <div className="bg-gradient-to-br from-primary/10 to-secondary/10 p-6 flex flex-col items-center justify-center text-center">
               <Avatar className="h-24 w-24 border-2 border-primary mb-4">
-                <AvatarFallback className="bg-primary/10 text-primary text-2xl font-semibold">FJ</AvatarFallback>
+                <AvatarFallback className="bg-primary/10 text-primary text-2xl font-semibold">VK</AvatarFallback>
               </Avatar>
-              <h3 className="text-xl font-semibold">Fr. Johnson Nellissery, ISP</h3>
-              <p className="text-muted-foreground">Pastor</p>
+              <h3 className="text-xl font-semibold">Fr. Vijoy Kallingal, ISch</h3>
+              <p className="text-muted-foreground">Vicar</p>
               <div className="mt-4 pt-4 border-t border-primary/20 w-full text-center">
                 <p className="italic text-sm">"Faith is taking the first step even when you can't see the whole staircase."</p>
               </div>
@@ -32,7 +32,7 @@ const PriestMessage = () => {
               <CardContent className="p-0 relative">
                 <MessageCircle className="absolute -left-3 -top-3 h-8 w-8 text-primary/20" />
                 <div className="space-y-4 pl-2">
-                  <p className="text-lg font-medium">Welcome to St. Mary's!</p>
+                  <p className="text-lg font-medium">Welcome to St. Mary's Church, Byalakere!</p>
                   <p>
                     Thank you for your interest in our parish. Whether you're visiting for a short time, searching for a new parish to call home, returning to the practice of your Catholic faith, or simply curious about the Catholic Church—we're truly glad you're here.
                   </p>
@@ -48,9 +48,9 @@ const PriestMessage = () => {
                   <div className="font-medium border-l-4 border-primary/30 pl-4 italic">
                     In Christ,
                     <br />
-                    Fr. Johnson Nellissery, ISP
+                    Fr. Vijoy Kallingal, ISch
                     <br />
-                    Pastor
+                    Vicar
                   </div>
                 </div>
               </CardContent>
