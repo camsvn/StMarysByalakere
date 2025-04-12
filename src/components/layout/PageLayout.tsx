@@ -19,7 +19,7 @@ const PageLayout = ({ children }: PageLayoutProps) => {
     <div className="min-h-screen flex flex-col">
       <Navbar />
       <main className="flex-1 pt-16">{children}</main>
-      {isAdmin && (
+      {/* {isAdmin && (
         <div className="fixed bottom-6 right-6 z-50">
           <Button asChild className="rounded-full shadow-lg">
             <Link to="/cms">
@@ -28,7 +28,7 @@ const PageLayout = ({ children }: PageLayoutProps) => {
             </Link>
           </Button>
         </div>
-      )}
+      )} */}
       <Footer />
     </div>
   );

@@ -82,17 +82,17 @@ const Navbar = () => {
           {/* Action buttons and language selector */}
           <div className="hidden md:flex items-center space-x-2">
             <LanguageSelector />
-            <Link to="/donate">
+            {/* <Link to="/donate">
               <Button variant="outline" size="sm">{t("navDonate")}</Button>
             </Link>
             <Link to={isAuthenticated ? "/member-portal" : "/login"}>
               <Button size="sm">{isAuthenticated ? "My Account" : t("navLogin")}</Button>
-            </Link>
+            </Link> */}
           </div>
 
           {/* Mobile Menu Button */}
           <div className="md:hidden flex items-center space-x-2">
-            <LanguageSelector />
+            {/* <LanguageSelector />
             <Button
               variant="ghost"
               size="icon"
@@ -100,7 +100,7 @@ const Navbar = () => {
               aria-label={isMenuOpen ? "Close Menu" : "Open Menu"}
             >
               {isMenuOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
-            </Button>
+            </Button> */}
           </div>
         </div>
 
@@ -115,10 +115,10 @@ const Navbar = () => {
               <NavItem to="/ministries" onClick={closeMenu}>{t("navMinistries")}</NavItem>
               <NavItem to="/gallery" onClick={closeMenu}>{t("navGallery")}</NavItem>
               <NavItem to="/contact" onClick={closeMenu}>{t("navContact")}</NavItem>
-              <NavItem to="/donate" onClick={closeMenu}>{t("navDonate")}</NavItem>
-              <NavItem to={isAuthenticated ? "/member-portal" : "/login"} onClick={closeMenu}>
+              {/* <NavItem to="/donate" onClick={closeMenu}>{t("navDonate")}</NavItem> */}
+              {/* <NavItem to={isAuthenticated ? "/member-portal" : "/login"} onClick={closeMenu}>
                 {isAuthenticated ? "My Account" : t("navLogin")}
-              </NavItem>
+              </NavItem> */}
             </ul>
           </div>
         )}
