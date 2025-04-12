@@ -62,7 +62,7 @@ const MassScheduleSection = () => {
   );
 
   return (
-    <section className="section-container bg-gradient-to-br from-primary/5 to-secondary/5 py-16">
+    <section id="mass-schedule" className="section-container bg-gradient-to-br from-primary/5 to-secondary/5 py-16">
       <div className="max-w-7xl mx-auto">
         <SectionHeading 
           title="Mass Schedule" 

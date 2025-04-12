@@ -1,4 +1,3 @@
-
 import { Button } from "@/components/ui/button";
 import ShapesBackground from "@/components/ui/ShapesBackground";
 import { Link } from "react-router-dom";
@@ -16,23 +15,41 @@ const Hero = () => {
           </div>
           <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-4 md:mb-6 animate-fade-in">
             Welcome to{" "}
-            <span className="text-primary">St. Mary Malabar Catholic Church</span>
+            <span className="text-primary">St. Mary's Church Byalakere</span>
           </h1>
           <p className="text-lg md:text-xl text-muted-foreground mb-8 md:mb-10 animate-fade-in animate-delay-100">
             Join our vibrant community for worship, fellowship, and spiritual growth. Together, we celebrate our faith and serve our community.
           </p>
           <div className="flex flex-col sm:flex-row justify-center lg:justify-start gap-4 animate-fade-in animate-delay-200">
             <Button size="lg" className="font-medium flex items-center gap-2" asChild>
-              <Link to="/mass-services">
+              {/* <Link to="/mass-services"> */}
+              <a 
+                href="#mass-schedule"
+                onClick={e => {
+                  e.preventDefault();
+                    window.history.pushState({}, '', '#mass-schedule');
+                    document.getElementById('mass-schedule')?.scrollIntoView({ behavior: 'smooth' });
+                }}
+              >
                 <Church className="h-5 w-5" />
                 Mass Schedule
-              </Link>
+              </a>
+              {/* </Link> */}
             </Button>
             <Button variant="outline" size="lg" className="font-medium flex items-center gap-2" asChild>
-              <Link to="/events">
+              {/* <Link to="/events"> */}
+              <a 
+                href="#event-section"
+                onClick={e => {
+                  e.preventDefault();
+                    window.history.pushState({}, '', '#event-section');
+                    document.getElementById('event-section')?.scrollIntoView({ behavior: 'smooth' });
+                }}
+              >
                 <Calendar className="h-5 w-5" />
                 Upcoming Events
-              </Link>
+              </a>
+              {/* </Link> */}
             </Button>
           </div>
         </div>

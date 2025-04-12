@@ -37,7 +37,7 @@ const EventsSection = () => {
   ];
 
   return (
-    <section className="section-container bg-white">
+    <section id="event-section" className="section-container bg-white">
       <div className="max-w-7xl mx-auto">
         <SectionHeading 
           title="Upcoming Events" 
