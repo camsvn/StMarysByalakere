@@ -8,7 +8,7 @@ const Footer = () => {
   return (
     <footer className="bg-primary text-white pt-12 pb-6">
       <div className="container mx-auto px-4">
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-8">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-8">
           {/* Church Info */}
           <div>
             <h3 className="text-xl font-bold mb-4">St. Mary Malabar Catholic Church</h3>
@@ -52,35 +52,6 @@ const Footer = () => {
                 <Link to="/contact" className="hover:underline">Contact Us</Link>
               </li>
             </ul>
-          </div>
-
-          {/* Connect With Us */}
-          <div>
-            <h3 className="text-xl font-bold mb-4">Connect With Us</h3>
-            <div className="flex space-x-4 mb-6">
-              <a
-                href="#"
-                className="hover:text-accent transition-colors duration-200"
-                aria-label="Facebook"
-              >
-                <Facebook className="h-6 w-6" />
-              </a>
-              <a
-                href="#"
-                className="hover:text-accent transition-colors duration-200"
-                aria-label="Instagram"
-              >
-                <Instagram className="h-6 w-6" />
-              </a>
-              <a
-                href="#"
-                className="hover:text-accent transition-colors duration-200"
-                aria-label="Twitter"
-              >
-                <Twitter className="h-6 w-6" />
-              </a>
-            </div>
-            <p>Subscribe to our newsletter for updates on events and announcements.</p>
           </div>
         </div>
 
