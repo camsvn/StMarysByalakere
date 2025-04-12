@@ -1,4 +1,3 @@
-
 import { Clock, MapPin } from "lucide-react";
 import SectionHeading from "../ui/SectionHeading";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
@@ -28,7 +27,7 @@ const MassCard = ({ day, times, location, className, isHighlighted }: MassCardPr
     <CardContent>
       <div className="space-y-2">
         <div className="flex items-start">
-          <Clock className={cn("h-5 w-5 mr-2 mt-0.5", isHighlighted ? "text-primary" : "text-muted-foreground")} />
+          <Clock className={cn("h-5 w-5 min-w-5 mr-2 mt-0.5", isHighlighted ? "text-primary" : "text-muted-foreground")} />
           <div className="space-y-1">
             {times.map((time, index) => (
               <div key={index} className={cn("text-sm", isHighlighted && "font-medium")}>{time}</div>
@@ -70,11 +69,11 @@ const MassScheduleSection = () => {
         />
 
         <Tabs defaultValue="all" className="w-full max-w-4xl mx-auto">
-          <TabsList className="grid w-full max-w-md mx-auto grid-cols-3 mb-8">
-            <TabsTrigger value="all" className="text-xs sm:text-sm px-2 sm:px-3">All Masses</TabsTrigger>
-            <TabsTrigger value="weekday" className="text-xs sm:text-sm px-2 sm:px-3">Weekday</TabsTrigger>
-            <TabsTrigger value="weekend" className="text-xs sm:text-sm px-2 sm:px-3">Weekend</TabsTrigger>
-          </TabsList>
+          {/* <TabsList className="grid w-full max-w-md mx-auto grid-cols-1 mb-8">
+            <TabsTrigger value="all" className="text-xs sm:text-sm px-2 sm:px-3">All Masses</TabsTrigger> */}
+            {/* <TabsTrigger value="weekday" className="text-xs sm:text-sm px-2 sm:px-3">Weekday</TabsTrigger>
+            <TabsTrigger value="weekend" className="text-xs sm:text-sm px-2 sm:px-3">Weekend</TabsTrigger> */}
+          {/* </TabsList> */}
 
           <TabsContent value="all" className="space-y-8">
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
@@ -83,7 +82,7 @@ const MassScheduleSection = () => {
                   key={item.day}
                   day={item.day}
                   times={item.times}
-                  location={item.location}
+                  // location={item.location}
                   isHighlighted={item.day === today}
                   className={`animate-fade-in animate-delay-${index * 50}`}
                 />
@@ -98,7 +97,7 @@ const MassScheduleSection = () => {
                   key={item.day}
                   day={item.day}
                   times={item.times}
-                  location={item.location}
+                  // location={item.location}
                   isHighlighted={item.day === today}
                   className={`animate-fade-in animate-delay-${index * 50}`}
                 />
@@ -113,7 +112,7 @@ const MassScheduleSection = () => {
                   key={item.day}
                   day={item.day}
                   times={item.times}
-                  location={item.location}
+                  // location={item.location}
                   isHighlighted={item.day === today}
                   className={`animate-fade-in animate-delay-${index * 50}`}
                 />

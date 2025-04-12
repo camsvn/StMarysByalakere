@@ -15,7 +15,7 @@ const CMSMassSchedule = () => {
   const [formData, setFormData] = useState<MassScheduleType>({
     day: "",
     times: [""],
-    location: "",
+    // location: "",
   });
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -46,7 +46,7 @@ const CMSMassSchedule = () => {
     setFormData({
       day: "",
       times: [""],
-      location: "",
+      // location: "",
     });
     setIsOpen(true);
   };
@@ -56,13 +56,16 @@ const CMSMassSchedule = () => {
     setFormData({
       day: schedule.day,
       times: [...schedule.times],
-      location: schedule.location || "",
+      // location: schedule.location || "",
     });
     setIsOpen(true);
   };
 
   const handleSave = () => {
-    if (!formData.day.trim() || formData.times.some(t => !t.trim()) || !formData.location?.trim()) {
+    if (!formData.day.trim() || 
+    formData.times.some(t => !t.trim())
+    // !formData.location?.trim()
+    ) {
       return; // Don't save incomplete data
     }
 
@@ -115,9 +118,9 @@ const CMSMassSchedule = () => {
                     ))}
                   </div>
                 </div>
-                {schedule.location && (
+                {/* {schedule.location && (
                   <p className="text-sm text-muted-foreground mt-2">Location: {schedule.location}</p>
-                )}
+                )} */}
               </div>
             </CardContent>
           </Card>
@@ -158,7 +161,7 @@ const CMSMassSchedule = () => {
                 <Plus className="h-4 w-4 mr-2" /> Add Time
               </Button>
             </div>
-            <div className="space-y-2">
+            {/* <div className="space-y-2">
               <Label htmlFor="location">Location</Label>
               <Input
                 id="location"
@@ -167,7 +170,7 @@ const CMSMassSchedule = () => {
                 onChange={handleInputChange}
                 placeholder="e.g., Main Church"
               />
-            </div>
+            </div> */}
             <div className="flex justify-end gap-3 pt-4">
               <Button variant="outline" onClick={() => setIsOpen(false)}>Cancel</Button>
               <Button onClick={handleSave}>Save Schedule</Button>

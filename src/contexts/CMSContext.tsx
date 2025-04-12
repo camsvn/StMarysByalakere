@@ -16,7 +16,7 @@ export type EventType = {
 export type MassScheduleType = {
   day: string;
   times: string[];
-  location?: string;
+  // location?: string;
 };
 
 export type MinistryType = {
@@ -78,13 +78,31 @@ const defaultEvents: EventType[] = [
 ];
 
 const defaultMassSchedule: MassScheduleType[] = [
-  { day: "Sunday", times: ["8:00 AM", "10:30 AM", "5:00 PM"], location: "Main Church" },
-  { day: "Monday", times: ["6:30 AM"], location: "Chapel" },
-  { day: "Tuesday", times: ["6:30 AM"], location: "Chapel" },
-  { day: "Wednesday", times: ["6:30 AM", "7:00 PM"], location: "Chapel" },
-  { day: "Thursday", times: ["6:30 AM"], location: "Chapel" },
-  { day: "Friday", times: ["6:30 AM"], location: "Chapel" },
-  { day: "Saturday", times: ["9:00 AM", "5:00 PM (Vigil)"], location: "Main Church" }
+  { day: "Sunday", times: ["8:30 AM"], 
+    // location: "Main Church" 
+  },
+  { day: "Monday", times: ["6:30 AM (Eucharistic adoration)", "7:00 AM"], 
+    // location: "Chapel" 
+  },
+  { day: "Tuesday", times: ["6:30 PM"], 
+    // location: "Chapel" 
+  },
+  { day: "Wednesday", times: ["6:30 AM (Eucharistic adoration)", "7:00 AM"], 
+    // location: "Chapel" 
+  },
+  { day: "Thursday", times: ["6:30 AM (Eucharistic adoration)", "7:00 AM"], 
+    // location: "Chapel" 
+  },
+  { day: "Friday", times: ["6:30 AM (Eucharistic adoration)", "7:00 AM"], 
+    // location: "Chapel" 
+  },
+  { day: "Saturday", times: [
+    "6:30 AM (Eucharistic adoration)", 
+    "7:00 AM", 
+    "7:45 AM (Novena)"
+  ], 
+    // location: "Main Church"
+   }
 ];
 
 const defaultMinistries: MinistryType[] = [

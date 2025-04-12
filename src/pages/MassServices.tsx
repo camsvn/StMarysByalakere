@@ -61,19 +61,19 @@ const MassServices = () => {
                           <CardContent>
                             <div className="space-y-2">
                               <div className="flex items-start">
-                                <Clock className={cn("h-5 w-5 mr-2 mt-0.5", item.day === today ? "text-primary" : "text-muted-foreground")} />
+                                <Clock className={cn("h-5 w-5 min-w-5 mr-2 mt-0.5", item.day === today ? "text-primary" : "text-muted-foreground")} />
                                 <div className="space-y-1">
                                   {item.times.map((time, idx) => (
                                     <div key={idx} className={cn("text-sm", item.day === today && "font-medium")}>{time}</div>
                                   ))}
                                 </div>
                               </div>
-                              {item.location && (
+                              {/* {item.location && (
                                 <div className="flex items-start mt-2">
                                   <MapPin className={cn("h-5 w-5 mr-2 mt-0.5", item.day === today ? "text-primary" : "text-muted-foreground")} />
                                   <div className="text-sm">{item.location}</div>
                                 </div>
-                              )}
+                              )} */}
                             </div>
                           </CardContent>
                         </Card>
