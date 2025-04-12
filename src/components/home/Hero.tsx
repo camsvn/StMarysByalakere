@@ -11,7 +11,7 @@ const Hero = () => {
         <div className="max-w-2xl lg:w-1/2 text-center lg:text-left">
           <div className="inline-flex items-center justify-center p-2 bg-primary/10 rounded-full mb-4 animate-fade-in">
             <Church className="h-6 w-6 text-primary mr-2" />
-            <span className="text-sm font-medium text-primary">Faith Community</span>
+            <span className="text-sm font-medium text-primary">Diocese of Mandya</span>
           </div>
           <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-4 md:mb-6 animate-fade-in">
             Welcome to{" "}
