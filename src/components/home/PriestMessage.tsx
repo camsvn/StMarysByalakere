@@ -14,7 +14,7 @@ const PriestMessage = () => {
 
       <div className="max-w-4xl mx-auto">
         <Card className="bg-white/90 backdrop-blur-sm rounded-lg shadow-lg border-0 overflow-hidden">
-          <div className="grid grid-cols-1 md:grid-cols-3 lg:gap-6">
+          <div className="grid grid-cols-1 md:grid-cols-3 md:gap-6">
             {/* Priest photo section */}
             <div className="bg-gradient-to-br from-primary/10 to-secondary/10 p-6 flex flex-col items-center justify-center text-center">
               <Avatar className="h-24 w-24 border-2 border-primary mb-4">
