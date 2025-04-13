@@ -64,8 +64,10 @@ const Contact = () => {
                   <div>
                     <h3 className="font-medium">Location</h3>
                     <address className="not-italic text-muted-foreground">
-                      123 Faith Avenue<br />
-                      City, State 12345
+                    Thrithwa Elizebeth Mane, <br />
+                    No.170/1, Kalathamana Halli, <br />
+                    Byalakere Village, Shivakote Post, <br />
+                    Bangalore - 560 089
                     </address>
                   </div>
                 </div>
@@ -75,7 +77,7 @@ const Contact = () => {
                   <div>
                     <h3 className="font-medium">Phone</h3>
                     <p className="text-muted-foreground">
-                      <a href="tel:+11234567890" className="hover:underline">(123) 456-7890</a>
+                      <a href="tel:+919553873361" className="hover:underline">+91 9553873361</a>
                     </p>
                   </div>
                 </div>
@@ -85,7 +87,7 @@ const Contact = () => {
                   <div>
                     <h3 className="font-medium">Email</h3>
                     <p className="text-muted-foreground">
-                      <a href="mailto:info@stmaryschurch.org" className="hover:underline">info@stmaryschurch.org</a>
+                      <a href="mailto:smcparishb@gmail.com" className="hover:underline">smcparishb@gmail.com</a>
                     </p>
                   </div>
                 </div>
