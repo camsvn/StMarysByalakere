@@ -1,8 +1,10 @@
 
 import { Link } from "react-router-dom";
-import { Facebook, Instagram, Twitter, Mail, Phone, MapPin } from "lucide-react";
+import { Facebook, Instagram, Twitter, Mail, Phone, MapPin, Church } from "lucide-react";
+import { useLanguage } from "@/contexts/LanguageContext";
 
 const Footer = () => {
+  const { t } = useLanguage();
   const currentYear = new Date().getFullYear();
 
   return (
@@ -10,9 +12,13 @@ const Footer = () => {
       <div className="container mx-auto px-4">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-8">
           {/* Church Info */}
-          <div>
-            <h3 className="text-xl font-bold mb-4">St Mary’s Church Byalakere</h3>
-            <ul className="space-y-2">
+          <div className="space-y-4">
+            <h3 className="text-xl font-bold mb-4 border-b border-white/20 pb-2">Our Parish</h3>
+            <ul className="space-y-3">
+            <li className="flex items-start">
+                <Church className="mr-2 h-5 w-5 min-w-5 mt-0.5 flex-shrink-0" />
+                <span>St. Mary's Church, Byalakere</span>
+              </li>
               <li className="flex items-center">
                 <MapPin className="mr-2 h-5 w-5 min-w-5" />
                 <span>Thrithwa Elizebeth Mane, No.170/1, Kalathamana Halli, Byalakere Village, Shivakote Post, Bangalore - 560 089</span>
@@ -33,8 +39,8 @@ const Footer = () => {
           </div>
 
           {/* Quick Links */}
-          <div>
-            <h3 className="text-xl font-bold mb-4">Quick Links</h3>
+          <div className="space-y-4">
+            <h3 className="text-xl font-bold mb-4 border-b border-white/20 pb-2">Quick Links</h3>
             <ul className="space-y-2">
               <li>
                 <Link to="/" className="hover:underline">Home</Link>
@@ -54,9 +60,15 @@ const Footer = () => {
             </ul>
           </div>
 
+          {/* Our Prayer */}
+          <div className="space-y-4">
+            <h3 className="text-xl font-bold mb-4 border-b border-white/20 pb-2">Our Prayer</h3>
+            <p className="text-white/80 leading-relaxed italic">{t("ourPrayer")}</p>
+          </div>
+
           {/* Connect With Us */}
-          <div>
-            <h3 className="text-xl font-bold mb-4">Connect With Us</h3>
+          {/* <div>
+            <h3 className="text-xl font-bold mb-4 border-b border-white/20 pb-2">Connect With Us</h3>
             <div className="flex space-x-4 mb-6">
               <a
                 href="#"
@@ -81,15 +93,15 @@ const Footer = () => {
               </a>
             </div>
             <p>Subscribe to our newsletter for updates on events and announcements.</p>
-          </div>
+          </div> */}
         </div>
 
         {/* Bottom Section */}
-        <div className="border-t border-white/20 pt-6 mt-6 text-center text-sm">
+        <div className="border-t border-white/20 pt-6 mt-6 text-center text-sm text-white/70">
           <p>
             &copy; {currentYear} St. Mary's Church Byalakere. All rights reserved. 
             <br />
-            Maintained by <a className="underline" href="https://www.decare.team/">DeCare Software</a>, designed with <a className="underline" href="https://lovable.dev/">Lovable</a>
+            Maintained by <a className="underline hover:text-white" href="https://www.decare.team/">DeCare Software</a>, designed with <a className="underline hover:text-white" href="https://lovable.dev/">Lovable</a>
           </p>
         </div>
       </div>

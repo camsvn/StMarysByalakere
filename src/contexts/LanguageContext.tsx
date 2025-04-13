@@ -140,6 +140,12 @@ const translations: Translations = {
     ml: "ഇഷ്ടമുള്ള തുക",
     es: "Cantidad Personalizada",
   },
+  // Our Prayer
+  ourPrayer: {
+    en: "Ente ammayum rajniyumaya parishudha mariyame, angayude nereyulla ente snehathinte adayalamaayi enneyum ente kannu, ente chevi, ente naavu, ente hrudayam, ente vyakthithwam enniva muzhuvanaayum angekku innu njan samarppikkunnu. njaan angayude swanthamaakayaal ente amme, angayude swanthamennathupole enne samrakshikkukayum nayikkukayum cheyyaname. Aammen",
+    ml: "എന്റെ അമ്മയും രാജ്ഞിയുമായ പരിശുദ്ധ മറിയമേ, അങ്ങയുടെ നേരെയുള്ള എന്റെ സ്നേഹത്തിന്റെ അടയാളമായി എന്നെയും എന്റെ കണ്ണ്, എന്റെ ചെവി, എന്റെ നാവു, എന്റെ ഹൃദയം, എന്റെ വ്യക്തിത്വം എന്നിവ മുഴുവനായും അങ്ങേക്ക് ഇന്ന് ഞാൻ സമർപ്പിക്കുന്നു. ഞാൻ അങ്ങയുടെ സ്വന്തമാകയാൽ എന്റെ അമ്മെ, അങ്ങയുടെ സ്വന്തമെന്നതുപോലെ എന്നെ സംരക്ഷിക്കുകയും നയിക്കുകയും ചെയ്യണമേ. ആമ്മേൻ",
+    // es: "Una comunidad católica Malabar de fe, esperanza y caridad",
+  },
 };
 
 // Context type
@@ -165,7 +171,7 @@ export const LanguageProvider: React.FC<{ children: ReactNode }> = ({ children }
   const availableLanguages = [
     { code: "en" as Language, name: "English" },
     { code: "ml" as Language, name: "Malayalam" },
-    { code: "es" as Language, name: "Spanish" },
+    // { code: "es" as Language, name: "Spanish" },
   ];
 
   // Update localStorage when language changes
