@@ -11,22 +11,22 @@ const Footer = () => {
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-8">
           {/* Church Info */}
           <div>
-            <h3 className="text-xl font-bold mb-4">St. Mary Malabar Catholic Church</h3>
+            <h3 className="text-xl font-bold mb-4">St Mary’s Church Byalakere</h3>
             <ul className="space-y-2">
               <li className="flex items-center">
-                <MapPin className="mr-2 h-5 w-5" />
-                <span>123 Faith Avenue, City, State 12345</span>
+                <MapPin className="mr-2 h-5 w-5 min-w-5" />
+                <span>Thrithwa Elizebeth Mane, No.170/1, Kalathamana Halli, Byalakere Village, Shivakote Post, Bangalore - 560 089</span>
               </li>
               <li className="flex items-center">
                 <Phone className="mr-2 h-5 w-5" />
-                <a href="tel:+11234567890" className="hover:underline">
-                  (123) 456-7890
+                <a href="tel:+919553873361" className="hover:underline">
+                +91 9553873361
                 </a>
               </li>
               <li className="flex items-center">
                 <Mail className="mr-2 h-5 w-5" />
-                <a href="mailto:info@stmaryschurch.org" className="hover:underline">
-                  info@stmaryschurch.org
+                <a href="mailto:smcparishb@gmail.com" className="hover:underline">
+                smcparishb@gmail.com
                 </a>
               </li>
             </ul>
@@ -87,7 +87,9 @@ const Footer = () => {
         {/* Bottom Section */}
         <div className="border-t border-white/20 pt-6 mt-6 text-center text-sm">
           <p>
-            &copy; {currentYear} St. Mary Malabar Catholic Church. All rights reserved.
+            &copy; {currentYear} St. Mary's Church Byalakere. All rights reserved. 
+            <br />
+            Maintained by <a className="underline" href="https://www.decare.team/">DeCare Software</a>, designed with <a className="underline" href="https://lovable.dev/">Lovable</a>
           </p>
         </div>
       </div>
