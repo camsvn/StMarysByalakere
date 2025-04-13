@@ -21,7 +21,7 @@ const PriestMessage = () => {
                 <AvatarFallback className="bg-primary/10 text-primary text-2xl font-semibold">VK</AvatarFallback>
               </Avatar>
               <h3 className="text-xl font-semibold">Fr. Vijoy Kallingal, ISch</h3>
-              <p className="text-muted-foreground">Vicar</p>
+              <p className="text-muted-foreground">Parish Priest</p>
               <div className="mt-4 pt-4 border-t border-primary/20 w-full text-center">
                 <p className="italic text-sm">"Faith is taking the first step even when you can't see the whole staircase."</p>
               </div>
@@ -50,7 +50,7 @@ const PriestMessage = () => {
                     <br />
                     Fr. Vijoy Kallingal, ISch
                     <br />
-                    Vicar
+                    Parish Priest
                   </div>
                 </div>
               </CardContent>
