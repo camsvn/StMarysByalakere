@@ -59,7 +59,7 @@ const Ministries = () => {
         <ShapesBackground />
         <div className="container mx-auto relative z-10">
           <SectionHeading 
-            title="Ministries & Groups"
+            title="Pious Associations"
             subtitle="Discover how you can get involved and serve in our parish community."
           />
           

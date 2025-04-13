@@ -35,7 +35,7 @@ const translations: Translations = {
     es: "Eventos",
   },
   navMinistries: {
-    en: "Ministries",
+    en: "Pious Associations",
     ml: "മിനിസ്ട്രികൾ",
     es: "Ministerios",
   },

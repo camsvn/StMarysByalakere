@@ -61,7 +61,7 @@ const MinistriesSection = () => {
   return (
     <section className="section-container">
       <SectionHeading
-        title="Ministries & Groups"
+        title="Pious Association"
         subtitle="Get involved in our parish community through various ministries and groups. Find a place where your gifts and passions meet the needs of others."
       />
 
