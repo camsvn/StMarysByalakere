@@ -66,7 +66,7 @@ const Navbar = () => {
             className="flex items-center space-x-2 text-2xl font-bold text-primary"
           >
             <span className="animate-float inline-block">🕊️</span>
-            <span>St. Mary's</span>
+            <span>St. Mary&apos;s</span>
           </Link>
 
           {/* Desktop Navigation */}
@@ -75,7 +75,7 @@ const Navbar = () => {
             <NavItem to="/about">{t("navAbout")}</NavItem>
             <NavItem to="/mass-services">{t("navMass")}</NavItem>
             <NavItem to="/events">{t("navEvents")}</NavItem>
-            <NavItem to="/ministries">{t("navMinistries")}</NavItem>
+            <NavItem to="/pious-associations">{t("navMinistries")}</NavItem>
             <NavItem to="/gallery">{t("navGallery")}</NavItem>
             <NavItem to="/contact">{t("navContact")}</NavItem>
           </ul>
@@ -93,7 +93,7 @@ const Navbar = () => {
 
           {/* Mobile Menu Button */}
           <div className="md:hidden flex items-center space-x-2">
-            {/* <LanguageSelector />
+            <LanguageSelector />
             <Button
               variant="ghost"
               size="icon"
@@ -101,7 +101,7 @@ const Navbar = () => {
               aria-label={isMenuOpen ? "Close Menu" : "Open Menu"}
             >
               {isMenuOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
-            </Button> */}
+            </Button>
           </div>
         </div>
 
@@ -113,7 +113,7 @@ const Navbar = () => {
               <NavItem to="/about" onClick={closeMenu}>{t("navAbout")}</NavItem>
               <NavItem to="/mass-services" onClick={closeMenu}>{t("navMass")}</NavItem>
               <NavItem to="/events" onClick={closeMenu}>{t("navEvents")}</NavItem>
-              <NavItem to="/ministries" onClick={closeMenu}>{t("navMinistries")}</NavItem>
+              <NavItem to="/pious-associations" onClick={closeMenu}>{t("navMinistries")}</NavItem>
               <NavItem to="/gallery" onClick={closeMenu}>{t("navGallery")}</NavItem>
               <NavItem to="/contact" onClick={closeMenu}>{t("navContact")}</NavItem>
               {/* <NavItem to="/donate" onClick={closeMenu}>{t("navDonate")}</NavItem> */}
