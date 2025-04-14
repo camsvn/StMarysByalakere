@@ -11,6 +11,7 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { LanguageProvider } from "@/contexts/LanguageContext";
 import { MemberProvider } from "@/contexts/MemberContext";
 import { CMSProvider } from "@/contexts/CMSContext";
+import PageLayout from "@/components/layout/PageLayout";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -37,7 +38,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+        className={`${geistSans.variable} ${geistMono.variable}`}
       >
         <QueryClientProvider client={queryClient}>
           <LanguageProvider>
@@ -46,7 +47,9 @@ export default function RootLayout({
                 <TooltipProvider>
                   <Toaster />
                   <Sonner />
-                  {children}
+                    <PageLayout>
+                      {children}
+                    </PageLayout>
                 </TooltipProvider>
               </CMSProvider>
             </MemberProvider>

@@ -5,7 +5,7 @@ import ShapesBackground from "@/components/ui/ShapesBackground";
 
 const About = () => {
   return (
-    <PageLayout>
+    <>
       <div className="pt-28 pb-16 md:pt-32 md:pb-20 px-4 relative">
         <ShapesBackground />
         <div className="container mx-auto relative z-10">
@@ -28,7 +28,7 @@ const About = () => {
           </div>
         </div>
       </div>
-    </PageLayout>
+    </>
   );
 };
 
