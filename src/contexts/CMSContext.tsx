@@ -107,22 +107,32 @@ const defaultMassSchedule: MassScheduleType[] = [
 
 const defaultMinistries: MinistryType[] = [
   {
-    title: "Youth Ministry",
+    title: "Pithruvedi",
     description: "A vibrant community where young people grow in faith, build friendships, and develop leadership skills.",
     icon: "Users"
   },
   {
-    title: "Choir & Music",
+    title: "Mathruvedi",
+    description: "A vibrant community where young people grow in faith, build friendships, and develop leadership skills.",
+    icon: "Users"
+  },
+  {
+    title: "SMYF",
+    description: "A vibrant community where young people grow in faith, build friendships, and develop leadership skills.",
+    icon: "Users"
+  },
+  {
+    title: "Choir",
     description: "Enhance our liturgies through music and song, bringing the congregation into deeper worship.",
     icon: "Music"
   },
   {
-    title: "Sunday School",
+    title: "Altar Servers",
     description: "Religious education for children and youth to learn about our faith and traditions.",
     icon: "BookOpen"
   },
   {
-    title: "Charity & Outreach",
+    title: "Catechism",
     description: "Serving our community through charitable works, outreach programs, and social justice initiatives.",
     icon: "Heart"
   }

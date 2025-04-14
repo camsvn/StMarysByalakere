@@ -35,6 +35,7 @@ const Ministries = () => {
       "Choir & Music": "https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4",
       "Sunday School": "https://images.unsplash.com/photo-1503676260728-1c00da094a0b",
       "Charity & Outreach": "https://images.unsplash.com/photo-1517022812141-23620dba5c23",
+      "Catechism": "https://images.unsplash.com/photo-1517022812141-23620dba5c23",
     };
     
     // Default images based on icon if no specific match
