@@ -1,5 +1,3 @@
-
-import PageLayout from "@/components/layout/PageLayout";
 import SectionHeading from "@/components/ui/SectionHeading";
 import ShapesBackground from "@/components/ui/ShapesBackground";
 

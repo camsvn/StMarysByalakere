@@ -1,4 +1,4 @@
-
+"use client"
 import Link from 'next/link'
 import SectionHeading from "../ui/SectionHeading";
 import EventCard from "../ui/EventCard";

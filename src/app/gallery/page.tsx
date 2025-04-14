@@ -1,6 +1,5 @@
 "use client"
 import { useState } from "react";
-import PageLayout from "@/components/layout/PageLayout";
 import SectionHeading from "@/components/ui/SectionHeading";
 import ShapesBackground from "@/components/ui/ShapesBackground";
 import { Badge } from "@/components/ui/badge";
@@ -13,7 +12,7 @@ import {
   CarouselPrevious
 } from "@/components/ui/carousel";
 import { AspectRatio } from "@/components/ui/aspect-ratio";
-import { LayoutGrid, Filter, ImageIcon } from "lucide-react";
+import { Filter, ImageIcon } from "lucide-react";
 
 const Gallery = () => {
   const { galleryImages } = useCMS();

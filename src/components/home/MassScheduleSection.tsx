@@ -1,3 +1,4 @@
+"use client"
 import { Clock, MapPin } from "lucide-react";
 import SectionHeading from "../ui/SectionHeading";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
@@ -5,7 +6,7 @@ import { Button } from "@/components/ui/button";
 import Link from 'next/link'
 import { cn } from "@/lib/utils";
 import { useCMS } from "@/contexts/CMSContext";
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { Tabs, TabsContent } from "@/components/ui/tabs";
 
 interface MassCardProps {
   day: string;

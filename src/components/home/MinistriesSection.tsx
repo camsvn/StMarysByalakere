@@ -1,3 +1,4 @@
+"use client"
 import Link from 'next/link'
 import SectionHeading from "../ui/SectionHeading";
 import { Button } from "@/components/ui/button";
@@ -8,12 +9,12 @@ import { useCMS } from "@/contexts/CMSContext";
 interface MinistryCardProps {
   title: string;
   description: string;
-  icon: React.ReactNode;
+  // icon: React.ReactNode;
   delay: string;
   imageUrl?: string; // optional image URL
 }
 
-const MinistryCard = ({ title, description, icon, delay, imageUrl }: MinistryCardProps) => (
+const MinistryCard = ({ title, description, delay, imageUrl }: MinistryCardProps) => (
   <Card className={`card-hover animate-fade-in ${delay}`}>
     <CardHeader className="flex flex-col items-center">
       {imageUrl && (
@@ -71,7 +72,7 @@ const MinistriesSection = () => {
             key={index}
             title={ministry.title}
             description={ministry.description}
-            icon={getIconComponent(ministry.icon)}
+            // icon={getIconComponent(ministry.icon)}
             delay={`animate-delay-${index * 100}`}
             imageUrl={"https://images.unsplash.com/photo-1470813740244-df37b8c1edcb?auto=format&fit=crop&w=600&h=400&q=80"} // pass the imageUrl prop
           />

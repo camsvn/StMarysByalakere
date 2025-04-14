@@ -1,6 +1,5 @@
 "use client"
 import { useState } from "react";
-import PageLayout from "@/components/layout/PageLayout";
 import SectionHeading from "@/components/ui/SectionHeading";
 import ShapesBackground from "@/components/ui/ShapesBackground";
 import { Button } from "@/components/ui/button";

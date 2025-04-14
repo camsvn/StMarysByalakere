@@ -1,6 +1,6 @@
+"use client"
 import { Button } from "@/components/ui/button";
 import ShapesBackground from "@/components/ui/ShapesBackground";
-import Link from 'next/link'
 import { Church, Calendar } from "lucide-react";
 
 const Hero = () => {

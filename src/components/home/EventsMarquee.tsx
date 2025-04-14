@@ -1,4 +1,4 @@
-
+"use client"
 import { useCMS } from "@/contexts/CMSContext";
 import { useRef, useEffect } from "react";
 import { Clock } from "lucide-react";

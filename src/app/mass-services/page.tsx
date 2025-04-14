@@ -1,17 +1,16 @@
 "use client"
-import PageLayout from "../components/layout/PageLayout";
 import SectionHeading from "@/components/ui/SectionHeading";
 import ShapesBackground from "@/components/ui/ShapesBackground";
 import { useCMS } from "@/contexts/CMSContext";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { Clock, MapPin, BookOpen, User, Heart } from "lucide-react";
+import { Clock, BookOpen, Heart } from "lucide-react";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Collapsible, CollapsibleContent, CollapsibleTrigger } from "@/components/ui/collapsible";
-import { useIsMobile } from "@/hooks/use-mobile";
+// import { useIsMobile } from "@/hooks/use-mobile";
 
 const MassServices = () => {
   const { massSchedule } = useCMS();
-  const isMobile = useIsMobile();
+  // const isMobile = useIsMobile();
 
   // Get current day of the week for highlighting
   const today = new Date().toLocaleString('en-us', {weekday: 'long'});

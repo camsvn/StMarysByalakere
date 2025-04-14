@@ -1,5 +1,4 @@
 "use client"
-import PageLayout from "@/components/layout/PageLayout";
 import SectionHeading from "@/components/ui/SectionHeading";
 import ShapesBackground from "@/components/ui/ShapesBackground";
 import { useCMS } from "@/contexts/CMSContext";
@@ -127,11 +126,11 @@ const Ministries = () => {
             <div className="bg-white rounded-lg shadow-lg p-6 md:p-8">
               <h2 className="text-2xl font-bold mb-4">Get Involved</h2>
               <p className="mb-4">
-                Whether you're interested in serving, sharing your talents, or growing in faith, there's a place for you in our parish community. 
+                Whether you&apos;re interested in serving, sharing your talents, or growing in faith, there&apos;s a place for you in our parish community. 
                 Contact us to learn more about these ministries or to get involved.
               </p>
               <p>
-                "As each one has received a gift, use it to serve one another as good stewards of God's varied grace." - 1 Peter 4:10
+                &quot;As each one has received a gift, use it to serve one another as good stewards of God&apos;s varied grace.&quot; - 1 Peter 4:10
               </p>
             </div>
           </div>

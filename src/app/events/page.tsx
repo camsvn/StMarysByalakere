@@ -1,6 +1,5 @@
 "use client"
 import { useState } from "react";
-import PageLayout from "@/components/layout/PageLayout";
 import SectionHeading from "@/components/ui/SectionHeading";
 import ShapesBackground from "@/components/ui/ShapesBackground";
 import EventCard from "@/components/ui/EventCard";
@@ -14,7 +13,7 @@ import {
   TableRow 
 } from "@/components/ui/table";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { CalendarIcon, LayoutGrid, Image, List } from "lucide-react";
+import { CalendarIcon, LayoutGrid, Image } from "lucide-react";
 import { AspectRatio } from "@/components/ui/aspect-ratio";
 import { 
   Pagination, 

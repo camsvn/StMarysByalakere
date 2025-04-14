@@ -1,7 +1,6 @@
 "use client"
 import { useState } from "react";
 import { useLanguage } from "@/contexts/LanguageContext";
-import PageLayout from "@/components/layout/PageLayout";
 import SectionHeading from "@/components/ui/SectionHeading";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -99,7 +98,7 @@ const Donate = () => {
                             selectedAmount === amount && "border-primary bg-primary/10 text-primary"
                           )}
                         >
-                          ${amount}
+                          ₹{amount}
                         </Label>
                       </div>
                     ))}
@@ -122,7 +121,7 @@ const Donate = () => {
                         </Label>
                         <div className="relative col-span-4">
                           <span className="absolute left-3 top-1/2 -translate-y-1/2 text-muted-foreground">
-                            $
+                          ₹
                           </span>
                           <Input
                             type="number"
@@ -166,15 +165,15 @@ const Donate = () => {
               <div className="border rounded-lg p-4">
                 <h4 className="font-medium">By Check</h4>
                 <p className="text-muted-foreground mt-1">
-                  Make checks payable to "St. Mary's Malabar Catholic Church" and mail to:<br />
-                  123 Church Street, Your City, State 12345
+                  Make checks payable to &quot;St. Mary&apos;s Church, Byalakere&quot; and mail to:<br />
+                  Thrithwa Elizebeth Mane, No.170/1, Kalathamana Halli, Byalakere Village, Shivakote Post, Bangalore - 560 089
                 </p>
               </div>
               
               <div className="border rounded-lg p-4">
                 <h4 className="font-medium">Planned Giving</h4>
                 <p className="text-muted-foreground mt-1">
-                  Consider including St. Mary's in your will or estate planning.
+                  Consider including St. Mary&apos;s in your will or estate planning.
                   Contact us to learn more about legacy giving options.
                 </p>
               </div>

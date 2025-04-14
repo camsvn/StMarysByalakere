@@ -23,7 +23,7 @@ const PriestMessage = () => {
               <h3 className="text-xl font-semibold">Fr. Vijoy Kallingal, ISch</h3>
               <p className="text-muted-foreground">Parish Priest</p>
               <div className="mt-4 pt-4 border-t border-primary/20 w-full text-center">
-                <p className="italic text-sm">"Faith is taking the first step even when you can't see the whole staircase."</p>
+                <p className="italic text-sm">&quot;Faith is taking the first step even when you can&apos;t see the whole staircase.&quot;</p>
               </div>
             </div>
             
@@ -32,18 +32,18 @@ const PriestMessage = () => {
               <CardContent className="p-0 relative">
                 <MessageCircle className="absolute -left-3 -top-3 h-8 w-8 text-primary/20" />
                 <div className="space-y-4 pl-2">
-                  <p className="text-lg font-medium">Welcome to St. Mary's!</p>
+                  <p className="text-lg font-medium">Welcome to St. Mary&apos;s!</p>
                   <p>
-                    Thank you for your interest in our parish. Whether you're visiting for a short time, searching for a new parish to call home, returning to the practice of your Catholic faith, or simply curious about the Catholic Church—we're truly glad you're here.
+                    Thank you for your interest in our parish. Whether you&apos;re visiting for a short time, searching for a new parish to call home, returning to the practice of your Catholic faith, or simply curious about the Catholic Church—we&apos;re truly glad you&apos;re here.
                   </p>
                   <p>
-                    We believe that God has blessed each of us with unique gifts, meant to be used in service of His Kingdom here on earth. At St. Mary's, there are many ways to share those gifts and become an active part of our faith community.
+                    We believe that God has blessed each of us with unique gifts, meant to be used in service of His Kingdom here on earth. At St. Mary&apos;s, there are many ways to share those gifts and become an active part of our faith community.
                   </p>
                   <p>
-                    We invite you to explore our website and learn more about the life of our parish. We hope you'll discover where God may be calling you to get involved.
+                    We invite you to explore our website and learn more about the life of our parish. We hope you&apos;ll discover where God may be calling you to get involved.
                   </p>
                   <p>
-                    We're so happy you've found us, and we look forward to welcoming you in person and getting to know you better.
+                    We&apos;re so happy you&apos;ve found us, and we look forward to welcoming you in person and getting to know you better.
                   </p>
                   <div className="font-medium border-l-4 border-primary/30 pl-4 italic">
                     In Christ,
