@@ -45,7 +45,7 @@ const EventsMarquee = () => {
             {[...events, ...events].map((event, index) => (
               <Link
                 key={`${event.id}-${index}`}
-                to="/events"
+                href="/events"
                 className="inline-block px-6 font-medium hover:text-accent transition-colors"
               >
                 <span className="mr-2">{event.date}:</span>

@@ -163,10 +163,17 @@ const LanguageContext = createContext<LanguageContextType | undefined>(undefined
 // Provider component
 export const LanguageProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
   // Try to get language from localStorage or default to English
-  const [language, setLanguageState] = useState<Language>(() => {
-    const storedLanguage = localStorage.getItem("language") as Language;
-    return storedLanguage || "en";
-  });
+  const [language, setLanguageState] = useState<Language>("en");
+
+  // On mount, try to get language from localStorage
+  useEffect(() => {
+    if (typeof window !== "undefined") {
+      const storedLanguage = localStorage.getItem("language") as Language;
+      if (storedLanguage) {
+        setLanguageState(storedLanguage);
+      }
+    }
+  }, []);
 
   // Available languages
   const availableLanguages = [
@@ -177,7 +184,9 @@ export const LanguageProvider: React.FC<{ children: ReactNode }> = ({ children }
 
   // Update localStorage when language changes
   useEffect(() => {
-    localStorage.setItem("language", language);
+    if (typeof window !== "undefined") {
+      localStorage.setItem("language", language);
+    }
   }, [language]);
 
   // Set language function

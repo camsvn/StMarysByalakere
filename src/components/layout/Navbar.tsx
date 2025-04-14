@@ -17,7 +17,7 @@ interface NavItemProps {
 
 const NavItem = ({ to, children, onClick }: NavItemProps) => (
   <li>
-    <Link to={to} className="nav-link" onClick={onClick}>
+    <Link href={to} className="nav-link" onClick={onClick}>
       {children}
     </Link>
   </li>
@@ -62,7 +62,7 @@ const Navbar = () => {
       <div className="container mx-auto px-4">
         <div className="flex items-center justify-between">
           <Link
-            to="/"
+            href="/"
             className="flex items-center space-x-2 text-2xl font-bold text-primary"
           >
             <span className="animate-float inline-block">🕊️</span>

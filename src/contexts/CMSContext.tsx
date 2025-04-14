@@ -3,6 +3,7 @@
 import React, { createContext, useContext, useState, useEffect } from "react";
 import { useLanguage } from "./LanguageContext";
 import { useMember } from "./MemberContext";
+import { getFromLocalStorage, setToLocalStorage } from '@/lib/storage'
 
 // Define types for different content types
 export type EventType = {
@@ -160,23 +161,23 @@ export const CMSProvider: React.FC<{ children: React.ReactNode }> = ({ children 
   
   // Load content from localStorage or use defaults
   const [events, setEvents] = useState<EventType[]>(() => {
-    const saved = localStorage.getItem("cms_events");
-    return saved ? JSON.parse(saved) : defaultEvents;
+    const saved = getFromLocalStorage("cms_events");
+    return typeof saved === "string" ? JSON.parse(saved) : defaultEvents;
   });
   
   const [massSchedule, setMassSchedule] = useState<MassScheduleType[]>(() => {
-    const saved = localStorage.getItem("cms_massSchedule");
-    return saved ? JSON.parse(saved) : defaultMassSchedule;
+    const saved = getFromLocalStorage("cms_massSchedule");
+    return typeof saved === "string" ? JSON.parse(saved) : defaultMassSchedule;
   });
   
   const [ministries, setMinistries] = useState<MinistryType[]>(() => {
-    const saved = localStorage.getItem("cms_ministries");
-    return saved ? JSON.parse(saved) : defaultMinistries;
+    const saved = getFromLocalStorage("cms_ministries");
+    return typeof saved === "string" ? JSON.parse(saved) : defaultMinistries;
   });
   
   const [galleryImages, setGalleryImages] = useState<GalleryImageType[]>(() => {
-    const saved = localStorage.getItem("cms_gallery");
-    return saved ? JSON.parse(saved) : defaultGalleryImages;
+    const saved = getFromLocalStorage("cms_gallery");
+    return typeof saved === "string" ? JSON.parse(saved) : defaultGalleryImages;
   });
   
   const [isEditing, setIsEditing] = useState(false);

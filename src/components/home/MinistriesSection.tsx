@@ -33,7 +33,7 @@ const MinistryCard = ({ title, description, icon, delay, imageUrl }: MinistryCar
     </CardContent>
     <CardFooter>
       <Button variant="ghost" asChild className="w-full">
-        <Link to={`/ministries`}>Learn More</Link>
+        <Link href={`/ministries`}>Learn More</Link>
       </Button>
     </CardFooter>
   </Card>
@@ -80,7 +80,7 @@ const MinistriesSection = () => {
 
       <div className="text-center mt-12">
         <Button asChild>
-          <Link to="/ministries">Explore All Ministries</Link>
+          <Link href="/ministries">Explore All Ministries</Link>
         </Button>
       </div>
     </section>

@@ -123,7 +123,7 @@ const MassScheduleSection = () => {
 
         <div className="text-center mt-10">
           <Button size="lg" variant="outline" asChild>
-            <Link to="/mass-services">View Detailed Schedule</Link>
+            <Link href="/mass-services">View Detailed Schedule</Link>
           </Button>
         </div>
       </div>

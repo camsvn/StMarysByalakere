@@ -72,7 +72,7 @@ const EventsSection = () => {
                     <h3 className="text-xl font-bold mb-2 group-hover:text-accent transition-colors">{event.title}</h3>
                     <p className="text-sm text-white/80 line-clamp-2 mb-4">{event.description}</p>
                     <Link 
-                      to="/events" 
+                      href="/events" 
                       className="inline-flex items-center text-sm font-medium text-primary-foreground hover:text-accent transition-colors"
                     >
                       Learn More
@@ -138,7 +138,7 @@ const EventsSection = () => {
 
         <div className="text-center mt-12">
           <Button size="lg" asChild className="group">
-            <Link to="/events">
+            <Link href="/events">
               View All Events
               <ArrowRight className="ml-2 h-5 w-5 group-hover:translate-x-1 transition-transform" />
             </Link>
