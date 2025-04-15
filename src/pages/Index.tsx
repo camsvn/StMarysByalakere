@@ -12,7 +12,9 @@ const Index = () => {
   return (
     <PageLayout>
       <Hero />
-      <EventsMarquee />
+      <div className="w-full">
+        <EventsMarquee />
+      </div>
       <PriestMessage />
       <EventsSection />
       <MassScheduleSection />

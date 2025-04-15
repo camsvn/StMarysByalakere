@@ -6,31 +6,31 @@ import { Church, Calendar } from "lucide-react";
 
 const Hero = () => {
   return (
-    <section className="hero relative pt-28 pb-16 md:pt-32 md:pb-20 lg:pt-40 lg:pb-32 px-4 overflow-hidden">
+    <section className="hero relative pt-20 sm:pt-28 pb-12 sm:pb-16 md:pt-32 md:pb-20 lg:pt-40 lg:pb-32 px-4 overflow-hidden">
       <ShapesBackground />
-      <div className="container mx-auto hero-content flex flex-col lg:flex-row items-center gap-8 md:gap-16">
+      <div className="container mx-auto hero-content flex flex-col lg:flex-row items-center gap-6 sm:gap-8 md:gap-16">
         <div className="max-w-2xl lg:w-1/2 text-center lg:text-left">
-          <div className="inline-flex items-center justify-center p-2 bg-primary/10 rounded-full mb-4 animate-fade-in">
-            <Church className="h-6 w-6 text-primary mr-2" />
-            <span className="text-sm font-medium text-primary">Diocese of Mandya</span>
+          <div className="inline-flex items-center justify-center p-1.5 sm:p-2 bg-primary/10 rounded-full mb-3 sm:mb-4 animate-fade-in">
+            <Church className="h-5 w-5 sm:h-6 sm:w-6 text-primary mr-1.5 sm:mr-2" />
+            <span className="text-xs sm:text-sm font-medium text-primary">Diocese of Mandya</span>
           </div>
-          <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-4 md:mb-6 animate-fade-in">
+          <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold mb-3 sm:mb-4 md:mb-6 animate-fade-in">
             Welcome to{" "}
             <span className="text-primary">St. Mary's Church, Byalakere</span>
           </h1>
-          <p className="text-lg md:text-xl text-muted-foreground mb-8 md:mb-10 animate-fade-in animate-delay-100">
+          <p className="text-base sm:text-lg md:text-xl text-muted-foreground mb-6 md:mb-8 lg:mb-10 animate-fade-in animate-delay-100">
             Join our vibrant community for worship, fellowship, and spiritual growth. Together, we celebrate our faith and serve our community.
           </p>
-          <div className="flex flex-col sm:flex-row justify-center lg:justify-start gap-4 animate-fade-in animate-delay-200">
+          <div className="flex flex-col sm:flex-row justify-center lg:justify-start gap-3 sm:gap-4 animate-fade-in animate-delay-200">
             <Button size="lg" className="font-medium flex items-center gap-2" asChild>
               <Link to="/mass-services">
-                <Church className="h-5 w-5" />
+                <Church className="h-4 w-4 sm:h-5 sm:w-5" />
                 Mass Schedule
               </Link>
             </Button>
             <Button variant="outline" size="lg" className="font-medium flex items-center gap-2" asChild>
               <Link to="/events">
-                <Calendar className="h-5 w-5" />
+                <Calendar className="h-4 w-4 sm:h-5 sm:w-5" />
                 Upcoming Events
               </Link>
             </Button>
@@ -38,17 +38,17 @@ const Hero = () => {
         </div>
         
         {/* Hero image - large cross or church visual */}
-        <div className="lg:w-1/2 mt-8 lg:mt-0 rounded-2xl overflow-hidden shadow-xl animate-fade-in animate-delay-300">
+        <div className="lg:w-1/2 mt-6 sm:mt-8 lg:mt-0 rounded-xl sm:rounded-2xl overflow-hidden shadow-xl animate-fade-in animate-delay-300">
           <div className="relative aspect-[4/3] bg-gradient-to-br from-primary/5 to-secondary/5">
             <img 
               src="https://images.unsplash.com/photo-1438032005730-c779502df39b?auto=format&fit=crop&w=800&h=600"
               alt="St. Mary's Church, Byalakere" 
-              className="w-full h-full object-cover rounded-2xl"
+              className="w-full h-full object-cover rounded-xl sm:rounded-2xl"
             />
             <div className="absolute inset-0 bg-gradient-to-t from-black/30 to-transparent flex items-end">
-              <div className="p-6 text-white">
-                <h3 className="text-xl font-semibold">St. Mary's Church, Byalakere</h3>
-                <p className="text-sm opacity-90">Diocese of Mandya</p>
+              <div className="p-4 sm:p-6 text-white">
+                <h3 className="text-base sm:text-xl font-semibold">St. Mary's Church, Byalakere</h3>
+                <p className="text-xs sm:text-sm opacity-90">Diocese of Mandya</p>
               </div>
             </div>
           </div>
