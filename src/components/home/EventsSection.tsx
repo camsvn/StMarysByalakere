@@ -56,24 +56,26 @@ const EventsSection = () => {
               {displayedEvents.map((event, index) => (
                 <div 
                   key={event.id} 
-                  className={`relative overflow-hidden rounded-lg shadow-lg group hover:shadow-xl transition-all duration-300 animate-fade-in animate-delay-${index * 100}`}
+                  className={`relative overflow-hidden rounded-lg shadow-lg group hover:shadow-xl transition-all duration-300 animate-fade-in animate-delay-${index * 100} h-[480px]`}
                 >
-                  <div className="absolute inset-0 bg-gradient-to-t from-black via-black/70 to-transparent opacity-60 group-hover:opacity-70 transition-opacity"></div>
-                  <img 
-                    src={posterImages[index % posterImages.length]} 
-                    alt={event.title} 
-                    className="w-full h-80 object-cover group-hover:scale-105 transition-transform duration-700"
-                  />
-                  <div className="absolute bottom-0 left-0 right-0 p-6 text-white">
+                  <div className="absolute inset-0 bg-gradient-to-t from-black via-black/70 to-transparent opacity-60 group-hover:opacity-70 transition-opacity z-10"></div>
+                  <div className="h-full w-full">
+                    <img 
+                      src={posterImages[index % posterImages.length]} 
+                      alt={event.title} 
+                      className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
+                    />
+                  </div>
+                  <div className="absolute bottom-0 left-0 right-0 p-6 text-white z-20 flex flex-col justify-end">
                     <div className="flex items-center mb-2">
                       <CalendarIcon className="h-5 w-5 mr-2 text-primary-foreground" />
                       <span className="text-sm font-medium bg-primary/80 px-3 py-1 rounded-full">{event.date} • {event.time}</span>
                     </div>
                     <h3 className="text-xl font-bold mb-2 group-hover:text-accent transition-colors">{event.title}</h3>
-                    <p className="text-sm text-white/80 line-clamp-2 mb-4">{event.description}</p>
+                    <p className="text-sm text-white/80 mb-4 line-clamp-3">{event.description}</p>
                     <Link 
                       to="/events" 
-                      className="inline-flex items-center text-sm font-medium text-primary-foreground hover:text-accent transition-colors"
+                      className="inline-flex items-center text-sm font-medium text-primary-foreground hover:text-accent transition-colors mt-auto"
                     >
                       Learn More
                       <ArrowRight className="ml-1 h-4 w-4 group-hover:translate-x-1 transition-transform" />
