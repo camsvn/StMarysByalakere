@@ -3,6 +3,7 @@ import { useState } from "react";
 import PageLayout from "../components/layout/PageLayout";
 import SectionHeading from "../components/ui/SectionHeading";
 import ShapesBackground from "../components/ui/ShapesBackground";
+import FilteredImage from "../components/ui/FilteredImage";
 import { Badge } from "@/components/ui/badge";
 import { useCMS } from "@/contexts/CMSContext";
 import { 
@@ -49,10 +50,11 @@ const Gallery = () => {
                     <div className="p-1">
                       <div className="overflow-hidden rounded-xl">
                         <AspectRatio ratio={16/9} className="bg-muted">
-                          <img 
+                          <FilteredImage 
                             src={image.src}
                             alt={image.alt} 
-                            className="w-full h-full object-cover" 
+                            className="w-full h-full"
+                            category={image.category}
                           />
                           <div className="absolute bottom-0 left-0 right-0 bg-black/40 p-4 text-white">
                             <p className="font-medium">{image.alt}</p>
@@ -95,10 +97,12 @@ const Gallery = () => {
                 className={`aspect-square overflow-hidden rounded-lg shadow-md card-hover animate-fade-in animate-delay-${index % 4 * 100}`}
               >
                 <div className="relative h-full group">
-                  <img 
+                  <FilteredImage 
                     src={image.src} 
                     alt={image.alt} 
-                    className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" 
+                    className="w-full h-full"
+                    category={image.category}
+                    enableHover={true}
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300">
                     <div className="absolute bottom-0 left-0 right-0 p-4 text-white transform translate-y-4 group-hover:translate-y-0 transition-transform duration-300">

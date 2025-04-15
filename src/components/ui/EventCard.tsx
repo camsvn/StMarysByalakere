@@ -1,5 +1,6 @@
 
 import { cn } from "@/lib/utils";
+import FilteredImage from "./FilteredImage";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Calendar, Clock, MapPin } from "lucide-react";
 import { AspectRatio } from "@/components/ui/aspect-ratio";
@@ -18,12 +19,14 @@ const EventCard = ({ title, date, time, description, location, image, className 
   return (
     <Card className={cn("overflow-hidden group", className)}>
       {image && (
-        <div className="relative w-full h-48 overflow-hidden">
+        <div className="relative w-full overflow-hidden">
           <AspectRatio ratio={16/9}>
-            <img 
+            <FilteredImage 
               src={image} 
               alt={title} 
-              className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+              className="w-full h-full"
+              filter="vintage"
+              enableHover={true}
             />
             <div className="absolute inset-0 bg-gradient-to-t from-background/80 to-transparent opacity-60"></div>
           </AspectRatio>

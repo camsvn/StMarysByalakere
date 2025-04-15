@@ -1,4 +1,3 @@
-
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -139,6 +138,37 @@
   
   .animate-delay-500 {
     animation-delay: 500ms;
+  }
+  
+  /* Image filter styles */
+  .filter-church {
+    @apply brightness-105 contrast-105 saturate-105;
+    filter: brightness(1.05) contrast(1.05) saturate(1.05);
+  }
+  
+  .filter-sepia {
+    @apply sepia-[0.3] brightness-105;
+    filter: sepia(0.3) brightness(1.05);
+  }
+  
+  .filter-grayscale {
+    @apply grayscale-[0.3] brightness-110;
+    filter: grayscale(0.3) brightness(1.1);
+  }
+  
+  .filter-contrast {
+    @apply contrast-110 brightness-105;
+    filter: contrast(1.1) brightness(1.05);
+  }
+  
+  .filter-blur {
+    @apply backdrop-blur-[1px];
+    backdrop-filter: blur(1px);
+  }
+  
+  .filter-vintage {
+    @apply sepia-[0.2] brightness-105 contrast-105 saturate-105;
+    filter: sepia(0.2) brightness(1.05) contrast(1.05) saturate(1.05);
   }
 }
 
