@@ -1,4 +1,3 @@
-
 import { Link } from "react-router-dom";
 import SectionHeading from "../ui/SectionHeading";
 import EventCard from "../ui/EventCard";
@@ -56,15 +55,17 @@ const EventsSection = () => {
               {displayedEvents.map((event, index) => (
                 <div 
                   key={event.id} 
-                  className={`relative overflow-hidden rounded-lg shadow-lg group hover:shadow-xl transition-all duration-300 animate-fade-in animate-delay-${index * 100}`}
+                  className={`relative h-full overflow-hidden rounded-lg shadow-lg group hover:shadow-xl transition-all duration-300 animate-fade-in animate-delay-${index * 100}`}
                 >
-                  <div className="absolute inset-0 bg-gradient-to-t from-black via-black/70 to-transparent opacity-60 group-hover:opacity-70 transition-opacity"></div>
-                  <img 
-                    src={posterImages[index % posterImages.length]} 
-                    alt={event.title} 
-                    className="w-full h-80 object-cover group-hover:scale-105 transition-transform duration-700"
-                  />
-                  <div className="absolute bottom-0 left-0 right-0 p-6 text-white">
+                  <div className="absolute inset-0 bg-gradient-to-t from-black via-black/70 to-transparent opacity-60 group-hover:opacity-70 transition-opacity z-10"></div>
+                  <div className="relative h-80 overflow-hidden">
+                    <img 
+                      src={posterImages[index % posterImages.length]} 
+                      alt={event.title} 
+                      className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
+                    />
+                  </div>
+                  <div className="absolute bottom-0 left-0 right-0 p-6 text-white z-20">
                     <div className="flex items-center mb-2">
                       <CalendarIcon className="h-5 w-5 mr-2 text-primary-foreground" />
                       <span className="text-sm font-medium bg-primary/80 px-3 py-1 rounded-full">{event.date} • {event.time}</span>
