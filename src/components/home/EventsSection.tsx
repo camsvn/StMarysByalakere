@@ -1,4 +1,3 @@
-
 import { Link } from "react-router-dom";
 import SectionHeading from "../ui/SectionHeading";
 import EventCard from "../ui/EventCard";
@@ -14,6 +13,7 @@ import {
 } from "@/components/ui/table";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { CalendarIcon, ArrowRight } from "lucide-react";
+import FilteredImage from "../ui/FilteredImage";
 
 const EventsSection = () => {
   const { events } = useCMS();
@@ -54,25 +54,20 @@ const EventsSection = () => {
           <TabsContent value="posters">
             <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-8">
               {displayedEvents.map((event, index) => (
-                <div 
+                <FilteredImage 
                   key={event.id} 
-                  className={`relative overflow-hidden rounded-lg shadow-lg group hover:shadow-xl transition-all duration-300 animate-fade-in animate-delay-${index * 100} h-[480px]`}
+                  src={posterImages[index % posterImages.length]}
+                  alt={event.title}
+                  aspectRatio={16/9}
+                  className={`rounded-lg shadow-lg group hover:shadow-xl transition-all duration-300 animate-fade-in animate-delay-${index * 100}`}
                 >
-                  <div className="absolute inset-0 bg-gradient-to-t from-black via-black/70 to-transparent opacity-60 group-hover:opacity-70 transition-opacity z-10"></div>
-                  <div className="h-full w-full">
-                    <img 
-                      src={posterImages[index % posterImages.length]} 
-                      alt={event.title} 
-                      className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
-                    />
-                  </div>
-                  <div className="absolute bottom-0 left-0 right-0 p-6 text-white z-20 flex flex-col justify-end">
+                  <div className="event-poster-text">
                     <div className="flex items-center mb-2">
                       <CalendarIcon className="h-5 w-5 mr-2 text-primary-foreground" />
-                      <span className="text-sm font-medium bg-primary/80 px-3 py-1 rounded-full">{event.date} • {event.time}</span>
+                      <span className="event-poster-date">{event.date} • {event.time}</span>
                     </div>
-                    <h3 className="text-xl font-bold mb-2 group-hover:text-accent transition-colors">{event.title}</h3>
-                    <p className="text-sm text-white/80 mb-4 line-clamp-3">{event.description}</p>
+                    <h3 className="event-poster-title">{event.title}</h3>
+                    <p className="event-poster-description">{event.description}</p>
                     <Link 
                       to="/events" 
                       className="inline-flex items-center text-sm font-medium text-primary-foreground hover:text-accent transition-colors mt-auto"
@@ -81,7 +76,7 @@ const EventsSection = () => {
                       <ArrowRight className="ml-1 h-4 w-4 group-hover:translate-x-1 transition-transform" />
                     </Link>
                   </div>
-                </div>
+                </FilteredImage>
               ))}
             </div>
           </TabsContent>

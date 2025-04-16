@@ -1,3 +1,4 @@
+
 import { useState } from "react";
 import PageLayout from "../components/layout/PageLayout";
 import SectionHeading from "../components/ui/SectionHeading";
@@ -72,16 +73,16 @@ const Events = () => {
                     aspectRatio={3/4}
                     className={`rounded-lg shadow-lg group hover:shadow-xl transition-all duration-300 animate-fade-in animate-delay-${index % 3 * 100}`}
                   >
-                    <div className="absolute bottom-0 left-0 right-0 p-6 text-white z-10">
+                    <div className="event-poster-text">
                       <div className="flex items-center mb-2">
                         <CalendarIcon className="h-5 w-5 mr-2 text-primary-foreground" />
-                        <span className="text-sm font-medium bg-primary/80 px-3 py-1 rounded-full">{event.date} • {event.time}</span>
+                        <span className="event-poster-date">{event.date} • {event.time}</span>
                       </div>
-                      <h3 className="text-xl font-bold mb-2 group-hover:text-accent transition-colors">{event.title}</h3>
-                      <p className="text-sm text-white/80 line-clamp-2 mb-4">{event.description}</p>
+                      <h3 className="event-poster-title">{event.title}</h3>
+                      <p className="event-poster-description">{event.description}</p>
                       {event.location && (
-                        <p className="text-sm text-white/80 flex items-center">
-                          <span className="inline-block w-1.5 h-1.5 rounded-full bg-primary/80 mr-2"></span>
+                        <p className="text-sm text-white/90 flex items-center">
+                          <span className="inline-block w-1.5 h-1.5 rounded-full bg-primary/90 mr-2"></span>
                           {event.location}
                         </p>
                       )}
