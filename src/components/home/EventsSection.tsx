@@ -2,7 +2,6 @@
 import { Link } from "react-router-dom";
 import SectionHeading from "../ui/SectionHeading";
 import EventCard from "../ui/EventCard";
-import FilteredImage from "../ui/FilteredImage";
 import { Button } from "@/components/ui/button";
 import { useCMS } from "@/contexts/CMSContext";
 import { 
@@ -61,12 +60,10 @@ const EventsSection = () => {
                 >
                   <div className="absolute inset-0 bg-gradient-to-t from-black via-black/70 to-transparent opacity-60 group-hover:opacity-70 transition-opacity z-10"></div>
                   <div className="h-full w-full">
-                    <FilteredImage 
+                    <img 
                       src={posterImages[index % posterImages.length]} 
                       alt={event.title} 
-                      className="w-full h-full"
-                      filter="church"
-                      enableHover={true}
+                      className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
                     />
                   </div>
                   <div className="absolute bottom-0 left-0 right-0 p-6 text-white z-20 flex flex-col justify-end">
