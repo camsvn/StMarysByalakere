@@ -6,7 +6,7 @@ import { useCMS } from "@/contexts/CMSContext";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Music, BookOpen, Heart, Users, Award, Coffee, Globe, Gift, MessageCircle } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
-import FilteredImage from "@/components/ui/FilteredImage";
+import { AspectRatio } from "@/components/ui/aspect-ratio";
 
 const Ministries = () => {
   const { ministries } = useCMS();
@@ -69,12 +69,13 @@ const Ministries = () => {
               <Card className="overflow-hidden">
                 <div className="grid md:grid-cols-2 gap-0">
                   <div className="relative">
-                    <FilteredImage 
-                      src={`${getMinistryBackground(ministries[0].title, ministries[0].icon)}?w=800&h=600&fit=crop&auto=format`}
-                      alt={ministries[0].title}
-                      filterType="ministry"
-                      aspectRatio={16/9}
-                    />
+                    <AspectRatio ratio={16/9} className="md:h-full">
+                      <img 
+                        src={`${getMinistryBackground(ministries[0].title, ministries[0].icon)}?w=800&h=600&fit=crop&auto=format`}
+                        alt={ministries[0].title}
+                        className="w-full h-full object-cover"
+                      />
+                    </AspectRatio>
                     <div className="absolute inset-0 bg-gradient-to-r from-black/60 to-transparent flex items-center p-6 md:hidden">
                       <h3 className="text-2xl font-bold text-white">{ministries[0].title}</h3>
                     </div>
@@ -99,10 +100,10 @@ const Ministries = () => {
             {ministries.slice(1).map((ministry, index) => (
               <Card key={index} className={`overflow-hidden animate-fade-in animate-delay-${index % 3 * 100}`}>
                 <div className="relative h-40">
-                  <FilteredImage 
+                  <img 
                     src={`${getMinistryBackground(ministry.title, ministry.icon)}?w=400&h=200&fit=crop&auto=format`}
                     alt={ministry.title}
-                    filterType="ministry"
+                    className="w-full h-full object-cover"
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent"></div>
                   <div className="absolute bottom-0 left-0 p-4">

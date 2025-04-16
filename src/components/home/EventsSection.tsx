@@ -14,7 +14,6 @@ import {
 } from "@/components/ui/table";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { CalendarIcon, ArrowRight } from "lucide-react";
-import FilteredImage from "../ui/FilteredImage";
 
 const EventsSection = () => {
   const { events } = useCMS();
@@ -61,11 +60,10 @@ const EventsSection = () => {
                 >
                   <div className="absolute inset-0 bg-gradient-to-t from-black via-black/70 to-transparent opacity-60 group-hover:opacity-70 transition-opacity z-10"></div>
                   <div className="h-full w-full">
-                    <FilteredImage 
+                    <img 
                       src={posterImages[index % posterImages.length]} 
                       alt={event.title} 
-                      filterType="event"
-                      className="group-hover:scale-105 transition-transform duration-700"
+                      className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
                     />
                   </div>
                   <div className="absolute bottom-0 left-0 right-0 p-6 text-white z-20 flex flex-col justify-end">
@@ -98,7 +96,6 @@ const EventsSection = () => {
                   time={event.time}
                   description={event.description}
                   location={event.location}
-                  image={posterImages[index % posterImages.length]}
                   className={`animate-fade-in animate-delay-${index * 100} shadow-lg hover:-translate-y-1 hover:shadow-xl transition-all duration-300`}
                 />
               ))}
