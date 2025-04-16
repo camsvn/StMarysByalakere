@@ -1,9 +1,11 @@
+
 import { Link } from "react-router-dom";
 import SectionHeading from "../ui/SectionHeading";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
 import { Music, BookOpen, Heart, Users, Award, Coffee, Globe, Gift, MessageCircle } from "lucide-react";
 import { useCMS } from "@/contexts/CMSContext";
+import FilteredImage from "../ui/FilteredImage";
 
 interface MinistryCardProps {
   title: string;
@@ -17,15 +19,15 @@ const MinistryCard = ({ title, description, icon, delay, imageUrl }: MinistryCar
   <Card className={`card-hover animate-fade-in ${delay}`}>
     <CardHeader className="flex flex-col items-center">
       {imageUrl && (
-        <img
-          src={imageUrl}
-          alt={title}
-          className="w-20 h-20 object-cover rounded-full mb-4 border"
-        />
+        <div className="w-20 h-20 rounded-full overflow-hidden mb-4 border">
+          <FilteredImage 
+            src={imageUrl}
+            alt={title}
+            aspectRatio={1}
+            className="w-full h-full"
+          />
+        </div>
       )}
-      {/* <div className="inline-flex items-center justify-center w-12 h-12 rounded-full bg-secondary/10 text-secondary mb-4">
-        {icon}
-      </div> */}
       <CardTitle className="text-xl text-center">{title}</CardTitle>
     </CardHeader>
     <CardContent>

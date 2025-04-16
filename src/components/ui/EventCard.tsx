@@ -2,7 +2,7 @@
 import { cn } from "@/lib/utils";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Calendar, Clock, MapPin } from "lucide-react";
-import { AspectRatio } from "@/components/ui/aspect-ratio";
+import FilteredImage from "./FilteredImage";
 
 interface EventCardProps {
   title: string;
@@ -18,16 +18,11 @@ const EventCard = ({ title, date, time, description, location, image, className 
   return (
     <Card className={cn("overflow-hidden group", className)}>
       {image && (
-        <div className="relative w-full h-48 overflow-hidden">
-          <AspectRatio ratio={16/9}>
-            <img 
-              src={image} 
-              alt={title} 
-              className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
-            />
-            <div className="absolute inset-0 bg-gradient-to-t from-background/80 to-transparent opacity-60"></div>
-          </AspectRatio>
-        </div>
+        <FilteredImage 
+          src={image} 
+          alt={title} 
+          aspectRatio={16/9}
+        />
       )}
       <div className="bg-gradient-to-r from-primary/10 to-secondary/10 h-2 w-full group-hover:bg-gradient-to-r group-hover:from-primary group-hover:to-secondary transition-colors duration-500"></div>
       <CardHeader className="pb-3">

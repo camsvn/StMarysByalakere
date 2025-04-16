@@ -1,4 +1,3 @@
-
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -139,6 +138,29 @@
   
   .animate-delay-500 {
     animation-delay: 500ms;
+  }
+  
+  /* Image filter classes */
+  .filtered-image {
+    @apply grayscale brightness-[1.05] transition-all duration-500;
+    filter: sepia(0.2) grayscale(0.8) brightness(1.05);
+  }
+  
+  .filtered-image-container {
+    @apply overflow-hidden relative;
+  }
+  
+  .filtered-image-container:hover .filtered-image {
+    @apply grayscale-0 brightness-100 scale-105;
+    filter: sepia(0) grayscale(0) brightness(1);
+  }
+  
+  .filtered-image-overlay {
+    @apply absolute inset-0 bg-gradient-to-t from-black/50 to-transparent opacity-70 transition-opacity duration-500;
+  }
+  
+  .filtered-image-container:hover .filtered-image-overlay {
+    @apply opacity-40;
   }
 }
 

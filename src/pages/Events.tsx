@@ -1,9 +1,9 @@
-
 import { useState } from "react";
 import PageLayout from "../components/layout/PageLayout";
 import SectionHeading from "../components/ui/SectionHeading";
 import ShapesBackground from "../components/ui/ShapesBackground";
 import EventCard from "../components/ui/EventCard";
+import FilteredImage from "../components/ui/FilteredImage";
 import { useCMS } from "@/contexts/CMSContext";
 import { 
   Table,
@@ -15,7 +15,6 @@ import {
 } from "@/components/ui/table";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { CalendarIcon, LayoutGrid, Image, List } from "lucide-react";
-import { AspectRatio } from "@/components/ui/aspect-ratio";
 import { 
   Pagination, 
   PaginationContent, 
@@ -66,19 +65,14 @@ const Events = () => {
             <TabsContent value="posters">
               <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-8">
                 {events.map((event, index) => (
-                  <div 
-                    key={event.id} 
-                    className={`relative overflow-hidden rounded-lg shadow-lg group hover:shadow-xl transition-all duration-300 animate-fade-in animate-delay-${index % 3 * 100}`}
+                  <FilteredImage 
+                    key={event.id}
+                    src={event.image || `https://images.unsplash.com/photo-1523712999610-f77fbcfc3843?auto=format&fit=crop&w=600&h=800&q=80`}
+                    alt={event.title}
+                    aspectRatio={3/4}
+                    className={`rounded-lg shadow-lg group hover:shadow-xl transition-all duration-300 animate-fade-in animate-delay-${index % 3 * 100}`}
                   >
-                    <div className="absolute inset-0 bg-gradient-to-t from-black via-black/70 to-transparent opacity-60 group-hover:opacity-70 transition-opacity"></div>
-                    <AspectRatio ratio={3/4}>
-                      <img 
-                        src={event.image || `https://images.unsplash.com/photo-1523712999610-f77fbcfc3843?auto=format&fit=crop&w=600&h=800&q=80`}
-                        alt={event.title} 
-                        className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
-                      />
-                    </AspectRatio>
-                    <div className="absolute bottom-0 left-0 right-0 p-6 text-white">
+                    <div className="absolute bottom-0 left-0 right-0 p-6 text-white z-10">
                       <div className="flex items-center mb-2">
                         <CalendarIcon className="h-5 w-5 mr-2 text-primary-foreground" />
                         <span className="text-sm font-medium bg-primary/80 px-3 py-1 rounded-full">{event.date} • {event.time}</span>
@@ -92,7 +86,7 @@ const Events = () => {
                         </p>
                       )}
                     </div>
-                  </div>
+                  </FilteredImage>
                 ))}
               </div>
             </TabsContent>
