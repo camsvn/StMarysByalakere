@@ -1,3 +1,4 @@
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -142,8 +143,8 @@
   
   /* Image filter classes */
   .filtered-image {
-    @apply grayscale brightness-[1.05] transition-all duration-500;
-    filter: sepia(0.2) grayscale(0.8) brightness(1.05);
+    @apply brightness-[1.05] transition-all duration-500;
+    filter: sepia(0.2) saturate(1.2) brightness(1.05);
   }
   
   .filtered-image-container {
@@ -151,8 +152,8 @@
   }
   
   .filtered-image-container:hover .filtered-image {
-    @apply grayscale-0 brightness-100 scale-105;
-    filter: sepia(0) grayscale(0) brightness(1);
+    @apply brightness-100 scale-105;
+    filter: sepia(0) saturate(1.1) brightness(1);
   }
   
   .filtered-image-overlay {
