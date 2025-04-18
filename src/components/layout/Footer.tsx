@@ -17,7 +17,7 @@ const Footer = () => {
             <ul className="space-y-3">
             <li className="flex items-start">
                 <Church className="mr-2 h-5 w-5 min-w-5 mt-0.5 flex-shrink-0" />
-                <span>St. Mary's Church, Byalakere</span>
+                <span>St. Mary&apos;s Church, Byalakere</span>
               </li>
               <li className="flex items-center">
                 <MapPin className="mr-2 h-5 w-5 min-w-5" />
@@ -99,7 +99,7 @@ const Footer = () => {
         {/* Bottom Section */}
         <div className="border-t border-white/20 pt-6 mt-6 text-center text-sm text-white/70">
           <p>
-            &copy; {currentYear} St. Mary's Church Byalakere. All rights reserved. 
+            &copy; {currentYear} St. Mary&apos;s Church Byalakere. All rights reserved. 
             <br />
             Maintained by <a className="underline hover:text-white" href="https://www.decare.team/">DeCare Software</a>, designed with <a className="underline hover:text-white" href="https://lovable.dev/">Lovable</a>
           </p>

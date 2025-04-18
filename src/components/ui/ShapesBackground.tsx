@@ -40,16 +40,16 @@ const ShapesBackground = () => {
   return (
     <div className="absolute inset-0 overflow-hidden -z-10">
       <div 
-        ref={el => shapesRef.current[0] = el} 
-        className="shape shape-blue rounded-full blur-3xl absolute opacity-20"
+      ref={el => { shapesRef.current[0] = el; }}
+      className="shape shape-blue rounded-full blur-3xl absolute opacity-20"
       />
       <div 
-        ref={el => shapesRef.current[1] = el} 
-        className="shape shape-purple rounded-full blur-3xl absolute opacity-20"
+      ref={el => { shapesRef.current[1] = el; }}
+      className="shape shape-purple rounded-full blur-3xl absolute opacity-20"
       />
       <div 
-        ref={el => shapesRef.current[2] = el} 
-        className="shape shape-gold rounded-full blur-3xl absolute opacity-20"
+      ref={el => { shapesRef.current[2] = el; }}
+      className="shape shape-gold rounded-full blur-3xl absolute opacity-20"
       />
     </div>
   );

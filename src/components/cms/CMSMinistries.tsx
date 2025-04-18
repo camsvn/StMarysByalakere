@@ -78,7 +78,7 @@ const CMSMinistries = () => {
   };
 
   const renderIcon = (iconName: string) => {
-    // @ts-ignore - We know these icons exist in the library
+    // @ts-expect-error - We know these icons exist in the library
     const Icon = Icons[iconName];
     return Icon ? <Icon className="h-6 w-6" /> : null;
   };

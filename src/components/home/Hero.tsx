@@ -15,7 +15,7 @@ const Hero = () => {
           </div>
           <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-4 md:mb-6 animate-fade-in">
             Welcome to{" "}
-            <span className="text-primary">St. Mary's Church Byalakere</span>
+            <span className="text-primary">St. Mary&apos;s Church Byalakere</span>
           </h1>
           <p className="text-lg md:text-xl text-muted-foreground mb-8 md:mb-10 animate-fade-in animate-delay-100">
             Join our vibrant community for worship, fellowship, and spiritual growth. Together, we celebrate our faith and serve our community.
