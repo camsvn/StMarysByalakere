@@ -52,30 +52,39 @@ type CMSContextType = {
 const defaultEvents: EventType[] = [
   {
     id: 1,
-    title: "Easter Sunday Mass",
-    date: "Apr 9, 2023",
-    time: "9:00 AM",
-    description: "Celebrate the resurrection of our Lord Jesus Christ with a special Easter service followed by community breakfast.",
+    title: "Good Friday Observance",
+    date: "Apr 18, 2025",
+    time: "8:30 AM",
+    description: "Join us for a heartfelt reflection on the Passion of Christ through solemn liturgy, the Way of the Cross (Venue: New Church Land), and a moving message. Experience the traditions of the Veneration of the Cross, sharing of bitter juice, and a comforting meal of Nercha Kanji and Payar (Venue: New Church Land).",
     location: "Main Church",
-    image: "https://images.unsplash.com/photo-1605810230434-7631ac76ec81?auto=format&fit=crop&w=600&h=400&q=80"
+    image: "https://ucarecdn.com/a3bd8113-ceed-4268-93c2-187a48094212/-/scale_crop/400x600/center/-/filter/sedis/-50/"
   },
   {
     id: 2,
-    title: "Youth Group Meeting",
-    date: "Apr 12, 2023",
-    time: "6:30 PM",
-    description: "Join fellow youth for an evening of faith, fun, and fellowship. This week's topic: 'Faith in Action'.",
-    location: "Parish Hall",
-    image: "https://images.unsplash.com/photo-1470813740244-df37b8c1edcb?auto=format&fit=crop&w=600&h=400&q=80"
+    title: "Holy Saturday Mass & Baptism Renewal",
+    date: "Apr 19, 2025",
+    time: "7:00 AM",
+    description: "Begin the day with a peaceful morning Holy Mass and renew your baptismal promises in a quiet moment of spiritual preparation for Easter.",
+    location: "Main Church",
+    image: "https://ucarecdn.com/0266c823-03a6-4f62-bb79-3b14a963032e/-/scale_crop/400x600/center/"
   },
   {
     id: 3,
-    title: "Food Drive for Local Shelter",
-    date: "Apr 15, 2023",
-    time: "10:00 AM",
-    description: "Help collect non-perishable food items for our local community shelter. All donations welcome!",
-    location: "Church Parking Lot",
-    image: "https://images.unsplash.com/photo-1500673922987-e212871fec22?auto=format&fit=crop&w=600&h=400&q=80"
+    title: "Easter Vigil & Resurrection Celebration",
+    date: "Apr 19, 2025",
+    time: "8:00 PM",
+    description: "Celebrate the joy of Christ's resurrection with a beautiful evening liturgy, filled with light, hope, and the tradition of Easter Egg sharing in a vibrant and uplifting ceremony.",
+    location: "Main Church",
+    image: "https://ucarecdn.com/179249a4-9f39-4bcd-8e11-5ba1b1362df0/-/scale_crop/400x600/60p,25p/"
+  },
+  {
+    id: 4,
+    title: "Easter Sunday Celebration",
+    date: "Apr 20, 2025",
+    time: "8:30 AM",
+    description: "Rejoice in the spirit of Easter with a joyful Holy Mass followed by cheerful Easter Egg distribution—a celebration for all ages filled with renewal and light.",
+    location: "Main Church",
+    image: "https://ucarecdn.com/ff1ff285-3e9d-49cb-8df1-cbbbbed5c272/-/scale_crop/400x600/center/"
   }
 ];
 
