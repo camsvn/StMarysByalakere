@@ -13,7 +13,7 @@ const MassServices = () => {
   // const isMobile = useIsMobile();
 
   // Get current day of the week for highlighting
-  const today = new Date().toLocaleString('en-us', {weekday: 'long'});
+  const today = new Date().toLocaleString('en-us', {weekday: 'long', timeZone: 'Asia/Kolkata'});
 
   return (
     <>

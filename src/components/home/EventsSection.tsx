@@ -26,7 +26,8 @@ const EventsSection = () => {
   const formattedToday = today.toLocaleDateString('en-US', {
     month: 'short',
     day: 'numeric',
-    year: 'numeric'
+    year: 'numeric',
+    timeZone: 'Asia/Kolkata'
   });
 
   // Array of placeholder images for event posters

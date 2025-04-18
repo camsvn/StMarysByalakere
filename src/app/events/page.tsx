@@ -33,7 +33,8 @@ const Events = () => {
   const formattedToday = today.toLocaleDateString('en-US', {
     month: 'short',
     day: 'numeric',
-    year: 'numeric'
+    year: 'numeric',
+    timeZone: 'Asia/Kolkata'
   });
 
   return (

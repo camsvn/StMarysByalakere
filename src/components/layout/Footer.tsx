@@ -5,7 +5,7 @@ import { useLanguage } from "@/contexts/LanguageContext";
 
 const Footer = () => {
   const { t } = useLanguage();
-  const currentYear = new Date().getFullYear();
+  const currentYear = new Date().toLocaleString("en-US", { timeZone: "Asia/Kolkata", year: "numeric" });
 
   return (
     <footer className="bg-primary text-white pt-12 pb-6">

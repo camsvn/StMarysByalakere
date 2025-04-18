@@ -50,7 +50,7 @@ const MassScheduleSection = () => {
   const { massSchedule } = useCMS();
   
   // Get current day of the week for highlighting
-  const today = new Date().toLocaleString('en-us', {weekday: 'long'});
+  const today = new Date().toLocaleString('en-us', { weekday: 'long', timeZone: 'Asia/Kolkata' });
   
   // Group mass schedule by weekday vs weekend
   const weekdayMasses = massSchedule.filter(item => 
@@ -91,7 +91,7 @@ const MassScheduleSection = () => {
             </div>
           </TabsContent>
 
-          <TabsContent value="weekday" className="space-y-8">
+          {/* <TabsContent value="weekday" className="space-y-8">
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
               {weekdayMasses.map((item, index) => (
                 <MassCard
@@ -119,7 +119,7 @@ const MassScheduleSection = () => {
                 />
               ))}
             </div>
-          </TabsContent>
+          </TabsContent> */}
         </Tabs>
 
         <div className="text-center mt-10">
