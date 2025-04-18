@@ -47,15 +47,15 @@ const Events = () => {
           />
           
           <Tabs value={viewMode} onValueChange={setViewMode} className="w-full max-w-6xl mx-auto">
-            <TabsList className="grid w-full max-w-md mx-auto grid-cols-3 mb-8">
+            <TabsList className="grid w-full max-w-md mx-auto grid-cols-2 mb-8">
               <TabsTrigger value="posters" className="flex items-center gap-2">
                 <Image className="h-4 w-4" />
                 <span className="hidden sm:inline">Posters</span>
               </TabsTrigger>
-              <TabsTrigger value="cards" className="flex items-center gap-2">
+              {/* <TabsTrigger value="cards" className="flex items-center gap-2">
                 <LayoutGrid className="h-4 w-4" />
                 <span className="hidden sm:inline">Cards</span>
-              </TabsTrigger>
+              </TabsTrigger> */}
               <TabsTrigger value="calendar" className="flex items-center gap-2">
                 <CalendarIcon className="h-4 w-4" />
                 <span className="hidden sm:inline">Calendar</span>
@@ -77,7 +77,7 @@ const Events = () => {
                         className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
                       />
                     </AspectRatio>
-                    <div className="absolute bottom-0 left-0 right-0 p-6 text-white">
+                    <div className="event-poster-text">
                       <div className="flex items-center mb-2">
                         <CalendarIcon className="h-5 w-5 mr-2 text-primary-foreground" />
                         <span className="text-sm font-medium bg-primary/80 px-3 py-1 rounded-full">{event.date} • {event.time}</span>
@@ -96,7 +96,7 @@ const Events = () => {
               </div>
             </TabsContent>
 
-            <TabsContent value="cards">
+            {/* <TabsContent value="cards">
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
                 {events.map((event, index) => (
                   <EventCard
@@ -111,7 +111,7 @@ const Events = () => {
                   />
                 ))}
               </div>
-            </TabsContent>
+            </TabsContent> */}
 
             <TabsContent value="calendar">
               <div className="bg-white rounded-lg shadow-lg overflow-hidden">
