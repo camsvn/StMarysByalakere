@@ -72,7 +72,7 @@ const Navbar = () => {
           {/* Desktop Navigation */}
           <ul className="hidden md:flex space-x-4">
             <NavItem to="/">{t("navHome")}</NavItem>
-            <NavItem to="/about">{t("navAbout")}</NavItem>
+            {/* <NavItem to="/about">{t("navAbout")}</NavItem> */}
             <NavItem to="/mass-services">{t("navMass")}</NavItem>
             <NavItem to="/events">{t("navEvents")}</NavItem>
             <NavItem to="/pious-associations">{t("navMinistries")}</NavItem>
@@ -110,7 +110,7 @@ const Navbar = () => {
           <div className="md:hidden absolute top-full left-0 w-full bg-white shadow-md animate-fade-in py-4">
             <ul className="flex flex-col space-y-4 px-4">
               <NavItem to="/" onClick={closeMenu}>{t("navHome")}</NavItem>
-              <NavItem to="/about" onClick={closeMenu}>{t("navAbout")}</NavItem>
+              {/* <NavItem to="/about" onClick={closeMenu}>{t("navAbout")}</NavItem> */}
               <NavItem to="/mass-services" onClick={closeMenu}>{t("navMass")}</NavItem>
               <NavItem to="/events" onClick={closeMenu}>{t("navEvents")}</NavItem>
               <NavItem to="/pious-associations" onClick={closeMenu}>{t("navMinistries")}</NavItem>
