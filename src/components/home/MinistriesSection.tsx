@@ -1,15 +1,14 @@
-"use client"
+
 import Link from 'next/link'
-import SectionHeading from "../ui/SectionHeading";
+import SectionHeading from "@/components/ui/SectionHeading";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
-import { Music, BookOpen, Heart, Users, Award, Coffee, Globe, Gift, MessageCircle } from "lucide-react";
-import { useCMS } from "@/contexts/CMSContext";
+import { getPayload } from 'payload'
+import config from '@payload-config'
 
 interface MinistryCardProps {
   title: string;
   description: string;
-  // icon: React.ReactNode;
   delay: string;
   imageUrl?: string; // optional image URL
 }
@@ -24,41 +23,29 @@ const MinistryCard = ({ title, description, delay, imageUrl }: MinistryCardProps
           className="w-20 h-20 object-cover rounded-full mb-4 border"
         />
       )}
-      {/* <div className="inline-flex items-center justify-center w-12 h-12 rounded-full bg-secondary/10 text-secondary mb-4">
-        {icon}
-      </div> */}
       <CardTitle className="text-xl text-center">{title}</CardTitle>
     </CardHeader>
     <CardContent>
-      <CardDescription className="text-center">{description}</CardDescription>
+      <CardDescription className="text-center line-clamp-3">{description}</CardDescription>
     </CardContent>
     <CardFooter>
       <Button variant="ghost" asChild className="w-full">
-        <Link href={`/ministries`}>Learn More</Link>
+        <Link href={`/pious-associations`}>Learn More</Link>
       </Button>
     </CardFooter>
   </Card>
 );
 
-const MinistriesSection = () => {
-  const { ministries } = useCMS();
-  
-  // Helper function to render the correct icon
-  const getIconComponent = (iconName: string) => {
-    const iconMap: Record<string, React.ReactNode> = {
-      Users: <Users className="h-6 w-6" />,
-      Music: <Music className="h-6 w-6" />,
-      BookOpen: <BookOpen className="h-6 w-6" />,
-      Heart: <Heart className="h-6 w-6" />,
-      Award: <Award className="h-6 w-6" />,
-      Coffee: <Coffee className="h-6 w-6" />,
-      Globe: <Globe className="h-6 w-6" />,
-      Gift: <Gift className="h-6 w-6" />,
-      MessageCircle: <MessageCircle className="h-6 w-6" />,
-    };
-    return iconMap[iconName] || <Users className="h-6 w-6" />;
-  };
+async function MinistriesSection() {
+  const payload = await getPayload({
+    config
+  });
 
+  const ministries = await payload.find({
+    collection: 'ministries',
+    sort: "id"
+  });
+  
   return (
     <section className="section-container">
       <SectionHeading
@@ -67,12 +54,11 @@ const MinistriesSection = () => {
       />
 
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-        {ministries.map((ministry, index) => (
+        {ministries.docs.map((ministry, index) => (
           <MinistryCard
             key={index}
-            title={ministry.title}
-            description={ministry.description}
-            // icon={getIconComponent(ministry.icon)}
+            title={ministry.name}
+            description={ministry?.description || ''}
             delay={`animate-delay-${index * 100}`}
             imageUrl={"https://images.unsplash.com/photo-1470813740244-df37b8c1edcb?auto=format&fit=crop&w=600&h=400&q=80"} // pass the imageUrl prop
           />

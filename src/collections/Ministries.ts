@@ -17,7 +17,7 @@ export const Ministries: CollectionConfig = {
     },
     {
       name: 'description',
-      type: 'richText',
+      type: 'textarea',
     },
     {
       name: 'image',
