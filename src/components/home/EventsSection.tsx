@@ -1,34 +1,91 @@
-"use client"
-import Link from 'next/link'
+"use client";
+import Link from "next/link";
+import { useEffect, useMemo, useState } from "react";
 import SectionHeading from "../ui/SectionHeading";
 import EventCard from "../ui/EventCard";
 import { Button } from "@/components/ui/button";
 import { useCMS } from "@/contexts/CMSContext";
-import { 
+import { Event } from '@/payload-types'
+import {
   Table,
   TableBody,
   TableCell,
   TableHead,
   TableHeader,
-  TableRow 
+  TableRow,
 } from "@/components/ui/table";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { CalendarIcon, ArrowRight } from "lucide-react";
+import { stringify } from "qs-esm";
+import { DateTime } from 'luxon';
+import type { Media } from '@/payload-types';
+import { cn, formatToIST } from "@/lib/utils";
+
+function isMedia(image: number | Media): image is Media {
+  return typeof image === 'object' && image !== null && 'url' in image;
+}
+
+function getImageURL(event: Event) {
+  const media = event.image as Media;
+  return media ? media.url : "https://images.unsplash.com/photo-1605810230434-7631ac76ec81?auto=format&fit=crop&w=600&h=400&q=80"
+}
+
+// interface Event {
+//   id: string;
+//   title: string;
+//   date: string;
+//   time: string;
+//   description: object;
+//   location: string;
+//   image: object;
+// }
 
 const EventsSection = () => {
-  const { events } = useCMS();
-  
-  // Display the first 3 events
-  const displayedEvents = events.slice(1, 4);
+  // const { events } = useCMS();
+
+  // // Display the first 3 events
+  // const displayedEvents = events.slice(1, 4);
+
+  const [displayedEvents, setEvents] = useState<Event[]>([]);
+
+  const today = useMemo(() => new Date(), []);
+  const formattedToday = useMemo(
+    () =>
+      today.toLocaleDateString("en-US", {
+        month: "short",
+        day: "numeric",
+        year: "numeric",
+        timeZone: "Asia/Kolkata",
+      }),
+    [today]
+  );
+
+  useEffect(() => {
+    const fetchEvents = async () => {
+      const istToday = DateTime.now().setZone("Asia/Kolkata").set({ hour: 0, minute: 0, second: 0, millisecond: 0 });
+      const query = {
+        limit: 3,
+        where: {
+          date: {
+            greater_than_equal: istToday.toUTC().toISO(),
+          },
+        },
+        sort: "date",
+      };
+      const stringifiedQuery = stringify({ ...query }, { addQueryPrefix: true });
+      try {
+        const response = await fetch(`/api/events${stringifiedQuery}`);
+        const data = await response.json();
+        setEvents(data.docs);
+      } catch (error) {
+        console.error("Error fetching events:", error);
+      }
+    };
+
+    fetchEvents();
+  }, []);
 
   // Get current date for highlighting today's events
-  const today = new Date();
-  const formattedToday = today.toLocaleDateString('en-US', {
-    month: 'short',
-    day: 'numeric',
-    year: 'numeric',
-    timeZone: 'Asia/Kolkata'
-  });
 
   // Array of placeholder images for event posters
   // const posterImages = [
@@ -40,8 +97,8 @@ const EventsSection = () => {
   return (
     <section id="event-section" className="section-container bg-white">
       <div className="max-w-7xl mx-auto">
-        <SectionHeading 
-          title="Upcoming Events" 
+        <SectionHeading
+          title="Upcoming Events"
           subtitle="Join us for these special events and be part of our vibrant community."
         />
 
@@ -53,29 +110,36 @@ const EventsSection = () => {
           </TabsList> */}
 
           <TabsContent value="posters">
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-8">
+            <div className={cn(
+              "grid grid-cols-1 place-items-center gap-8 mb-8",
+              `md:grid-cols-${displayedEvents.length}`
+              )}>
               {displayedEvents.map((event, index) => (
-                <div 
-                  key={event.id} 
+                <div
+                  key={event.id}
                   className={`relative h-[480px] overflow-hidden rounded-lg shadow-lg group hover:shadow-xl transition-all duration-300 animate-fade-in animate-delay-${index * 100}`}
                 >
                   <div className="absolute inset-0 bg-gradient-to-t from-black via-black/70 to-transparent opacity-60 group-hover:opacity-70 transition-opacity z-10"></div>
                   <div className="h-full w-full">
-                    <img 
-                      src={event.image} 
-                      alt={event.title} 
+                    <img
+                      src={getImageURL(event)}
+                      alt={event.title}
                       className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
                     />
                   </div>
                   <div className="absolute bottom-0 left-0 right-0 p-6 text-white z-20 flex flex-col justify-end">
                     <div className="flex items-center mb-2">
                       <CalendarIcon className="h-5 w-5 mr-2 text-primary-foreground" />
-                      <span className="text-sm font-medium bg-primary/80 px-3 py-1 rounded-full">{event.date} • {event.time}</span>
+                      <span className="text-sm font-medium bg-primary/80 px-3 py-1 rounded-full">{formatToIST(event.date)} • {formatToIST(event.date, "t")}</span>
                     </div>
-                    <h3 className="text-xl font-bold mb-2 group-hover:text-accent transition-colors">{event.title}</h3>
-                    <p className="text-sm text-white/80 line-clamp-3 mb-4">{event.description}</p>
-                    <Link 
-                      href="/events" 
+                    <h3 className="text-xl font-bold mb-2 group-hover:text-accent transition-colors">
+                      {event.title}
+                    </h3>
+                    <p className="text-sm text-white/80 line-clamp-3 mb-4">
+                      {event.description}
+                    </p>
+                    <Link
+                      href="/events"
                       className="inline-flex items-center text-sm font-medium text-primary-foreground hover:text-accent transition-colors mt-auto"
                     >
                       Learn More
@@ -115,21 +179,34 @@ const EventsSection = () => {
                     <TableRow>
                       <TableHead className="w-[180px]">Date & Time</TableHead>
                       <TableHead>Event</TableHead>
-                      <TableHead className="hidden md:table-cell">Location</TableHead>
+                      <TableHead className="hidden md:table-cell">
+                        Location
+                      </TableHead>
                     </TableRow>
                   </TableHeader>
                   <TableBody>
                     {displayedEvents.map((event) => (
-                      <TableRow key={event.id} className={event.date === formattedToday ? "bg-primary/5" : ""}>
+                      <TableRow
+                        key={event.id}
+                        className={
+                          event.date === formattedToday ? "bg-primary/5" : ""
+                        }
+                      >
                         <TableCell className="font-medium">
                           <div>{event.date}</div>
-                          <div className="text-sm text-muted-foreground">{event.time}</div>
+                          <div className="text-sm text-muted-foreground">
+                            {event.time}
+                          </div>
                         </TableCell>
                         <TableCell>
                           <div className="font-medium">{event.title}</div>
-                          <div className="text-sm text-muted-foreground line-clamp-1">{event.description}</div>
+                          <div className="text-sm text-muted-foreground line-clamp-1">
+                            {event.description}
+                          </div>
                         </TableCell>
-                        <TableCell className="hidden md:table-cell">{event.location}</TableCell>
+                        <TableCell className="hidden md:table-cell">
+                          {event.location}
+                        </TableCell>
                       </TableRow>
                     ))}
                   </TableBody>
