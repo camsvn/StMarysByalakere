@@ -1,11 +1,17 @@
-"use client";
+
 import Link from "next/link";
-import { useEffect, useMemo, useState } from "react";
 import SectionHeading from "../ui/SectionHeading";
-import EventCard from "../ui/EventCard";
 import { Button } from "@/components/ui/button";
-import { useCMS } from "@/contexts/CMSContext";
-import { Event } from '@/payload-types'
+import { Event } from '@/payload-types';
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { CalendarIcon, ArrowRight } from "lucide-react";
+import { DateTime } from 'luxon';
+import { getPayload } from 'payload'
+import config from '@payload-config'
+import type { Media } from '@/payload-types';
+import { cn, formatToIST } from "@/lib/utils";
+
+import EventCard from "../ui/EventCard";
 import {
   Table,
   TableBody,
@@ -14,12 +20,7 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { CalendarIcon, ArrowRight } from "lucide-react";
 import { stringify } from "qs-esm";
-import { DateTime } from 'luxon';
-import type { Media } from '@/payload-types';
-import { cn, formatToIST } from "@/lib/utils";
 
 function isMedia(image: number | Media): image is Media {
   return typeof image === 'object' && image !== null && 'url' in image;
@@ -40,50 +41,73 @@ function getImageURL(event: Event) {
 //   image: object;
 // }
 
-const EventsSection = () => {
+async function EventsSection() {
   // const { events } = useCMS();
 
   // // Display the first 3 events
   // const displayedEvents = events.slice(1, 4);
 
-  const [displayedEvents, setEvents] = useState<Event[]>([]);
+  // const [displayedEvents, setEvents] = useState<Event[]>([]);
 
-  const today = useMemo(() => new Date(), []);
-  const formattedToday = useMemo(
-    () =>
-      today.toLocaleDateString("en-US", {
-        month: "short",
-        day: "numeric",
-        year: "numeric",
-        timeZone: "Asia/Kolkata",
-      }),
-    [today]
-  );
+  // const today = useMemo(() => new Date(), []);
+  // const formattedToday = useMemo(
+  //   () =>
+  //     today.toLocaleDateString("en-US", {
+  //       month: "short",
+  //       day: "numeric",
+  //       year: "numeric",
+  //       timeZone: "Asia/Kolkata",
+  //     }),
+  //   [today]
+  // );
+  const payload = await getPayload({
+      config
+    });
 
-  useEffect(() => {
-    const fetchEvents = async () => {
-      const istToday = DateTime.now().setZone("Asia/Kolkata").set({ hour: 0, minute: 0, second: 0, millisecond: 0 });
-      const query = {
-        limit: 3,
-        where: {
-          date: {
-            greater_than_equal: istToday.toUTC().toISO(),
-          },
-        },
-        sort: "date",
-      };
-      const stringifiedQuery = stringify({ ...query }, { addQueryPrefix: true });
-      try {
-        const response = await fetch(`/api/events${stringifiedQuery}`);
-        const data = await response.json();
-        setEvents(data.docs);
-      } catch (error) {
-        console.error("Error fetching events:", error);
+  const istToday = DateTime.now().setZone("Asia/Kolkata").set({ hour: 0, minute: 0, second: 0, millisecond: 0 });
+  // const formattedToday = istToday.toLocaleDateString("en-US", {
+  //   month: "short",
+  //   day: "numeric",
+  //   year: "numeric",
+  //   timeZone: "Asia/Kolkata",
+  // })
+
+  const displayedEvents = await payload.find({
+    collection: 'events',
+    sort: "date",
+    limit: 3,
+    where: {
+      date: {
+        greater_than_equal: istToday.toUTC().toISO()
       }
-    };
+    }
+  });
+  
 
-    fetchEvents();
-  }, []);
+  // useEffect(() => {
+  //   const fetchEvents = async () => {
+  //     const istToday = DateTime.now().setZone("Asia/Kolkata").set({ hour: 0, minute: 0, second: 0, millisecond: 0 });
+  //     const query = {
+  //       limit: 3,
+  //       where: {
+  //         date: {
+  //           greater_than_equal: istToday.toUTC().toISO(),
+  //         },
+  //       },
+  //       sort: "date",
+  //     };
+  //     const stringifiedQuery = stringify({ ...query }, { addQueryPrefix: true });
+  //     try {
+  //       const response = await fetch(`/api/events${stringifiedQuery}`);
+  //       const data = await response.json();
+  //       setEvents(data.docs);
+  //     } catch (error) {
+  //       console.error("Error fetching events:", error);
+  //     }
+  //   };
+
+  //   fetchEvents();
+  // }, []);
 
   // Get current date for highlighting today's events
 
@@ -112,9 +136,9 @@ const EventsSection = () => {
           <TabsContent value="posters">
             <div className={cn(
               "grid grid-cols-1 place-items-center gap-8 mb-8",
-              `md:grid-cols-${displayedEvents.length}`
+              `md:grid-cols-${displayedEvents.docs.length}`
               )}>
-              {displayedEvents.map((event, index) => (
+              {displayedEvents.docs.map((event, index) => (
                 <div
                   key={event.id}
                   className={`relative h-[480px] overflow-hidden rounded-lg shadow-lg group hover:shadow-xl transition-all duration-300 animate-fade-in animate-delay-${index * 100}`}
@@ -151,7 +175,7 @@ const EventsSection = () => {
             </div>
           </TabsContent>
 
-          <TabsContent value="cards">
+          {/* <TabsContent value="cards">
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
               {displayedEvents.map((event, index) => (
                 <EventCard
@@ -165,9 +189,9 @@ const EventsSection = () => {
                 />
               ))}
             </div>
-          </TabsContent>
+          </TabsContent> */}
 
-          <TabsContent value="calendar">
+          {/* <TabsContent value="calendar">
             <div className="bg-white rounded-lg shadow-lg overflow-hidden">
               <div className="bg-primary/10 p-4 flex items-center">
                 <CalendarIcon className="h-6 w-6 text-primary mr-2" />
@@ -213,7 +237,7 @@ const EventsSection = () => {
                 </Table>
               </div>
             </div>
-          </TabsContent>
+          </TabsContent> */}
         </Tabs>
 
         <div className="text-center mt-12">
