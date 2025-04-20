@@ -36,7 +36,8 @@ export default function MarqueeClient({ events }: { events: Event[] }) {
 
   const keyframes = `
     @keyframes scroll-left {
-      0% { transform: translateX(${clientWidth}px); }
+    0%, 100% { transform: translateX(${clientWidth}px); }
+      0% { transform: translateX(${20}px); }
       100% { transform: translateX(-${scrollWidth}px); }
     }
   `;
@@ -58,7 +59,7 @@ export default function MarqueeClient({ events }: { events: Event[] }) {
             className="whitespace-nowrap flex will-change-transform"
             ref={marqueeRef}
             style={{
-              animation: `scroll-left ${duration}s linear infinite`,
+              animation: scrollWidth > clientWidth ? `scroll-left ${duration}s linear infinite` : 'none',
               visibility: !isReady ? "hidden" : undefined,
             }}
             onMouseEnter={() => {
