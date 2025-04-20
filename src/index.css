@@ -140,48 +140,6 @@
   .animate-delay-500 {
     animation-delay: 500ms;
   }
-  
-  /* Image filter classes */
-  .filtered-image {
-    @apply brightness-[1.05] transition-all duration-500;
-    filter: sepia(0.2) saturate(1.2) brightness(1.05);
-  }
-  
-  .filtered-image-container {
-    @apply overflow-hidden relative;
-  }
-  
-  .filtered-image-container:hover .filtered-image {
-    @apply brightness-100 scale-105;
-    filter: sepia(0) saturate(1.1) brightness(1);
-  }
-  
-  .filtered-image-overlay {
-    @apply absolute inset-0 bg-gradient-to-t from-black/70 to-transparent opacity-70 transition-opacity duration-500;
-  }
-  
-  .filtered-image-container:hover .filtered-image-overlay {
-    @apply opacity-40;
-  }
-
-  /* Event poster text container */
-  .event-poster-text {
-    @apply absolute bottom-0 left-0 right-0 p-6 text-white z-10 bg-gradient-to-t from-black/90 via-black/70 to-transparent;
-    text-shadow: 0 1px 3px rgba(0,0,0,0.7);
-  }
-  
-  .event-poster-title {
-    @apply text-xl font-bold mb-2 group-hover:text-accent transition-colors;
-    text-shadow: 0 2px 4px rgba(0,0,0,0.9);
-  }
-  
-  .event-poster-date {
-    @apply text-sm font-medium bg-primary/90 px-3 py-1 rounded-full backdrop-blur-sm shadow-md;
-  }
-  
-  .event-poster-description {
-    @apply text-sm text-white/90 line-clamp-2 mb-4 drop-shadow-md;
-  }
 }
 
 #root {
