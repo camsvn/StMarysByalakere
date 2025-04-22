@@ -61,6 +61,8 @@ export default function MarqueeClient({ events }: { events: Event[] }) {
             style={{
               animation: scrollWidth > clientWidth ? `scroll-left ${duration}s linear infinite` : 'none',
               visibility: !isReady ? "hidden" : undefined,
+              opacity: !isReady ? "0%" : "100%",
+              transition: "opacity 0.4s ease-in-out"
             }}
             onMouseEnter={() => {
               if (marqueeRef.current) {

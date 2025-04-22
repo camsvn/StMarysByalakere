@@ -15,7 +15,7 @@ async function getEvents() {
   const displayedEvents = await payload.find({
     collection: 'events',
     sort: "date",
-    limit: 3,
+    limit: 10,
     where: {
       date: {
         greater_than_equal: istToday.toUTC().toISO()

@@ -31,47 +31,14 @@ function getImageURL(event: Event) {
   return media ? media.url : "https://images.unsplash.com/photo-1605810230434-7631ac76ec81?auto=format&fit=crop&w=600&h=400&q=80"
 }
 
-// interface Event {
-//   id: string;
-//   title: string;
-//   date: string;
-//   time: string;
-//   description: object;
-//   location: string;
-//   image: object;
-// }
-
-async function EventsSection() {
-  // const { events } = useCMS();
-
-  // // Display the first 3 events
-  // const displayedEvents = events.slice(1, 4);
-
-  // const [displayedEvents, setEvents] = useState<Event[]>([]);
-
-  // const today = useMemo(() => new Date(), []);
-  // const formattedToday = useMemo(
-  //   () =>
-  //     today.toLocaleDateString("en-US", {
-  //       month: "short",
-  //       day: "numeric",
-  //       year: "numeric",
-  //       timeZone: "Asia/Kolkata",
-  //     }),
-  //   [today]
-  // );
+async function getEvents() {
   const payload = await getPayload({
-      config
-    });
-
-  const istToday = DateTime.now().setZone("Asia/Kolkata").set({ hour: 0, minute: 0, second: 0, millisecond: 0 });
-  // const formattedToday = istToday.toLocaleDateString("en-US", {
-  //   month: "short",
-  //   day: "numeric",
-  //   year: "numeric",
-  //   timeZone: "Asia/Kolkata",
-  // })
-
+        config
+      });
+  const istToday = DateTime.now().setZone("Asia/Kolkata").set({ 
+    hour: 0, minute: 0, second: 0, millisecond: 0 
+  });
+  
   const displayedEvents = await payload.find({
     collection: 'events',
     sort: "date",
@@ -83,7 +50,21 @@ async function EventsSection() {
     }
   });
   
+  return displayedEvents.docs;
+}
 
+// interface Event {
+//   id: string;
+//   title: string;
+//   date: string;
+//   time: string;
+//   description: object;
+//   location: string;
+//   image: object;
+// }
+
+async function EventsSection() {
+  const events = await getEvents();
   // useEffect(() => {
   //   const fetchEvents = async () => {
   //     const istToday = DateTime.now().setZone("Asia/Kolkata").set({ hour: 0, minute: 0, second: 0, millisecond: 0 });
@@ -109,14 +90,7 @@ async function EventsSection() {
   //   fetchEvents();
   // }, []);
 
-  // Get current date for highlighting today's events
-
-  // Array of placeholder images for event posters
-  // const posterImages = [
-  //   "https://images.unsplash.com/photo-1605810230434-7631ac76ec81?auto=format&fit=crop&w=600&h=400&q=80",
-  //   "https://images.unsplash.com/photo-1470813740244-df37b8c1edcb?auto=format&fit=crop&w=600&h=400&q=80",
-  //   "https://images.unsplash.com/photo-1500673922987-e212871fec22?auto=format&fit=crop&w=600&h=400&q=80"
-  // ];
+  if (events.length === 0) return null;
 
   return (
     <section id="event-section" className="section-container bg-white">
@@ -136,9 +110,9 @@ async function EventsSection() {
           <TabsContent value="posters">
             <div className={cn(
               "grid grid-cols-1 place-items-center gap-8 mb-8",
-              `md:grid-cols-${displayedEvents.docs.length}`
+              `md:grid-cols-${events.length}`
               )}>
-              {displayedEvents.docs.map((event, index) => (
+              {events.map((event, index) => (
                 <div
                   key={event.id}
                   className={`relative h-[480px] overflow-hidden rounded-lg shadow-lg group hover:shadow-xl transition-all duration-300 animate-fade-in animate-delay-${index * 100}`}
@@ -177,7 +151,7 @@ async function EventsSection() {
 
           {/* <TabsContent value="cards">
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-              {displayedEvents.map((event, index) => (
+              {events.map((event, index) => (
                 <EventCard
                   key={event.id}
                   title={event.title}
@@ -209,7 +183,7 @@ async function EventsSection() {
                     </TableRow>
                   </TableHeader>
                   <TableBody>
-                    {displayedEvents.map((event) => (
+                    {events.map((event) => (
                       <TableRow
                         key={event.id}
                         className={
