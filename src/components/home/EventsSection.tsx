@@ -22,35 +22,9 @@ import {
 } from "@/components/ui/table";
 import { stringify } from "qs-esm";
 
-function isMedia(image: number | Media): image is Media {
-  return typeof image === 'object' && image !== null && 'url' in image;
-}
-
 function getImageURL(event: Event) {
   const media = event.image as Media;
   return media ? media.url : "https://images.unsplash.com/photo-1605810230434-7631ac76ec81?auto=format&fit=crop&w=600&h=400&q=80"
-}
-
-async function getEvents() {
-  const payload = await getPayload({
-        config
-      });
-  const istToday = DateTime.now().setZone("Asia/Kolkata").set({ 
-    hour: 0, minute: 0, second: 0, millisecond: 0 
-  });
-  
-  const displayedEvents = await payload.find({
-    collection: 'events',
-    sort: "date",
-    limit: 3,
-    where: {
-      date: {
-        greater_than_equal: istToday.toUTC().toISO()
-      }
-    }
-  });
-  
-  return displayedEvents.docs;
 }
 
 // interface Event {
@@ -63,8 +37,12 @@ async function getEvents() {
 //   image: object;
 // }
 
-async function EventsSection() {
-  const events = await getEvents();
+interface EventsSectionProps {
+  events: Event[];
+}
+
+async function EventsSection({ events }: EventsSectionProps) {
+  events = events.slice(0,3)
   // useEffect(() => {
   //   const fetchEvents = async () => {
   //     const istToday = DateTime.now().setZone("Asia/Kolkata").set({ hour: 0, minute: 0, second: 0, millisecond: 0 });
