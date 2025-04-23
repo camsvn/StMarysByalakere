@@ -1,5 +1,5 @@
 "use client";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Link from "next/link";
 import SectionHeading from "@/components/ui/SectionHeading";
 import ShapesBackground from "@/components/ui/ShapesBackground";
@@ -24,9 +24,12 @@ import {
   PaginationNext,
   PaginationPrevious,
 } from "@/components/ui/pagination";
-import { cn } from "@/lib/utils";
+import { cn, formatToIST } from "@/lib/utils";
 import { Event, Media } from "@/payload-types";
 import { useIsMobile } from "@/hooks/use-mobile";
+import type { PaginatedDocs } from "payload";
+import { DateTime } from "luxon";
+import { stringify } from "qs-esm";
 
 function getImageURL(event: Event) {
   const media = event.image as Media;
@@ -36,9 +39,47 @@ function getImageURL(event: Event) {
 }
 
 const Events = () => {
-  const { events } = useCMS();
+  // const { events } = useCMS();
   const isMobile = useIsMobile();
   const [viewMode, setViewMode] = useState<string>("posters");
+
+  const [events, setEvents] = useState<PaginatedDocs<Event>>({
+    docs: [],
+    hasNextPage: false,
+    hasPrevPage: false,
+    limit: 10,
+    nextPage: null,
+    page: 1,
+    pagingCounter: 0,
+    prevPage: null,
+    totalDocs: 0,
+    totalPages: 0,
+  });
+
+  const fetchEvents = async (page: number = 1, limit: number = 6) => {
+    const istToday = DateTime.now()
+      .setZone("Asia/Kolkata")
+      .set({ hour: 0, minute: 0, second: 0, millisecond: 0 });
+    const query = {
+      limit: limit,
+      page: page,
+      where: {
+        date: {
+          greater_than_equal: istToday.toUTC().toISO(),
+        },
+      },
+      sort: "date",
+    };
+    const stringifiedQuery = stringify({ ...query }, { addQueryPrefix: true });
+    const response = await fetch(`/api/events${stringifiedQuery}`);
+    const data = await response.json();
+    setEvents(data);
+  };
+
+  useEffect(() => {
+    fetchEvents()
+  }, [])
+  
 
   // Get current date for highlighting today's events
   const today = new Date();
@@ -79,10 +120,10 @@ const Events = () => {
               <div
                 className={cn(
                   "grid grid-cols-1 place-items-center gap-8 mb-8",
-                  `md:grid-cols-${events.length < 3 ? events.length : 3}`
+                  `md:grid-cols-${events.docs.length < 3 ? events.docs.length : 3}`
                 )}
               >
-                {events.map((event, index) => (
+                {events.docs.map((event, index) => (
                   <div
                     key={event.id}
                     className={`relative h-[480px] overflow-hidden rounded-lg shadow-lg group hover:shadow-xl transition-all duration-300 animate-fade-in animate-delay-${index * 100}`}
@@ -90,7 +131,7 @@ const Events = () => {
                     <div className="absolute inset-0 bg-gradient-to-t from-black via-black/70 to-transparent opacity-60 group-hover:opacity-70 transition-opacity z-10"></div>
                     <div className="h-full w-full">
                       <img
-                        src={event.image}
+                        src={getImageURL(event)}
                         alt={event.title}
                         className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
                       />
@@ -99,7 +140,8 @@ const Events = () => {
                       <div className="flex items-center mb-2">
                         <CalendarIcon className="h-5 w-5 mr-2 text-primary-foreground" />
                         <span className="text-sm font-medium bg-primary/80 px-3 py-1 rounded-full">
-                          {event.date} • {event.time}
+                          {formatToIST(event.date)} •{" "}
+                          {formatToIST(event.date, "t")}
                         </span>
                       </div>
                       <h3 className="text-xl font-bold mb-2 group-hover:text-accent transition-colors">
@@ -123,7 +165,7 @@ const Events = () => {
 
             {/* <TabsContent value="cards">
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                {events.map((event, index) => (
+                {events.docs.map((event, index) => (
                   <EventCard
                     key={event.id}
                     title={event.title}
@@ -146,7 +188,7 @@ const Events = () => {
                 </div>
                 {isMobile ? (
                   <div className="p-4 divide-y">
-                    {events.map((event) => (
+                    {events.docs.map((event) => (
                       <div
                         key={event.id}
                         className={`py-4 ${event.date === formattedToday ? "bg-primary/5" : ""}`}
@@ -159,7 +201,7 @@ const Events = () => {
                             </div>
                           </div>
                           <div className="text-sm text-muted-foreground ml-1">
-                            {event.time}
+                            {formatToIST(event.date, "t")}
                           </div>
                         </div>
                         <div className="ml-1">
@@ -193,7 +235,7 @@ const Events = () => {
                         </TableRow>
                       </TableHeader>
                       <TableBody>
-                        {events.map((event) => (
+                        {events.docs.map((event) => (
                           <TableRow
                             key={event.id}
                             className={
@@ -203,9 +245,9 @@ const Events = () => {
                             }
                           >
                             <TableCell className="font-medium">
-                              <div>{event.date}</div>
+                              <div>{formatToIST(event.date)}</div>
                               <div className="text-sm text-muted-foreground">
-                                {event.time}
+                                {formatToIST(event.date, "t")}
                               </div>
                             </TableCell>
                             <TableCell>
