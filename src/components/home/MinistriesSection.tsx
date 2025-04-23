@@ -54,7 +54,7 @@ async function MinistriesSection() {
       />
 
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-        {ministries.docs.map((ministry, index) => (
+        {ministries.docs.slice(0,4).map((ministry, index) => (
           <MinistryCard
             key={index}
             title={ministry.name}
@@ -67,7 +67,7 @@ async function MinistriesSection() {
 
       <div className="text-center mt-12">
         <Button asChild>
-          <Link href="/ministries">Explore All Ministries</Link>
+          <Link href="/pious-associations">Explore All Ministries</Link>
         </Button>
       </div>
     </section>
