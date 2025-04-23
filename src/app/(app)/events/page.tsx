@@ -1,5 +1,5 @@
 "use client";
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import Link from "next/link";
 import SectionHeading from "@/components/ui/SectionHeading";
 import ShapesBackground from "@/components/ui/ShapesBackground";
@@ -23,6 +23,7 @@ import {
   PaginationLink,
   PaginationNext,
   PaginationPrevious,
+  PaginationEllipsis,
 } from "@/components/ui/pagination";
 import { cn, formatToIST } from "@/lib/utils";
 import { Event, Media } from "@/payload-types";
@@ -56,7 +57,7 @@ const Events = () => {
     totalPages: 0,
   });
 
-  const fetchEvents = async (page: number = 1, limit: number = 2) => {
+  const fetchEvents = async (page: number = 1, limit: number = 6) => {
     const istToday = DateTime.now()
       .setZone("Asia/Kolkata")
       .set({ hour: 0, minute: 0, second: 0, millisecond: 0 });
@@ -77,20 +78,19 @@ const Events = () => {
   };
 
   useEffect(() => {
-    fetchEvents()
-  }, [])
+    fetchEvents();
+  }, []);
 
   // Handle page changes
   const handlePageChange = async (page: number) => {
     setLoading(true);
     try {
       await fetchEvents(page);
-      window.scrollTo({ top: 0, behavior: 'smooth' });
+      window.scrollTo({ top: 0, behavior: "smooth" });
     } finally {
       setLoading(false);
     }
   };
-  
 
   // Get current date for highlighting today's events
   const today = new Date();
@@ -284,29 +284,54 @@ const Events = () => {
             <Pagination>
               <PaginationContent>
                 <PaginationItem>
-                  <PaginationPrevious 
-                  href="#"
-                  onClick={(e) => {
-                    e.preventDefault();
-                    if (events.prevPage) handlePageChange(events.prevPage);
-                  }}
-                  className={cn(!events.prevPage && "pointer-events-none opacity-50")}
+                  <PaginationPrevious
+                    onClick={(e) => {
+                      e.preventDefault();
+                      if (events.prevPage) handlePageChange(events.prevPage);
+                    }}
+                    className={cn(
+                      !events.prevPage && "pointer-events-none opacity-50"
+                    )}
                   />
                 </PaginationItem>
+                {/* {Array.from({ length: events.totalPages }, (_, i) => i + 1)
+                  .filter(
+                    (num) =>
+                      num === 1 ||
+                      num === events.totalPages ||
+                      (num >= (events?.page || 1) - 1 &&
+                        num <= (events?.page || 1) + 1)
+                  )
+                  .map((pageNum, i, arr) => (
+                    <React.Fragment key={pageNum}>
+                      {i > 0 && arr[i] - arr[i - 1] > 1 && (
+                        <PaginationItem>
+                          <PaginationEllipsis />
+                        </PaginationItem>
+                      )} */}
+                {/* </React.Fragment>
+                    ))} */}
                 <PaginationItem>
-                  <PaginationLink href="#" isActive>
-                    1
+                  <PaginationLink
+                    isActive
+                    // onClick={(e) => {
+                    //   e.preventDefault();
+                    //   handlePageChange(pageNum);
+                    // }}
+                  >
+                    {events.page}
                   </PaginationLink>
                 </PaginationItem>
                 <PaginationItem>
-                  <PaginationNext 
-                  href="#"
-                  onClick={(e) => {
-                    e.preventDefault();
-                    if (events.nextPage) handlePageChange(events.nextPage);
-                  }}
-                  className={cn(!events.nextPage && "pointer-events-none opacity-50")}
-                />
+                  <PaginationNext
+                    onClick={(e) => {
+                      e.preventDefault();
+                      if (events.nextPage) handlePageChange(events.nextPage);
+                    }}
+                    className={cn(
+                      !events.nextPage && "pointer-events-none opacity-50"
+                    )}
+                  />
                 </PaginationItem>
               </PaginationContent>
             </Pagination>
