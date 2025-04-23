@@ -26,6 +26,7 @@ import {
 } from "@/components/ui/pagination";
 import { cn } from "@/lib/utils";
 import { Event, Media } from "@/payload-types";
+import { useIsMobile } from "@/hooks/use-mobile";
 
 function getImageURL(event: Event) {
   const media = event.image as Media;
@@ -36,6 +37,7 @@ function getImageURL(event: Event) {
 
 const Events = () => {
   const { events } = useCMS();
+  const isMobile = useIsMobile();
   const [viewMode, setViewMode] = useState<string>("posters");
 
   // Get current date for highlighting today's events
@@ -57,10 +59,7 @@ const Events = () => {
             subtitle="Stay updated with what's happening in our parish community."
           />
 
-          <Tabs
-            defaultValue="calendar"
-            className="w-full max-w-6xl mx-auto"
-          >
+          <Tabs defaultValue="calendar" className="w-full max-w-6xl mx-auto">
             <TabsList className="grid w-full max-w-md mx-auto grid-cols-2 mb-8">
               <TabsTrigger value="posters" className="flex items-center gap-2">
                 <Image className="h-4 w-4" />
@@ -80,7 +79,7 @@ const Events = () => {
               <div
                 className={cn(
                   "grid grid-cols-1 place-items-center gap-8 mb-8",
-                  `md:grid-cols-${events.length < 3 ? events.length : 3 }`
+                  `md:grid-cols-${events.length < 3 ? events.length : 3}`
                 )}
               >
                 {events.map((event, index) => (
@@ -145,45 +144,85 @@ const Events = () => {
                   <CalendarIcon className="h-6 w-6 text-primary mr-2" />
                   <h3 className="text-lg font-medium">All Events</h3>
                 </div>
-                <div className="p-4">
-                  <Table>
-                    <TableHeader>
-                      <TableRow>
-                        <TableHead className="w-[180px]">Date & Time</TableHead>
-                        <TableHead>Event</TableHead>
-                        <TableHead className="hidden md:table-cell">
-                          Location
-                        </TableHead>
-                      </TableRow>
-                    </TableHeader>
-                    <TableBody>
-                      {events.map((event) => (
-                        <TableRow
-                          key={event.id}
-                          className={
-                            event.date === formattedToday ? "bg-primary/5" : ""
-                          }
-                        >
-                          <TableCell className="font-medium">
-                            <div>{event.date}</div>
-                            <div className="text-sm text-muted-foreground">
-                              {event.time}
+                {isMobile ? (
+                  <div className="p-4 divide-y">
+                    {events.map((event) => (
+                      <div
+                        key={event.id}
+                        className={`py-4 ${event.date === formattedToday ? "bg-primary/5" : ""}`}
+                      >
+                        <div className="mb-2">
+                          <div className="flex items-center bg-soft-blue rounded-full px-3 py-1 w-fit mb-2">
+                            <CalendarIcon className="h-4 w-4 text-primary mr-2" />
+                            <div className="text-sm font-semibold">
+                              {event.date}
                             </div>
-                          </TableCell>
-                          <TableCell>
-                            <div className="font-medium">{event.title}</div>
-                            <div className="text-sm text-muted-foreground">
-                              {event.description}
+                          </div>
+                          <div className="text-sm text-muted-foreground ml-1">
+                            {event.time}
+                          </div>
+                        </div>
+                        <div className="ml-1">
+                          <div className="font-medium text-base">
+                            {event.title}
+                          </div>
+                          <div className="text-sm text-muted-foreground line-clamp-2 mt-1">
+                            {event.description}
+                          </div>
+                          {event.location && (
+                            <div className="text-xs text-primary-foreground bg-primary/20 px-2 py-0.5 rounded-full mt-2 w-fit">
+                              {event.location}
                             </div>
-                          </TableCell>
-                          <TableCell className="hidden md:table-cell">
-                            {event.location}
-                          </TableCell>
+                          )}
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                ) : (
+                  <div className="p-4">
+                    <Table>
+                      <TableHeader>
+                        <TableRow>
+                          <TableHead className="w-[180px]">
+                            Date & Time
+                          </TableHead>
+                          <TableHead>Event</TableHead>
+                          <TableHead className="hidden md:table-cell">
+                            Location
+                          </TableHead>
                         </TableRow>
-                      ))}
-                    </TableBody>
-                  </Table>
-                </div>
+                      </TableHeader>
+                      <TableBody>
+                        {events.map((event) => (
+                          <TableRow
+                            key={event.id}
+                            className={
+                              event.date === formattedToday
+                                ? "bg-primary/5"
+                                : ""
+                            }
+                          >
+                            <TableCell className="font-medium">
+                              <div>{event.date}</div>
+                              <div className="text-sm text-muted-foreground">
+                                {event.time}
+                              </div>
+                            </TableCell>
+                            <TableCell>
+                              <div className="font-medium">{event.title}</div>
+                              <div className="text-sm text-muted-foreground">
+                                {event.description}
+                              </div>
+                            </TableCell>
+                            <TableCell className="hidden md:table-cell">
+                              {event.location}
+                            </TableCell>
+                          </TableRow>
+                        ))}
+                      </TableBody>
+                    </Table>
+                  </div>
+                )}
               </div>
             </TabsContent>
           </Tabs>
