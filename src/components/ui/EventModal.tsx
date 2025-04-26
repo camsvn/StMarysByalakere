@@ -16,9 +16,9 @@ interface EventModalProps {
   event: Event | null;
 }
 
-function getImageURL(event: Event) {
-  const media = event.image as Media;
-  return media ? media.url : "https://images.unsplash.com/photo-1605810230434-7631ac76ec81?auto=format&fit=crop&w=600&h=400&q=80"
+function getImageURL(event: Event): string {
+  const media = event?.image as Media | undefined;
+  return media?.url || "https://images.unsplash.com/photo-1605810230434-7631ac76ec81?auto=format&fit=crop&w=600&h=400&q=80";
 }
 
 const EventModal: React.FC<EventModalProps> = ({
