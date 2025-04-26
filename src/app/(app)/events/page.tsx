@@ -25,6 +25,8 @@ import {
   PaginationPrevious,
   PaginationEllipsis,
 } from "@/components/ui/pagination";
+import { Button } from "@/components/ui/button";
+import { EventModal } from "@/components/ui/EventModal";
 import { cn, formatToIST } from "@/lib/utils";
 import { Event, Media } from "@/payload-types";
 import { useIsMobile } from "@/hooks/use-mobile";
@@ -56,6 +58,18 @@ const Events = () => {
     totalDocs: 0,
     totalPages: 0,
   });
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [selectedEvent, setSelectedEvent] = useState<Event | null>(null);
+  
+  const openModal = (event: Event) => {
+    setSelectedEvent(event);
+    setIsModalOpen(true);
+  };
+
+  const closeModal = () => {
+    setIsModalOpen(false);
+    setSelectedEvent(null);
+  };
 
   const fetchEvents = async (page: number = 1, limit: number = 6) => {
     const istToday = DateTime.now()
@@ -111,6 +125,8 @@ const Events = () => {
             subtitle="Stay updated with what's happening in our parish community."
           />
 
+          <EventModal isOpen={isModalOpen} onClose={closeModal} event={selectedEvent} /> 
+
           <Tabs defaultValue="calendar" className="w-full max-w-6xl mx-auto">
             <TabsList className="grid w-full max-w-md mx-auto grid-cols-2 mb-8">
               <TabsTrigger value="posters" className="flex items-center gap-2">
@@ -161,13 +177,18 @@ const Events = () => {
                       <p className="text-sm text-white/80 line-clamp-3 mb-4">
                         {event.description}
                       </p>
-                      <Link
-                        href="/events"
-                        className="inline-flex items-center text-sm font-medium text-primary-foreground hover:text-accent transition-colors mt-auto"
-                      >
+                      <Button
+                      variant="link"
+                      size="sm"
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        openModal(event)
+                      }}
+                      className="mt-2 text-sm font-medium text-primary-foreground gap-0 group-hover/learnmore:text-accent w-fit p-0"
+                    >
                         Learn More
                         <ArrowRight className="ml-1 h-4 w-4 group-hover:translate-x-1 transition-transform" />
-                      </Link>
+                      </Button>
                     </div>
                   </div>
                 ))}

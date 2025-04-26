@@ -54,7 +54,7 @@ const EventModal: React.FC<EventModalProps> = ({
             </DialogHeader>
           </div>
         </div>
-        <div className="p-4 pt-0">
+        <div className="p-6 pt-0">
           <DialogDescription className="text-base text-foreground/90 leading-relaxed whitespace-pre-line">
             {event.description}
           </DialogDescription>
@@ -64,4 +64,4 @@ const EventModal: React.FC<EventModalProps> = ({
   );
 };
 
-export default EventModal;
+export { EventModal };

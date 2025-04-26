@@ -3,6 +3,7 @@ import React, { useState } from 'react';
 import Link from "next/link";
 import SectionHeading from "../ui/SectionHeading";
 import { Button } from "@/components/ui/button";
+import { EventModal } from "@/components/ui/EventModal";
 import { Event } from '@/payload-types';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { CalendarIcon, ArrowRight } from "lucide-react";
@@ -11,7 +12,6 @@ import { getPayload } from 'payload'
 import config from '@payload-config'
 import type { Media } from '@/payload-types';
 import { cn, formatToIST } from "@/lib/utils";
-import EventModal from './EventModal'
 
 import EventCard from "../ui/EventCard";
 import {
@@ -204,7 +204,7 @@ function EventsSection({ events }: EventsSectionProps) {
           </TabsContent> */}
         </Tabs>
 
-        <EventModal isOpen={isModalOpen} onClose={closeModal} event={selectedEvent} /> {/* Modal component */}
+        <EventModal isOpen={isModalOpen} onClose={closeModal} event={selectedEvent} />
 
         <div className="text-center mt-12">
           <Button size="lg" asChild className="group">
