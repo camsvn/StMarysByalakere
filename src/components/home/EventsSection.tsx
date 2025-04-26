@@ -1,4 +1,5 @@
-
+"use client"
+import React, { useState } from 'react';
 import Link from "next/link";
 import SectionHeading from "../ui/SectionHeading";
 import { Button } from "@/components/ui/button";
@@ -10,6 +11,7 @@ import { getPayload } from 'payload'
 import config from '@payload-config'
 import type { Media } from '@/payload-types';
 import { cn, formatToIST } from "@/lib/utils";
+import EventModal from './EventModal'
 
 import EventCard from "../ui/EventCard";
 import {
@@ -27,22 +29,25 @@ function getImageURL(event: Event) {
   return media ? media.url : "https://images.unsplash.com/photo-1605810230434-7631ac76ec81?auto=format&fit=crop&w=600&h=400&q=80"
 }
 
-// interface Event {
-//   id: string;
-//   title: string;
-//   date: string;
-//   time: string;
-//   description: object;
-//   location: string;
-//   image: object;
-// }
-
 interface EventsSectionProps {
   events: Event[];
 }
 
-async function EventsSection({ events }: EventsSectionProps) {
+function EventsSection({ events }: EventsSectionProps) {
   events = events.slice(0,3)
+
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [selectedEvent, setSelectedEvent] = useState<Event | null>(null);
+
+  const openModal = (event: Event) => {
+    setSelectedEvent(event);
+    setIsModalOpen(true);
+  };
+
+  const closeModal = () => {
+    setIsModalOpen(false);
+    setSelectedEvent(null);
+  };
   // useEffect(() => {
   //   const fetchEvents = async () => {
   //     const istToday = DateTime.now().setZone("Asia/Kolkata").set({ hour: 0, minute: 0, second: 0, millisecond: 0 });
@@ -114,13 +119,20 @@ async function EventsSection({ events }: EventsSectionProps) {
                     <p className="text-sm text-white/80 line-clamp-3 mb-4">
                       {event.description}
                     </p>
-                    <Link
-                      href="/events"
-                      className="inline-flex items-center text-sm font-medium text-primary-foreground hover:text-accent transition-colors mt-auto"
+                    <div className='group/learnmore'>
+                    <Button
+                      variant="link"
+                      size="sm"
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        openModal(event)
+                      }}
+                      className="mt-2 text-sm font-medium text-primary-foreground gap-0 group-hover/learnmore:text-accent w-fit p-0"
                     >
                       Learn More
-                      <ArrowRight className="ml-1 h-4 w-4 group-hover:translate-x-1 transition-transform" />
-                    </Link>
+                      <ArrowRight className="ml-1 h-4 w-4 group-hover/learnmore:translate-x-1 transition-transform" />
+                    </Button>
+                    </div>
                   </div>
                 </div>
               ))}
@@ -191,6 +203,8 @@ async function EventsSection({ events }: EventsSectionProps) {
             </div>
           </TabsContent> */}
         </Tabs>
+
+        <EventModal isOpen={isModalOpen} onClose={closeModal} event={selectedEvent} /> {/* Modal component */}
 
         <div className="text-center mt-12">
           <Button size="lg" asChild className="group">
