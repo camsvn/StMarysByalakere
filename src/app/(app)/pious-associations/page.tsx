@@ -64,7 +64,7 @@ const Ministries = () => {
           />
           
           {/* Featured Ministry */}
-          {ministries.length > 0 && (
+          {/* {ministries.length > 0 && (
             <div className="mb-12">
               <Card className="overflow-hidden">
                 <div className="grid md:grid-cols-2 gap-0">
@@ -93,11 +93,11 @@ const Ministries = () => {
                 </div>
               </Card>
             </div>
-          )}
+          )} */}
           
           {/* Ministries Grid */}
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mt-8">
-            {ministries.slice(1).map((ministry, index) => (
+            {ministries.map((ministry, index) => (
               <Card key={index} className={`overflow-hidden animate-fade-in animate-delay-${index % 3 * 100}`}>
                 <div className="relative h-40">
                   <img 
@@ -106,11 +106,11 @@ const Ministries = () => {
                     className="w-full h-full object-cover"
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent"></div>
-                  <div className="absolute bottom-0 left-0 p-4">
+                  {/* <div className="absolute bottom-0 left-0 p-4">
                     <div className="inline-flex items-center justify-center w-12 h-12 rounded-full bg-white/90 text-secondary mb-2">
                       {getIconComponent(ministry.icon)}
                     </div>
-                  </div>
+                  </div> */}
                 </div>
                 <CardHeader>
                   <CardTitle className="text-xl">{ministry.title}</CardTitle>
